@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "slabmachines:pattern_chest_slab"
+  },
+  "pattern": [
+	"S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"S": {
+      "item": "tconstruct:tooltables",
+	  "data": 4
+    }
+  },
+  "conditions": [{
+    "type": "slabmachines:tinkersInstalled"
+	}]
+}

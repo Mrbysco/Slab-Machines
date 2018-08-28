@@ -1,0 +1,16 @@
+[
+{
+  "modid": "slabmachines",
+  "name": "Slab Machines",
+  "description": "Machines but as a slab",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Mrbysco"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

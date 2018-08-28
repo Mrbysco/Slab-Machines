@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "slabmachines:tool_forge_slab"
+  },
+  "pattern": [
+	"S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"S": {
+      "item": "tconstruct:toolforge",
+	  "data": 0
+    }
+  },
+  "conditions": [{
+    "type": "slabmachines:tinkersInstalled"
+	}]
+}

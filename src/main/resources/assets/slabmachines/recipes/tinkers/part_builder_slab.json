@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "slabmachines:part_builder_slab"
+  },
+  "pattern": [
+	"S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"S": {
+      "item": "tconstruct:tooltables",
+	  "data": 2
+    }
+  },
+  "conditions": [{
+    "type": "slabmachines:tinkersInstalled"
+	}]
+}
