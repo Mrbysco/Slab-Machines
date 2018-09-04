@@ -48,15 +48,22 @@ public class SlabBlocks {
     	
     	if(SlabMachines.tinkersLoaded)
     	{
-    		craftingStationSlab = registerBlock(new BlockCraftingStationSlab());
-    		partBuilderSlab = registerBlock(new BlockPartBuilderSlab());
-    		partChestSlab = registerBlock(new BlockPartChestSlab());
-    		patternChestSlab = registerBlock(new BlockPatternChestSlab());
-    		stencilTableSlab = registerBlock(new BlockStencilTableSlab());	
-    		toolForgeSlab = registerBlock(new BlockToolForgeSlab());
-    		toolStationSlab = registerBlock(new BlockToolStationSlab());
+    		registerTinkers();
     	}
+    	
     	registry.registerAll(BLOCKS.toArray(new Block[0]));
+    }
+    
+	@net.minecraftforge.fml.common.Optional.Method(modid = "tconstruct")
+    public static void registerTinkers()
+    {
+		craftingStationSlab = registerBlock(new BlockCraftingStationSlab());
+		partBuilderSlab = registerBlock(new BlockPartBuilderSlab());
+		partChestSlab = registerBlock(new BlockPartChestSlab());
+		patternChestSlab = registerBlock(new BlockPatternChestSlab());
+		stencilTableSlab = registerBlock(new BlockStencilTableSlab());	
+		toolForgeSlab = registerBlock(new BlockToolForgeSlab());
+		toolStationSlab = registerBlock(new BlockToolStationSlab());
     }
     
     public static <T extends Block> T registerBlock(T block)

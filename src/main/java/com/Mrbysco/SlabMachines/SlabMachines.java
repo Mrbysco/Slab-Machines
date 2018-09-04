@@ -60,9 +60,6 @@ public class SlabMachines {
 		logger.info("Registering TileEntities");
 		SlabTileEntities.register();
 		
-		logger.info("Registering Crafting Tweaks support");
-		CraftTweaksCompat.register();
-		
 		proxy.Preinit();
 	}
 	
@@ -71,6 +68,9 @@ public class SlabMachines {
 	{
 		logger.info("Registering gui handler");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new SlabGuiHandler());
+		
+		logger.info("Registering Crafting Tweaks support");
+		CraftTweaksCompat.register();
 		
 		proxy.Init();
     }

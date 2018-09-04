@@ -22,10 +22,16 @@ public class CraftTweaksCompat {
 		
 		if(SlabMachines.tinkersLoaded)
 		{
-			NBTTagCompound tinkers = new NBTTagCompound();
-			tinkers.setString("ContainerClass", ContainerCraftingStationSlab.class.getName());
-			tinkers.setString("AlignToGrid", "left");
-			FMLInterModComms.sendMessage("craftingtweaks", "RegisterProvider", tinkers);
+			registerTinkers();
 		}
 	}
+	
+	@net.minecraftforge.fml.common.Optional.Method(modid = "tconstruct")
+    public static void registerTinkers()
+    {
+		NBTTagCompound tinkers = new NBTTagCompound();
+		tinkers.setString("ContainerClass", ContainerCraftingStationSlab.class.getName());
+		tinkers.setString("AlignToGrid", "left");
+		FMLInterModComms.sendMessage("craftingtweaks", "RegisterProvider", tinkers);
+    }
 }
