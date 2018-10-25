@@ -9,7 +9,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
 	"S": {
-      "item": "slabmachines:chest_slab"
+      "item": "slabmachines:trapped_chest_slab"
     }
   }
 }
