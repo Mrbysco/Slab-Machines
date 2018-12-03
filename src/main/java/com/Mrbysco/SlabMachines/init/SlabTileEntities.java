@@ -5,6 +5,7 @@ import com.Mrbysco.SlabMachines.SlabReference;
 import com.Mrbysco.SlabMachines.entity.EntityTNTPrimeSlab;
 import com.Mrbysco.SlabMachines.tileentity.TileChestSlab;
 import com.Mrbysco.SlabMachines.tileentity.TileNoteSlab;
+import com.Mrbysco.SlabMachines.tileentity.compat.pitweaks.TilePiTweakFurnaceSlab;
 import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileCraftingStationSlab;
 import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TilePartBuilderSlab;
 import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TilePartChestSlab;
@@ -37,6 +38,11 @@ public class SlabTileEntities {
 		else
 		{
 			registerTileEntity(TileFurnaceSlab.class, "slab_furnace");	
+		}
+		
+		if(SlabMachines.piTweaksLoaded)
+		{
+			registerTileEntity(TilePiTweakFurnaceSlab.class, "slab_furnace");
 		}
 		
 		if(SlabMachines.tinkersLoaded)
