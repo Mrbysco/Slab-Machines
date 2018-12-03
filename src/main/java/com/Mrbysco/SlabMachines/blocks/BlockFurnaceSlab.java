@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.Mrbysco.SlabMachines.SlabMachines;
 import com.Mrbysco.SlabMachines.SlabReference;
 import com.Mrbysco.SlabMachines.gui.SlabGuiHandler;
+import com.Mrbysco.SlabMachines.tileentity.compat.pitweaks.TilePiTweakFurnaceSlab;
 import com.Mrbysco.SlabMachines.tileentity.furnace.TileFurnaceSlab;
 import com.Mrbysco.SlabMachines.tileentity.furnace.compat.TileFastFurnaceSlab;
 import com.Mrbysco.SlabMachines.utils.SlabUtil;
@@ -213,7 +214,12 @@ public class BlockFurnaceSlab extends BlockSlab{
 		if(SlabMachines.fastFurnaceLoaded)
 			return new TileFastFurnaceSlab();
 		else
-			return new TileFurnaceSlab();
+		{
+			if(SlabMachines.piTweaksLoaded)
+				return new TilePiTweakFurnaceSlab();
+			else
+				return new TileFurnaceSlab();
+		}
 	}
 	
 	public static enum Variant implements IStringSerializable

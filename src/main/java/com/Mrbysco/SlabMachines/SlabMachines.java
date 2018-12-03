@@ -39,6 +39,7 @@ public class SlabMachines {
 	
 	public static boolean fastBenchLoaded;
 	public static boolean fastFurnaceLoaded;
+	public static boolean piTweaksLoaded;
 	public static boolean tinkersLoaded;
 	
 	public static SlabTab slabTab = new SlabTab();
@@ -48,6 +49,7 @@ public class SlabMachines {
 	{
 		fastBenchLoaded = Loader.isModLoaded("fastbench");
 		fastFurnaceLoaded = Loader.isModLoaded("fastfurnace");
+		piTweaksLoaded = Loader.isModLoaded("pitweaks");
 		
 		tinkersLoaded = Loader.isModLoaded("tconstruct");
 		

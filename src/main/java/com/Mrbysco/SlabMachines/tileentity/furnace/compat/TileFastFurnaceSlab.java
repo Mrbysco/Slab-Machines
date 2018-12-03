@@ -4,7 +4,6 @@ import java.util.Map.Entry;
 
 import com.Mrbysco.SlabMachines.packets.SlabPacketHandler;
 import com.Mrbysco.SlabMachines.packets.SlabPacketUpdateFurnaceMessage;
-import com.Mrbysco.SlabMachines.tileentity.furnace.ISlabFurnace;
 import com.Mrbysco.SlabMachines.tileentity.furnace.TileFurnaceSlab;
 
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +18,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ItemStackHolder;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class TileFastFurnaceSlab extends TileFurnaceSlab implements ISlabFurnace{
+public class TileFastFurnaceSlab extends TileFurnaceSlab{
 	public static final int INPUT = 0;
 	public static final int FUEL = 1;
 	public static final int OUTPUT = 2;

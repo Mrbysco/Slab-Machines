@@ -125,7 +125,7 @@ public class EntityTNTPrimeSlab extends Entity
             
             if(this.isEthoSlab)
             {
-        		double radius = (double)(4F * (0.7F + this.world.rand.nextFloat() * 0.6F));
+        		double radius = (double)(6F * (0.7F + this.world.rand.nextFloat() * 0.6F));
         		
         		AxisAlignedBB hitbox = new AxisAlignedBB(this.posX - 0.5f, this.posY - 0.5f, this.posZ - 0.5f, this.posX + 0.5f, this.posY + 0.5f, this.posZ + 0.5f)
         				.expand(-radius, -radius, -radius).expand(radius, radius, radius);
@@ -133,19 +133,18 @@ public class EntityTNTPrimeSlab extends Entity
         		{
         			if((entity instanceof EntityPlayer && !(entity instanceof FakePlayer)) || SlabMachineConfigGen.general.ethoSlabVillagers && entity instanceof EntityVillager)
         			{
-        				
-        			}
-        			for(int i = 40; i >= 0; i--)
-        			{
-        				if(entity.getPosition().getY() + i > 256)
-        				{
-        					return;
-        				}
-        				if(this.world.getBlockState(entity.getPosition().add(0, i, 0)).getBlock() == Blocks.AIR)
-        				{
-        					this.world.setBlockState(entity.getPosition().add(0, i, 0), Blocks.ANVIL.getDefaultState().withProperty(BlockAnvil.DAMAGE, 2));
-        					break;
-        				}
+        				for(int i = 40; i >= 0; i--)
+            			{
+            				if(entity.getPosition().getY() + i > 256)
+            				{
+            					return;
+            				}
+            				if(this.world.getBlockState(entity.getPosition().add(0, i, 0)).getBlock() == Blocks.AIR)
+            				{
+            					this.world.setBlockState(entity.getPosition().add(0, i, 0), Blocks.ANVIL.getDefaultState().withProperty(BlockAnvil.DAMAGE, 2));
+            					break;
+            				}
+            			}
         			}
         		}
             }

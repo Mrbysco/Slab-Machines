@@ -57,7 +57,7 @@ public class BlockTNTSlab extends BlockSlab{
     	ItemStack stack = placer.getHeldItem(hand);
     	if(stack.getItem() == Item.getItemFromBlock(this))
     	{
-        	return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(ETHOSLAB, Boolean.valueOf(stack.getDisplayName().equals("Etho slab")));
+        	return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(ETHOSLAB, Boolean.valueOf(stack.getDisplayName().toLowerCase().equals("Etho slab".toLowerCase())));
     	}
 
     	return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
