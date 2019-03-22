@@ -1,6 +1,6 @@
-package com.Mrbysco.SlabMachines.packets;
+package com.mrbysco.slabmachines.packets;
 
-import com.Mrbysco.SlabMachines.SlabReference;
+import com.mrbysco.slabmachines.SlabReference;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;

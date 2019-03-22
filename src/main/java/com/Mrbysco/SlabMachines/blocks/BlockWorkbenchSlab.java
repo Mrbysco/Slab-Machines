@@ -1,8 +1,8 @@
-package com.Mrbysco.SlabMachines.blocks;
+package com.mrbysco.slabmachines.blocks;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.gui.SlabGuiHandler;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.gui.SlabGuiHandler;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;

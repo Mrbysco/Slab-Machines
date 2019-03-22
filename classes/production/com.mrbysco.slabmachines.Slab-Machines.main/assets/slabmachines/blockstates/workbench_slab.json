@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "variants": {
+	"variant": {
+	  "default": {}
+	},
+	"half": {
+	  "top": {
+		"model": "slabmachines:slab_base_top"
+	  },
+	  "bottom": {
+		"model": "slabmachines:slab_base_bottom"
+	  }
+	},
+	"inventory": [{
+	  "model": "slabmachines:slab_base_bottom",
+	  "transform": "forge:default-block"
+	}]
+  }
+}

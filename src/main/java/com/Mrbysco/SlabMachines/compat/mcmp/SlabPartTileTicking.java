@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.compat.mcmp;
+package com.mrbysco.slabmachines.compat.mcmp;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;

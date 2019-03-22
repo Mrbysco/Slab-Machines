@@ -1,8 +1,8 @@
-package com.Mrbysco.SlabMachines.tileentity.compat.tinkers;
+package com.mrbysco.slabmachines.tileentity.compat.tinkers;
 
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockToolStationSlab;
-import com.Mrbysco.SlabMachines.gui.compat.tcon.ContainerToolStationSlab;
-import com.Mrbysco.SlabMachines.gui.compat.tcon.GuiToolStationSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolStationSlab;
+import com.mrbysco.slabmachines.gui.compat.tcon.ContainerToolStationSlab;
+import com.mrbysco.slabmachines.gui.compat.tcon.GuiToolStationSlab;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;

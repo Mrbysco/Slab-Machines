@@ -1,9 +1,9 @@
-package com.Mrbysco.SlabMachines.compat.craftingtweaks;
+package com.mrbysco.slabmachines.compat.craftingtweaks;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.gui.compat.tcon.ContainerCraftingStationSlab;
-import com.Mrbysco.SlabMachines.gui.workbench.ContainerWorkbenchSlab;
-import com.Mrbysco.SlabMachines.gui.workbench.fast.ContainerFastWorkbenchSlab;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.gui.compat.tcon.ContainerCraftingStationSlab;
+import com.mrbysco.slabmachines.gui.workbench.ContainerWorkbenchSlab;
+import com.mrbysco.slabmachines.gui.workbench.fast.ContainerFastWorkbenchSlab;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.event.FMLInterModComms;

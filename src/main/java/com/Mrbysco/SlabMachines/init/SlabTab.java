@@ -1,6 +1,6 @@
-package com.Mrbysco.SlabMachines.init;
+package com.mrbysco.slabmachines.init;
 
-import com.Mrbysco.SlabMachines.SlabReference;
+import com.mrbysco.slabmachines.SlabReference;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;

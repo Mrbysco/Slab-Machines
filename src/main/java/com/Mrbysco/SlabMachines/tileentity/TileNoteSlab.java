@@ -1,7 +1,7 @@
-package com.Mrbysco.SlabMachines.tileentity;
+package com.mrbysco.slabmachines.tileentity;
 
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;

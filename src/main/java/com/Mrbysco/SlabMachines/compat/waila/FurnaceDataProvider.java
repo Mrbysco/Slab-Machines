@@ -1,13 +1,13 @@
-package com.Mrbysco.SlabMachines.compat.waila;
+package com.mrbysco.slabmachines.compat.waila;
 
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
-import com.Mrbysco.SlabMachines.tileentity.furnace.TileFurnaceSlab;
-import com.Mrbysco.SlabMachines.tileentity.furnace.compat.TileFastFurnaceSlab;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
+import com.mrbysco.slabmachines.tileentity.furnace.compat.TileFastFurnaceSlab;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;

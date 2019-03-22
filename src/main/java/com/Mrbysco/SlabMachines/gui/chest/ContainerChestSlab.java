@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.gui.chest;
+package com.mrbysco.slabmachines.gui.chest;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

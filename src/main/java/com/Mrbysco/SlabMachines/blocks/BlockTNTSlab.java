@@ -1,8 +1,8 @@
-package com.Mrbysco.SlabMachines.blocks;
+package com.mrbysco.slabmachines.blocks;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.entity.EntityTNTPrimeSlab;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.entity.EntityTNTPrimeSlab;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;

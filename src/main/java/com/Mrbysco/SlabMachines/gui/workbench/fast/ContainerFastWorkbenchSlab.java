@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.gui.workbench.fast;
+package com.mrbysco.slabmachines.gui.workbench.fast;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

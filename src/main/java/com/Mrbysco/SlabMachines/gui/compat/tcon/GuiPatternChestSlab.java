@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.gui.compat.tcon;
+package com.mrbysco.slabmachines.gui.compat.tcon;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.math.BlockPos;

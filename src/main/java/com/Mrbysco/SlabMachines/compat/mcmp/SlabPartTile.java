@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.compat.mcmp;
+package com.mrbysco.slabmachines.compat.mcmp;
 
 import mcmultipart.api.multipart.IMultipartTile;
 import net.minecraft.tileentity.TileEntity;

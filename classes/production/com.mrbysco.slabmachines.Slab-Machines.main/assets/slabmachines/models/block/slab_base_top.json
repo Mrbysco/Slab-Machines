@@ -1,0 +1,48 @@
+{
+  "textures": {
+	"particle": "blocks/crafting_table_front",
+	"down": "blocks/planks_oak",
+	"up": "blocks/crafting_table_top",
+	"north": "slabmachines:blocks/craftingslab_front",
+	"east": "slabmachines:blocks/craftingslab_side",
+	"south": "slabmachines:blocks/craftingslab_side",
+	"west": "slabmachines:blocks/craftingslab_front"
+  },
+  "elements": [
+	{
+	  "from": [0, 8, 0],
+	  "to": [16, 16, 16],
+	  "faces": {
+		"down": {
+		  "uv": [0, 0, 16, 16],
+		  "texture": "#down",
+		  "cullface": "down"
+		},
+		"up": {
+		  "uv": [0, 0, 16, 16],
+		  "texture": "#up"
+		},
+		"north": {
+		  "uv": [0, 0, 16, 8],
+		  "texture": "#north",
+		  "cullface": "north"
+		},
+		"south": {
+		  "uv": [0, 0, 16, 8],
+		  "texture": "#south",
+		  "cullface": "south"
+		},
+		"west": {
+		  "uv": [0, 0, 16, 8],
+		  "texture": "#west",
+		  "cullface": "west"
+		},
+		"east": {
+		  "uv": [0, 0, 16, 8],
+		  "texture": "#east",
+		  "cullface": "east"
+		}
+	  }
+	}
+  ]
+}

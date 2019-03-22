@@ -1,12 +1,12 @@
-package com.Mrbysco.SlabMachines.blocks;
+package com.mrbysco.slabmachines.blocks;
 
 import javax.annotation.Nullable;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.gui.SlabGuiHandler;
-import com.Mrbysco.SlabMachines.tileentity.TileChestSlab;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.gui.SlabGuiHandler;
+import com.mrbysco.slabmachines.tileentity.TileChestSlab;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;

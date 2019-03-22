@@ -1,9 +1,9 @@
-package com.Mrbysco.SlabMachines.gui.compat.tcon;
+package com.mrbysco.slabmachines.gui.compat.tcon;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileStencilTableSlab;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileStencilTableSlab;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;

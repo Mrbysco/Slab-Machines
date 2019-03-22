@@ -1,10 +1,10 @@
-package com.Mrbysco.SlabMachines.compat.jei;
+package com.mrbysco.slabmachines.compat.jei;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.compat.jei.tcon.RecipeCraftingStationSlabInfo;
-import com.Mrbysco.SlabMachines.gui.workbench.ContainerWorkbenchSlab;
-import com.Mrbysco.SlabMachines.gui.workbench.fast.ContainerFastWorkbenchSlab;
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.compat.jei.tcon.RecipeCraftingStationSlabInfo;
+import com.mrbysco.slabmachines.gui.workbench.ContainerWorkbenchSlab;
+import com.mrbysco.slabmachines.gui.workbench.fast.ContainerFastWorkbenchSlab;
+import com.mrbysco.slabmachines.init.SlabBlocks;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;

@@ -1,8 +1,8 @@
-package com.Mrbysco.SlabMachines.init.recipe;
+package com.mrbysco.slabmachines.init.recipe;
 
 import java.util.function.BooleanSupplier;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabMachines;
 import com.google.gson.JsonObject;
 
 import net.minecraftforge.common.crafting.IConditionFactory;

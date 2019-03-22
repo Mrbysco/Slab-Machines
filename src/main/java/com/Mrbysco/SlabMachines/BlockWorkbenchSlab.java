@@ -1,6 +1,6 @@
-package com.Mrbysco.SlabMachines;
+package com.mrbysco.slabmachines;
 
-import com.Mrbysco.SlabMachines.gui.SlabGuiHandler;
+import com.mrbysco.slabmachines.gui.SlabGuiHandler;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;

@@ -1,13 +1,11 @@
-package com.Mrbysco.SlabMachines.tileentity.furnace.compat;
+package com.mrbysco.slabmachines.tileentity.furnace.compat;
 
-import java.util.Map.Entry;
-
-import com.Mrbysco.SlabMachines.packets.SlabPacketHandler;
-import com.Mrbysco.SlabMachines.packets.SlabPacketUpdateFurnaceMessage;
-import com.Mrbysco.SlabMachines.tileentity.furnace.TileFurnaceSlab;
-
+import com.mrbysco.slabmachines.packets.SlabPacketHandler;
+import com.mrbysco.slabmachines.packets.SlabPacketUpdateFurnaceMessage;
+import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +15,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry.ItemStackHolder;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Map.Entry;
 
 public class TileFastFurnaceSlab extends TileFurnaceSlab{
 	public static final int INPUT = 0;
@@ -56,9 +56,9 @@ public class TileFastFurnaceSlab extends TileFurnaceSlab{
 		ItemStack fuel = ItemStack.EMPTY;
 		boolean canSmelt = canSmelt();
 
+
 		if (!this.isBurning() && !(fuel = furnaceItemStacks.get(FUEL)).isEmpty()) {
-			if (canSmelt) 
-				burnFuel(fuel, false);
+			if (canSmelt) burnFuel(fuel, false);
 		}
 
 		boolean wasBurning = isBurning();
@@ -93,9 +93,10 @@ public class TileFastFurnaceSlab extends TileFurnaceSlab{
 	protected void burnFuel(ItemStack fuel, boolean burnedThisTick) {
 		currentItemBurnTime = (furnaceBurnTime = getItemBurnTime(fuel));
 		if (this.isBurning()) {
+			Item item = fuel.getItem();
 			fuel.shrink(1);
-			if (fuel.isEmpty()) furnaceItemStacks.set(FUEL, fuel.getItem().getContainerItem(fuel));
-			if (!burnedThisTick) 
+			if (fuel.isEmpty()) furnaceItemStacks.set(FUEL, item.getContainerItem(fuel));
+			if (!burnedThisTick)
 			{
 				NetworkRegistry.TargetPoint target = new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64);
 				SlabPacketHandler.INSTANCE.sendToAllAround(new SlabPacketUpdateFurnaceMessage(this), target);

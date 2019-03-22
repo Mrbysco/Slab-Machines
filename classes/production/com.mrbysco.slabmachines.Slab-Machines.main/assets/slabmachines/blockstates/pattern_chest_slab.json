@@ -1,0 +1,37 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+		"particle": "slabmachines:blocks/tinkers/patternchest_slab_side",
+		"down": "tconstruct:blocks/chest/pattern_top",
+		"up": "tconstruct:blocks/chest/pattern_top",
+		"north": "slabmachines:blocks/tinkers/patternchest_slab_front",
+		"east": "slabmachines:blocks/tinkers/patternchest_slab_side",
+		"south": "slabmachines:blocks/tinkers/patternchest_slab_side",
+		"west": "slabmachines:blocks/tinkers/patternchest_slab_side"
+	}
+  },
+  "variants": {
+	"variant": {
+	  "default": {}
+	},
+	"half": {
+	  "top": {
+		"model": "slabmachines:slab_base_top"
+	  },
+	  "bottom": {
+		"model": "slabmachines:slab_base_bottom"
+	  }
+	},
+	"facing": {
+	  "north": {},
+	  "south": { "y": 180 },
+	  "west": { "y": 270 },
+	  "east": { "y": 90 }
+	},
+	"inventory": [{
+	  "model": "slabmachines:slab_base_bottom",
+	  "transform": "forge:default-block"
+	}]
+  }
+}

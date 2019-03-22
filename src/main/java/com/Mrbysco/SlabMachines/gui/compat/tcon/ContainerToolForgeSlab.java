@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.gui.compat.tcon;
+package com.mrbysco.slabmachines.gui.compat.tcon;
 
 import java.util.Set;
 

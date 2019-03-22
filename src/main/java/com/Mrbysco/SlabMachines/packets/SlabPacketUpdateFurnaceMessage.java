@@ -1,9 +1,9 @@
-package com.Mrbysco.SlabMachines.packets;
+package com.mrbysco.slabmachines.packets;
 
-import com.Mrbysco.SlabMachines.blocks.BlockFurnaceSlab;
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
-import com.Mrbysco.SlabMachines.tileentity.furnace.TileFurnaceSlab;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.blocks.BlockFurnaceSlab;
+import com.mrbysco.slabmachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.BlockSlab;

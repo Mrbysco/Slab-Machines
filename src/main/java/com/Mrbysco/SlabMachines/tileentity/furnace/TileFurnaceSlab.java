@@ -1,10 +1,10 @@
-package com.Mrbysco.SlabMachines.tileentity.furnace;
+package com.mrbysco.slabmachines.tileentity.furnace;
 
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.config.SlabMachineConfigGen;
-import com.Mrbysco.SlabMachines.packets.SlabPacketHandler;
-import com.Mrbysco.SlabMachines.packets.SlabPacketRequestFurnaceSlabUpdate;
-import com.Mrbysco.SlabMachines.packets.SlabPacketUpdateFurnaceMessage;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
+import com.mrbysco.slabmachines.packets.SlabPacketHandler;
+import com.mrbysco.slabmachines.packets.SlabPacketRequestFurnaceSlabUpdate;
+import com.mrbysco.slabmachines.packets.SlabPacketUpdateFurnaceMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

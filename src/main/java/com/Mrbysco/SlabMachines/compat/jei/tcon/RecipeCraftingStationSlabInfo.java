@@ -1,11 +1,11 @@
-package com.Mrbysco.SlabMachines.compat.jei.tcon;
+package com.mrbysco.slabmachines.compat.jei.tcon;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.Mrbysco.SlabMachines.gui.compat.tcon.ContainerCraftingStationSlab;
+import com.mrbysco.slabmachines.gui.compat.tcon.ContainerCraftingStationSlab;
 
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;

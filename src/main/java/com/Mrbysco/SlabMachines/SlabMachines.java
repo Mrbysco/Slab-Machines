@@ -1,15 +1,15 @@
-package com.Mrbysco.SlabMachines;
+package com.mrbysco.slabmachines;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.Mrbysco.SlabMachines.compat.craftingtweaks.CraftTweaksCompat;
-import com.Mrbysco.SlabMachines.config.SlabMachineConfigGen;
-import com.Mrbysco.SlabMachines.gui.SlabGuiHandler;
-import com.Mrbysco.SlabMachines.init.SlabTab;
-import com.Mrbysco.SlabMachines.init.SlabTileEntities;
-import com.Mrbysco.SlabMachines.packets.SlabPacketHandler;
-import com.Mrbysco.SlabMachines.proxy.CommonProxy;
+import com.mrbysco.slabmachines.compat.craftingtweaks.CraftTweaksCompat;
+import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
+import com.mrbysco.slabmachines.gui.SlabGuiHandler;
+import com.mrbysco.slabmachines.init.SlabTab;
+import com.mrbysco.slabmachines.init.SlabTileEntities;
+import com.mrbysco.slabmachines.packets.SlabPacketHandler;
+import com.mrbysco.slabmachines.proxy.CommonProxy;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;

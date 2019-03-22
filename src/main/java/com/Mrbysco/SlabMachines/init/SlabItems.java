@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.init;
+package com.mrbysco.slabmachines.init;
 
 import java.util.ArrayList;
 

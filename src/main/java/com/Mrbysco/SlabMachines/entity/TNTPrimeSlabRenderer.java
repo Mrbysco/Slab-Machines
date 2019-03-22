@@ -1,6 +1,6 @@
-package com.Mrbysco.SlabMachines.entity;
+package com.mrbysco.slabmachines.entity;
 
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.init.SlabBlocks;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;

@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "slabmachines:tnt_slab",
+	"count": 6
+  },
+  "pattern": [
+	"TTT"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"T": {
+      "item": "minecraft:tnt"
+    }
+  }
+}

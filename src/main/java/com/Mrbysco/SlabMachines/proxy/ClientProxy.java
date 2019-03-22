@@ -1,15 +1,15 @@
-package com.Mrbysco.SlabMachines.proxy;
+package com.mrbysco.slabmachines.proxy;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.entity.EntityTNTPrimeSlab;
-import com.Mrbysco.SlabMachines.entity.TNTPrimeSlabRenderer;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileCraftingStationSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileCraftingStationSlabRenderer;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TilePartBuilderSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TilePartBuilderSlabRenderer;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileToolForgeSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileToolStationRenderer;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileToolStationSlab;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.entity.EntityTNTPrimeSlab;
+import com.mrbysco.slabmachines.entity.TNTPrimeSlabRenderer;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileCraftingStationSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileCraftingStationSlabRenderer;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TilePartBuilderSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TilePartBuilderSlabRenderer;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolForgeSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolStationRenderer;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolStationSlab;
 
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;

@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.proxy;
+package com.mrbysco.slabmachines.proxy;
 
 public class ServerProxy extends CommonProxy{
 	@Override

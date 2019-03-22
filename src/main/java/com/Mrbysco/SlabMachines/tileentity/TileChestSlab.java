@@ -1,11 +1,11 @@
-package com.Mrbysco.SlabMachines.tileentity;
+package com.mrbysco.slabmachines.tileentity;
 
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.config.SlabMachineConfigGen;
-import com.Mrbysco.SlabMachines.gui.chest.ContainerChestSlab;
-import com.Mrbysco.SlabMachines.gui.chest.GuiChestSlab;
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
+import com.mrbysco.slabmachines.gui.chest.ContainerChestSlab;
+import com.mrbysco.slabmachines.gui.chest.GuiChestSlab;
+import com.mrbysco.slabmachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.gui.inventory.GuiContainer;

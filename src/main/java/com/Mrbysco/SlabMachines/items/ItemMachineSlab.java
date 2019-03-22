@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.items;
+package com.mrbysco.slabmachines.items;
 
 public class ItemMachineSlab {
 

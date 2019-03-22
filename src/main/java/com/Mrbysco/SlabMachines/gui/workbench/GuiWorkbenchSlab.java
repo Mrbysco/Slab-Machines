@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.gui.workbench;
+package com.mrbysco.slabmachines.gui.workbench;
 
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.InventoryPlayer;

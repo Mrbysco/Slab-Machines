@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "slabmachines:note_slab",
+	"count": 2
+  },
+  "pattern": [
+	"N"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"N": {
+      "item": "minecraft:noteblock"
+    }
+  }
+}

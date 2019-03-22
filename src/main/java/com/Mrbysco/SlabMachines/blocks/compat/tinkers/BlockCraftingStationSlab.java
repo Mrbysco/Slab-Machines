@@ -1,14 +1,14 @@
-package com.Mrbysco.SlabMachines.blocks.compat.tinkers;
+package com.mrbysco.slabmachines.blocks.compat.tinkers;
 
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.gui.SlabGuiHandler;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileCraftingStationSlab;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.gui.SlabGuiHandler;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileCraftingStationSlab;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;

@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "minecraft:noteblock"
+  },
+  "pattern": [
+	"N",
+	"N"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"N": {
+      "item": "slabmachines:note_slab"
+    }
+  }
+}

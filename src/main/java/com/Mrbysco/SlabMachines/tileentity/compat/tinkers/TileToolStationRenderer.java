@@ -1,11 +1,11 @@
-package com.Mrbysco.SlabMachines.tileentity.compat.tinkers;
+package com.mrbysco.slabmachines.tileentity.compat.tinkers;
 
 import java.util.Optional;
 
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockToolForgeSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockToolStationSlab;
-import com.Mrbysco.SlabMachines.config.SlabMachineConfigGen;
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolForgeSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolStationSlab;
+import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
+import com.mrbysco.slabmachines.init.SlabBlocks;
 
 import mcmultipart.api.container.IMultipartContainer;
 import mcmultipart.api.container.IPartInfo;

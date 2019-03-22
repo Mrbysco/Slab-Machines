@@ -1,13 +1,13 @@
-package com.Mrbysco.SlabMachines.blocks;
+package com.mrbysco.slabmachines.blocks;
 
 import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.tileentity.TileNoteSlab;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.tileentity.TileNoteSlab;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;

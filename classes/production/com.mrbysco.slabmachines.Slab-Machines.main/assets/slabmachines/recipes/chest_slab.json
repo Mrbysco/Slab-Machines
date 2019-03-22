@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "slabmachines:chest_slab"
+  },
+  "pattern": [
+	"SSS",
+	"S S",
+	"SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"S": {
+      "item": "#slabWood"
+    }
+  }
+}

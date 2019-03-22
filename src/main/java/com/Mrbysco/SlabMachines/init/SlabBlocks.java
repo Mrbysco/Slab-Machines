@@ -1,21 +1,21 @@
-package com.Mrbysco.SlabMachines.init;
+package com.mrbysco.slabmachines.init;
 
 import java.util.ArrayList;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.blocks.BlockChestSlab;
-import com.Mrbysco.SlabMachines.blocks.BlockFurnaceSlab;
-import com.Mrbysco.SlabMachines.blocks.BlockNoteblockSlab;
-import com.Mrbysco.SlabMachines.blocks.BlockTNTSlab;
-import com.Mrbysco.SlabMachines.blocks.BlockTrappedChestSlab;
-import com.Mrbysco.SlabMachines.blocks.BlockWorkbenchSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockCraftingStationSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockPartBuilderSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockPartChestSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockPatternChestSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockStencilTableSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockToolForgeSlab;
-import com.Mrbysco.SlabMachines.blocks.compat.tinkers.BlockToolStationSlab;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.blocks.BlockChestSlab;
+import com.mrbysco.slabmachines.blocks.BlockFurnaceSlab;
+import com.mrbysco.slabmachines.blocks.BlockNoteblockSlab;
+import com.mrbysco.slabmachines.blocks.BlockTNTSlab;
+import com.mrbysco.slabmachines.blocks.BlockTrappedChestSlab;
+import com.mrbysco.slabmachines.blocks.BlockWorkbenchSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockCraftingStationSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockPartBuilderSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockPartChestSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockPatternChestSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockStencilTableSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolForgeSlab;
+import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolStationSlab;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;

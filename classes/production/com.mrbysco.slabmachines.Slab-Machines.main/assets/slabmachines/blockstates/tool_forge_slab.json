@@ -1,0 +1,37 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+		"particle": "tconstruct:blocks/toolforge_top",
+		"down": "minecraft:blocks/iron_block",
+		"up": "tconstruct:blocks/toolforge_top",
+		"north": "slabmachines:blocks/tinkers/toolforge_slab_side",
+		"east": "slabmachines:blocks/tinkers/toolforge_slab_side",
+		"south": "slabmachines:blocks/tinkers/toolforge_slab_side",
+		"west": "slabmachines:blocks/tinkers/toolforge_slab_side"
+	}
+  },
+  "variants": {
+	"variant": {
+	  "default": {}
+	},
+	"half": {
+	  "top": {
+		"model": "slabmachines:slab_base_top"
+	  },
+	  "bottom": {
+		"model": "slabmachines:slab_base_bottom"
+	  }
+	},
+	"facing": {
+	  "north": {},
+	  "south": {},
+	  "west": {},
+	  "east": {}
+	},
+	"inventory": [{
+	  "model": "slabmachines:slab_base_bottom",
+	  "transform": "forge:default-block"
+	}]
+  }
+}

@@ -1,20 +1,20 @@
-package com.Mrbysco.SlabMachines.init;
+package com.mrbysco.slabmachines.init;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.entity.EntityTNTPrimeSlab;
-import com.Mrbysco.SlabMachines.tileentity.TileChestSlab;
-import com.Mrbysco.SlabMachines.tileentity.TileNoteSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.pitweaks.TilePiTweakFurnaceSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileCraftingStationSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TilePartBuilderSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TilePartChestSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TilePatternChestSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileStencilTableSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileToolForgeSlab;
-import com.Mrbysco.SlabMachines.tileentity.compat.tinkers.TileToolStationSlab;
-import com.Mrbysco.SlabMachines.tileentity.furnace.TileFurnaceSlab;
-import com.Mrbysco.SlabMachines.tileentity.furnace.compat.TileFastFurnaceSlab;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.entity.EntityTNTPrimeSlab;
+import com.mrbysco.slabmachines.tileentity.TileChestSlab;
+import com.mrbysco.slabmachines.tileentity.TileNoteSlab;
+import com.mrbysco.slabmachines.tileentity.compat.pitweaks.TilePiTweakFurnaceSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileCraftingStationSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TilePartBuilderSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TilePartChestSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TilePatternChestSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileStencilTableSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolForgeSlab;
+import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolStationSlab;
+import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
+import com.mrbysco.slabmachines.tileentity.furnace.compat.TileFastFurnaceSlab;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;

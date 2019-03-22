@@ -1,6 +1,6 @@
-package com.Mrbysco.SlabMachines.config;
+package com.mrbysco.slabmachines.config;
 
-import com.Mrbysco.SlabMachines.SlabReference;
+import com.mrbysco.slabmachines.SlabReference;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;

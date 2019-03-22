@@ -1,7 +1,7 @@
-package com.Mrbysco.SlabMachines.tileentity.compat.tinkers;
+package com.mrbysco.slabmachines.tileentity.compat.tinkers;
 
-import com.Mrbysco.SlabMachines.gui.compat.tcon.ContainerPatternChestSlab;
-import com.Mrbysco.SlabMachines.gui.compat.tcon.GuiPatternChestSlab;
+import com.mrbysco.slabmachines.gui.compat.tcon.ContainerPatternChestSlab;
+import com.mrbysco.slabmachines.gui.compat.tcon.GuiPatternChestSlab;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

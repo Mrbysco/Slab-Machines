@@ -1,8 +1,8 @@
-package com.Mrbysco.SlabMachines.entity;
+package com.mrbysco.slabmachines.entity;
 
 import javax.annotation.Nullable;
 
-import com.Mrbysco.SlabMachines.config.SlabMachineConfigGen;
+import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
 
 import net.minecraft.block.BlockAnvil;
 import net.minecraft.entity.Entity;

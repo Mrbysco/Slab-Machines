@@ -1,7 +1,7 @@
-package com.Mrbysco.SlabMachines.compat.mcmp;
+package com.mrbysco.slabmachines.compat.mcmp;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.init.SlabBlocks;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.init.SlabBlocks;
 
 import mcmultipart.api.addon.IMCMPAddon;
 import mcmultipart.api.addon.IWrappedBlock;

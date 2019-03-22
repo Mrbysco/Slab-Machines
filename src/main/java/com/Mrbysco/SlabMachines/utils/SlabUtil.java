@@ -1,4 +1,4 @@
-package com.Mrbysco.SlabMachines.utils;
+package com.mrbysco.slabmachines.utils;
 
 import java.util.Optional;
 

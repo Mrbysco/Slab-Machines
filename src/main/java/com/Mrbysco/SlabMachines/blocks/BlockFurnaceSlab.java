@@ -1,16 +1,16 @@
-package com.Mrbysco.SlabMachines.blocks;
+package com.mrbysco.slabmachines.blocks;
 
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.Mrbysco.SlabMachines.SlabMachines;
-import com.Mrbysco.SlabMachines.SlabReference;
-import com.Mrbysco.SlabMachines.gui.SlabGuiHandler;
-import com.Mrbysco.SlabMachines.tileentity.compat.pitweaks.TilePiTweakFurnaceSlab;
-import com.Mrbysco.SlabMachines.tileentity.furnace.TileFurnaceSlab;
-import com.Mrbysco.SlabMachines.tileentity.furnace.compat.TileFastFurnaceSlab;
-import com.Mrbysco.SlabMachines.utils.SlabUtil;
+import com.mrbysco.slabmachines.SlabMachines;
+import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.gui.SlabGuiHandler;
+import com.mrbysco.slabmachines.tileentity.compat.pitweaks.TilePiTweakFurnaceSlab;
+import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
+import com.mrbysco.slabmachines.tileentity.furnace.compat.TileFastFurnaceSlab;
+import com.mrbysco.slabmachines.utils.SlabUtil;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
