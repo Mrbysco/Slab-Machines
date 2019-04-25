@@ -3,7 +3,6 @@ package com.mrbysco.slabmachines.tileentity.compat.tinkers;
 import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolStationSlab;
 import com.mrbysco.slabmachines.gui.compat.tcon.ContainerToolStationSlab;
 import com.mrbysco.slabmachines.gui.compat.tcon.GuiToolStationSlab;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.client.gui.inventory.GuiContainer;

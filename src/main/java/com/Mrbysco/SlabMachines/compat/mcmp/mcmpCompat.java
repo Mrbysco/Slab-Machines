@@ -1,8 +1,6 @@
 package com.mrbysco.slabmachines.compat.mcmp;
 
-import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.init.SlabBlocks;
-
 import mcmultipart.api.addon.IMCMPAddon;
 import mcmultipart.api.addon.IWrappedBlock;
 import mcmultipart.api.addon.MCMPAddon;
@@ -15,6 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
 @MCMPAddon
 public class mcmpCompat implements IMCMPAddon {
@@ -44,7 +43,7 @@ public class mcmpCompat implements IMCMPAddon {
 		IWrappedBlock tntSlab = registry.registerStackWrapper(Item.getItemFromBlock(SlabBlocks.tntSlab), stack -> true, SlabBlocks.tntSlab);
 		tntSlab.setPlacementInfo(this::getSlabState);
 		
-		if(SlabMachines.tinkersLoaded)
+		if(Loader.isModLoaded("tconstruct"))
 		{
 			registry.registerPartWrapper(SlabBlocks.craftingStationSlab, new SlabPart(SlabBlocks.craftingStationSlab));
 			IWrappedBlock craftingstationSlab = registry.registerStackWrapper(Item.getItemFromBlock(SlabBlocks.craftingStationSlab), stack -> true, SlabBlocks.craftingStationSlab);

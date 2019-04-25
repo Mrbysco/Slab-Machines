@@ -1,7 +1,6 @@
 package com.mrbysco.slabmachines.packets;
 
 import com.mrbysco.slabmachines.SlabReference;
-
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;

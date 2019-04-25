@@ -1,14 +1,8 @@
 package com.mrbysco.slabmachines.compat.waila;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.init.SlabBlocks;
 import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
 import com.mrbysco.slabmachines.tileentity.furnace.compat.TileFastFurnaceSlab;
-
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -23,6 +17,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 @WailaPlugin
 public class FurnaceDataProvider implements IWailaDataProvider, IWailaPlugin{
@@ -32,7 +30,7 @@ public class FurnaceDataProvider implements IWailaDataProvider, IWailaPlugin{
 
     	FurnaceDataProvider provider = new FurnaceDataProvider();
 
-        if(SlabMachines.fastFurnaceLoaded)
+        if(Loader.isModLoaded("fastfurnace"))
         {
         	registrar.registerBodyProvider(provider, TileFastFurnaceSlab.class);
             registrar.registerNBTProvider(provider, TileFastFurnaceSlab.class);

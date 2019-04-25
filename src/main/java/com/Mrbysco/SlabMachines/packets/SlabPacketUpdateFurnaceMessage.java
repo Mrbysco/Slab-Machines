@@ -4,7 +4,6 @@ import com.mrbysco.slabmachines.blocks.BlockFurnaceSlab;
 import com.mrbysco.slabmachines.init.SlabBlocks;
 import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;

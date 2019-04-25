@@ -2,7 +2,6 @@ package com.mrbysco.slabmachines.tileentity.compat.tinkers;
 
 import com.mrbysco.slabmachines.gui.compat.tcon.ContainerStencilTableSlab;
 import com.mrbysco.slabmachines.gui.compat.tcon.GuiStencilTableSlab;
-
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

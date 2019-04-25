@@ -1,13 +1,13 @@
 package com.mrbysco.slabmachines.gui.compat.tcon;
 
-import java.util.Set;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.tools.common.tileentity.TileToolStation;
+
+import java.util.Set;
 
 public class GuiToolForgeSlab extends GuiToolStationSlab{
 

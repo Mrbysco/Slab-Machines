@@ -6,7 +6,6 @@ import com.mrbysco.slabmachines.gui.chest.ContainerChestSlab;
 import com.mrbysco.slabmachines.gui.chest.GuiChestSlab;
 import com.mrbysco.slabmachines.init.SlabBlocks;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;

@@ -15,7 +15,6 @@ import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolStationSlab;
 import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
 import com.mrbysco.slabmachines.tileentity.furnace.compat.TileFastFurnaceSlab;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import net.minecraft.block.BlockSlab;
 import net.minecraft.client.gui.inventory.GuiFurnace;
 import net.minecraft.entity.player.EntityPlayer;

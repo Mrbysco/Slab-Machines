@@ -2,7 +2,6 @@ package com.mrbysco.slabmachines.tileentity;
 
 import com.mrbysco.slabmachines.init.SlabBlocks;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;

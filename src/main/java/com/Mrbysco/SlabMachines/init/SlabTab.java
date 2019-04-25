@@ -1,7 +1,6 @@
 package com.mrbysco.slabmachines.init;
 
 import com.mrbysco.slabmachines.SlabReference;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 

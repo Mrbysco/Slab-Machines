@@ -3,7 +3,6 @@ package com.mrbysco.slabmachines.blocks;
 import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.gui.SlabGuiHandler;
-
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,6 +18,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
 public class BlockWorkbenchSlab extends BlockSlab{
 	public static final PropertyEnum<BlockWorkbenchSlab.Variant> VARIANT = PropertyEnum.<BlockWorkbenchSlab.Variant>create("variant", BlockWorkbenchSlab.Variant.class);
@@ -85,7 +85,7 @@ public class BlockWorkbenchSlab extends BlockSlab{
 		else
 		{
 			int id = state.getValue(HALF) == EnumBlockHalf.TOP ? SlabGuiHandler.GUI_WORKBENCH_SLAB_TOP : SlabGuiHandler.GUI_WORKBENCH_SLAB_BOTTOM;
-			if(SlabMachines.fastFurnaceLoaded)
+			if(Loader.isModLoaded("fastfurnace"))
 			{
     			id = state.getValue(HALF) == EnumBlockHalf.TOP ? SlabGuiHandler.GUI_FASTWORKBENCH_SLAB_TOP : SlabGuiHandler.GUI_FASTWORKBENCH_SLAB_BOTTOM;
 			}

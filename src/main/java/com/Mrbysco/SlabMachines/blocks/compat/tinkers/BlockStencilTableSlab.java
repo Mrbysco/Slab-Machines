@@ -1,15 +1,10 @@
 package com.mrbysco.slabmachines.blocks.compat.tinkers;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.gui.SlabGuiHandler;
 import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileStencilTableSlab;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -41,6 +36,9 @@ import slimeknights.mantle.tileentity.TileInventory;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.shared.tileentity.TileTable;
 import slimeknights.tconstruct.tools.common.block.ITinkerStationBlock;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class BlockStencilTableSlab extends BlockSlab implements ITinkerStationBlock {
 	public static final PropertyEnum<BlockStencilTableSlab.Variant> VARIANT = PropertyEnum.<BlockStencilTableSlab.Variant>create("variant", BlockStencilTableSlab.Variant.class);

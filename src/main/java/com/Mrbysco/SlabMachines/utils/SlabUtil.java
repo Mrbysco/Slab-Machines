@@ -1,7 +1,5 @@
 package com.mrbysco.slabmachines.utils;
 
-import java.util.Optional;
-
 import mcmultipart.api.multipart.IMultipartTile;
 import mcmultipart.api.multipart.MultipartHelper;
 import mcmultipart.api.slot.EnumFaceSlot;
@@ -16,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
+
+import java.util.Optional;
 
 public class SlabUtil {
 	@net.minecraftforge.fml.common.Optional.Method(modid = "mcmultipart")

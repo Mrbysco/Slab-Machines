@@ -1,14 +1,12 @@
 package com.mrbysco.slabmachines.gui.compat.tcon;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.mrbysco.slabmachines.tileentity.compat.tinkers.TilePartBuilderSlab;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.ObjectUtils;
 import slimeknights.tconstruct.tools.common.inventory.ContainerPartBuilder;
 import slimeknights.tconstruct.tools.common.tileentity.TilePartBuilder;
 

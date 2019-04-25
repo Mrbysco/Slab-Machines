@@ -5,7 +5,6 @@ import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
 import com.mrbysco.slabmachines.packets.SlabPacketHandler;
 import com.mrbysco.slabmachines.packets.SlabPacketRequestFurnaceSlabUpdate;
 import com.mrbysco.slabmachines.packets.SlabPacketUpdateFurnaceMessage;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

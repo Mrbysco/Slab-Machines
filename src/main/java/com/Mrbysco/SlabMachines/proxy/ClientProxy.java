@@ -1,6 +1,5 @@
 package com.mrbysco.slabmachines.proxy;
 
-import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.entity.EntityTNTPrimeSlab;
 import com.mrbysco.slabmachines.entity.TNTPrimeSlabRenderer;
 import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileCraftingStationSlab;
@@ -10,9 +9,9 @@ import com.mrbysco.slabmachines.tileentity.compat.tinkers.TilePartBuilderSlabRen
 import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolForgeSlab;
 import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolStationRenderer;
 import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolStationSlab;
-
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
 public class ClientProxy extends CommonProxy{
@@ -20,7 +19,7 @@ public class ClientProxy extends CommonProxy{
 	public void Preinit() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTNTPrimeSlab.class, TNTPrimeSlabRenderer.FACTORY);
 		
-		if(SlabMachines.tinkersLoaded)
+		if(Loader.isModLoaded("tconstruct"))
 		{
 			tinkersTESR();
 		}

@@ -1,8 +1,5 @@
 package com.mrbysco.slabmachines.init;
 
-import java.util.ArrayList;
-
-import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.blocks.BlockChestSlab;
 import com.mrbysco.slabmachines.blocks.BlockFurnaceSlab;
 import com.mrbysco.slabmachines.blocks.BlockNoteblockSlab;
@@ -16,14 +13,16 @@ import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockPatternChestSlab;
 import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockStencilTableSlab;
 import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolForgeSlab;
 import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolStationSlab;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.ArrayList;
 
 @EventBusSubscriber
 public class SlabBlocks {
@@ -46,7 +45,7 @@ public class SlabBlocks {
     	noteSlab = registerBlock(new BlockNoteblockSlab());
     	tntSlab = registerBlock(new BlockTNTSlab());
     	
-    	if(SlabMachines.tinkersLoaded)
+    	if(Loader.isModLoaded("tconstruct"))
     	{
     		registerTinkers();
     	}

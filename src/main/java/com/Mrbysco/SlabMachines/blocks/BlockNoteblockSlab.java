@@ -1,15 +1,10 @@
 package com.mrbysco.slabmachines.blocks;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import com.google.common.collect.Lists;
 import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.tileentity.TileNoteSlab;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-import com.google.common.collect.Lists;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -34,6 +29,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockNoteblockSlab extends BlockSlab{
 	public static final PropertyEnum<BlockNoteblockSlab.Variant> VARIANT = PropertyEnum.<BlockNoteblockSlab.Variant>create("variant", BlockNoteblockSlab.Variant.class);

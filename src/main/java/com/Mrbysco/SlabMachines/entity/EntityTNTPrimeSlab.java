@@ -1,9 +1,6 @@
 package com.mrbysco.slabmachines.entity;
 
-import javax.annotation.Nullable;
-
 import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
-
 import net.minecraft.block.BlockAnvil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +17,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
+
+import javax.annotation.Nullable;
 
 public class EntityTNTPrimeSlab extends Entity
 {

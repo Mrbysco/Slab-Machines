@@ -1,7 +1,6 @@
 package com.mrbysco.slabmachines.tileentity.compat.pitweaks;
 
 import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
-
 import net.minecraft.item.ItemStack;
 
 public class TilePiTweakFurnaceSlab extends TileFurnaceSlab{

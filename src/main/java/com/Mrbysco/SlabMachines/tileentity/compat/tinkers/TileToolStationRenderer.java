@@ -1,12 +1,9 @@
 package com.mrbysco.slabmachines.tileentity.compat.tinkers;
 
-import java.util.Optional;
-
 import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolForgeSlab;
 import com.mrbysco.slabmachines.blocks.compat.tinkers.BlockToolStationSlab;
 import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
 import com.mrbysco.slabmachines.init.SlabBlocks;
-
 import mcmultipart.api.container.IMultipartContainer;
 import mcmultipart.api.container.IPartInfo;
 import mcmultipart.api.multipart.MultipartHelper;
@@ -29,6 +26,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.client.ToolBuildGuiInfo;
 import slimeknights.tconstruct.tools.common.client.GuiButtonRepair;
+
+import java.util.Optional;
 
 @SideOnly(Side.CLIENT)
 public class TileToolStationRenderer extends TileEntitySpecialRenderer<TileToolStationSlab> {	

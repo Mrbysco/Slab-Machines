@@ -1,9 +1,5 @@
 package com.mrbysco.slabmachines.blocks;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.gui.SlabGuiHandler;
@@ -11,7 +7,6 @@ import com.mrbysco.slabmachines.tileentity.compat.pitweaks.TilePiTweakFurnaceSla
 import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
 import com.mrbysco.slabmachines.tileentity.furnace.compat.TileFastFurnaceSlab;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -38,6 +33,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockFurnaceSlab extends BlockSlab{
 	public static final PropertyEnum<BlockFurnaceSlab.Variant> VARIANT = PropertyEnum.<BlockFurnaceSlab.Variant>create("variant", BlockFurnaceSlab.Variant.class);
@@ -77,7 +76,7 @@ public class BlockFurnaceSlab extends BlockSlab{
         {
 			int id = state.getValue(HALF) == EnumBlockHalf.TOP ? SlabGuiHandler.GUI_FURNACE_SLAB_TOP : SlabGuiHandler.GUI_FURNACE_SLAB_BOTTOM;
 
-        	if(SlabMachines.fastFurnaceLoaded)
+        	if(Loader.isModLoaded("fastfurnace"))
 			{
     			id = state.getValue(HALF) == EnumBlockHalf.TOP ? SlabGuiHandler.GUI_FASTFURNACE_SLAB_TOP : SlabGuiHandler.GUI_FASTFURNACE_SLAB_BOTTOM;
 			}
@@ -211,11 +210,11 @@ public class BlockFurnaceSlab extends BlockSlab{
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		if(SlabMachines.fastFurnaceLoaded)
+		if(Loader.isModLoaded("fastfurnace"))
 			return new TileFastFurnaceSlab();
 		else
 		{
-			if(SlabMachines.piTweaksLoaded)
+			if(Loader.isModLoaded("pitweaks"))
 				return new TilePiTweakFurnaceSlab();
 			else
 				return new TileFurnaceSlab();

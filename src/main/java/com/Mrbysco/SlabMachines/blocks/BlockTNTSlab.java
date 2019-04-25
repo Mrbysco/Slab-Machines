@@ -3,7 +3,6 @@ package com.mrbysco.slabmachines.blocks;
 import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.entity.EntityTNTPrimeSlab;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;

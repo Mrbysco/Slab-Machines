@@ -1,7 +1,5 @@
 package com.mrbysco.slabmachines.gui.compat.tcon;
 
-import java.util.Set;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -10,6 +8,8 @@ import slimeknights.tconstruct.common.Sounds;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.tools.common.tileentity.TileToolStation;
+
+import java.util.Set;
 
 public class ContainerToolForgeSlab extends ContainerToolStationSlab{
 

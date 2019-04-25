@@ -1,15 +1,13 @@
 package com.mrbysco.slabmachines.compat.jei.tcon;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import com.mrbysco.slabmachines.gui.compat.tcon.ContainerCraftingStationSlab;
-
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.inventory.Slot;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeCraftingStationSlabInfo implements IRecipeTransferInfo<ContainerCraftingStationSlab> {
 

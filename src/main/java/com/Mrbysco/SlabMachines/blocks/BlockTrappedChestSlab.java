@@ -1,13 +1,10 @@
 package com.mrbysco.slabmachines.blocks;
 
-import javax.annotation.Nullable;
-
 import com.mrbysco.slabmachines.SlabMachines;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.gui.SlabGuiHandler;
 import com.mrbysco.slabmachines.tileentity.TileChestSlab;
 import com.mrbysco.slabmachines.utils.SlabUtil;
-
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,6 +27,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class BlockTrappedChestSlab extends BlockSlab{
 	public static final PropertyEnum<BlockTrappedChestSlab.Variant> VARIANT = PropertyEnum.<BlockTrappedChestSlab.Variant>create("variant", BlockTrappedChestSlab.Variant.class);

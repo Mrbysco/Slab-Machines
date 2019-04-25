@@ -15,10 +15,10 @@ import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolForgeSlab;
 import com.mrbysco.slabmachines.tileentity.compat.tinkers.TileToolStationSlab;
 import com.mrbysco.slabmachines.tileentity.furnace.TileFurnaceSlab;
 import com.mrbysco.slabmachines.tileentity.furnace.compat.TileFastFurnaceSlab;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -31,7 +31,7 @@ public class SlabTileEntities {
 		registerTileEntity(TileChestSlab.class, "slab_chest");	
 		registerTileEntity(TileNoteSlab.class, "slab_note");	
 
-		if(SlabMachines.fastFurnaceLoaded)
+		if(Loader.isModLoaded("fastfurnace"))
 		{
 			registerTileEntity(TileFastFurnaceSlab.class, "slab_furnace");
 		}
@@ -40,12 +40,12 @@ public class SlabTileEntities {
 			registerTileEntity(TileFurnaceSlab.class, "slab_furnace");	
 		}
 		
-		if(SlabMachines.piTweaksLoaded)
+		if(Loader.isModLoaded("pitweaks"))
 		{
 			registerTileEntity(TilePiTweakFurnaceSlab.class, "slab_furnace");
 		}
 		
-		if(SlabMachines.tinkersLoaded)
+		if(Loader.isModLoaded("tconstruct"))
 		{
 			registerTileEntity(TileCraftingStationSlab.class, "slab_crafting_station");	
 			registerTileEntity(TilePartBuilderSlab.class, "slab_part_builder");	
