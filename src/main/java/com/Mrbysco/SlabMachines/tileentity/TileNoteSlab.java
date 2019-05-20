@@ -122,4 +122,6 @@ public class TileNoteSlab extends TileEntityNote{
 	public int getMaterialInt() {
 	    return this.materialInt;
 	}
+
+    @Override public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) { return oldState.getBlock() != newState.getBlock(); }
 }

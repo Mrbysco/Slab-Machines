@@ -29,7 +29,7 @@ public class SlabTileEntities {
 		registerEntity("slab_tnt_primed", EntityTNTPrimeSlab.class, "slabtntprimed", 80, 3, true);
 		
 		registerTileEntity(TileChestSlab.class, "slab_chest");	
-		registerTileEntity(TileNoteSlab.class, "slab_note");	
+		registerTileEntity(TileNoteSlab.class, "slab_note");
 
 		if(Loader.isModLoaded("fastfurnace"))
 		{
@@ -37,9 +37,9 @@ public class SlabTileEntities {
 		}
 		else
 		{
-			registerTileEntity(TileFurnaceSlab.class, "slab_furnace");	
+			registerTileEntity(TileFurnaceSlab.class, "slab_furnace");
 		}
-		
+
 		if(Loader.isModLoaded("pitweaks"))
 		{
 			registerTileEntity(TilePiTweakFurnaceSlab.class, "slab_furnace");

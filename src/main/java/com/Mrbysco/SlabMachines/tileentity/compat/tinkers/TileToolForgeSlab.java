@@ -5,6 +5,7 @@ import com.mrbysco.slabmachines.gui.compat.tcon.ContainerToolForgeSlab;
 import com.mrbysco.slabmachines.gui.compat.tcon.GuiToolForgeSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -70,4 +71,6 @@ public class TileToolForgeSlab extends TileToolStationSlab{
 	    // add inventory if needed
 	    return state.withProperty(BlockToolForgeSlab.INVENTORY, toDisplay);
 	}
+
+	@Override public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) { return oldState.getBlock() != newState.getBlock(); }
 }

@@ -6,6 +6,7 @@ import com.mrbysco.slabmachines.gui.compat.tcon.GuiPartBuilderSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -96,4 +97,6 @@ public class TilePartBuilderSlab extends TilePartBuilder{
 	    
 	    readFromNBT(tag);
 	}
+
+	@Override public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) { return oldState.getBlock() != newState.getBlock(); }
 }

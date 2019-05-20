@@ -3,6 +3,7 @@ package com.mrbysco.slabmachines.tileentity.compat.tinkers;
 import com.mrbysco.slabmachines.gui.compat.tcon.ContainerStencilTableSlab;
 import com.mrbysco.slabmachines.gui.compat.tcon.GuiStencilTableSlab;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -55,4 +56,6 @@ public class TileStencilTableSlab extends TileStencilTable{
 	    
 	    readFromNBT(tag);
 	}
+
+	@Override public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) { return oldState.getBlock() != newState.getBlock(); }
 }

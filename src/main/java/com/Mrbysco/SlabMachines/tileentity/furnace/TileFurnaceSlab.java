@@ -5,6 +5,7 @@ import com.mrbysco.slabmachines.config.SlabMachineConfigGen;
 import com.mrbysco.slabmachines.packets.SlabPacketHandler;
 import com.mrbysco.slabmachines.packets.SlabPacketRequestFurnaceSlabUpdate;
 import com.mrbysco.slabmachines.packets.SlabPacketUpdateFurnaceMessage;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,7 +19,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -425,4 +428,6 @@ public class TileFurnaceSlab extends TileEntityFurnace implements ISlabFurnace{
     public String getGuiID() {
         return SlabReference.MOD_PREFIX + "slabfurnace";
     }
+
+    @Override public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) { return oldState.getBlock() != newState.getBlock(); }
 }

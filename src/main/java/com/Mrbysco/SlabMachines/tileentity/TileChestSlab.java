@@ -7,6 +7,7 @@ import com.mrbysco.slabmachines.gui.chest.GuiChestSlab;
 import com.mrbysco.slabmachines.init.SlabBlocks;
 import com.mrbysco.slabmachines.utils.SlabUtil;
 import net.minecraft.block.BlockChest;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -233,4 +234,6 @@ public class TileChestSlab extends TileEntityLockableLoot implements ITickable
     {
         return this.chestContents;
     }
+
+    @Override public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) { return oldState.getBlock() != newState.getBlock(); }
 }
