@@ -247,7 +247,7 @@ public class TileFurnaceSlab extends TileEntityFurnace implements ISlabFurnace{
             {
                 ItemStack itemstack1 = this.furnaceItemStacks.get(2);
 
-                if (itemstack1.isEmpty())
+                if (itemstack1.isEmpty() || itemstack1 == ItemStack.EMPTY)
                 {
                     return true;
                 }
