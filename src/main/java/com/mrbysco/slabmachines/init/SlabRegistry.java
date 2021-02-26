@@ -52,10 +52,11 @@ public class SlabRegistry {
     public static final RegistryObject<TileEntityType<TileFurnaceSlab>> FURNACE_SLAB_TILE = TILES.register("furnace_slab", () -> TileEntityType.Builder.create(TileFurnaceSlab::new, FURNACE_SLAB.get()).build(null));
     public static final RegistryObject<TileEntityType<TileChestSlab>> CHEST_SLAB_TILE = TILES.register("chest_slab", () -> TileEntityType.Builder.create(TileChestSlab::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
 
-    public static final RegistryObject<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITIES.register("tnt_slab", () -> register("tnt_slab", EntityType.Builder.<TNTSlabEntity>create(TNTSlabEntity::new, EntityClassification.MISC).size(1.0F, 0.5F)));
+    public static final RegistryObject<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITIES.register("tnt_slab", () -> register("tnt_slab", EntityType.Builder.<TNTSlabEntity>create(TNTSlabEntity::new, EntityClassification.MISC)
+            .size(1.0F, 0.5F).trackingRange(10).func_233608_b_(10).setCustomClientFactory(TNTSlabEntity::new)));
 
     public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder, boolean sendVelocityUpdates) {
-        return builder.setTrackingRange(64).setUpdateInterval(3).setShouldReceiveVelocityUpdates(sendVelocityUpdates).build(id);
+        return builder.build(id);
     }
 
     public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder) {

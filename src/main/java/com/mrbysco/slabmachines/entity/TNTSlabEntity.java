@@ -10,6 +10,7 @@ import net.minecraft.entity.item.TNTEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -18,6 +19,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -42,8 +45,17 @@ public class TNTSlabEntity extends TNTEntity {
         this.etho = etho;
     }
 
-    protected void entityInit()
-    {
+	public TNTSlabEntity(FMLPlayMessages.SpawnEntity spawnEntity, World worldIn) {
+		this(SlabRegistry.TNT_SLAB_ENTITY.get(), worldIn);
+	}
+
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+
+    protected void registerData() {
+    	super.registerData();
         this.dataManager.register(IS_ETHO, Boolean.valueOf(false));
     }
 

@@ -6,7 +6,6 @@ import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ChestContainer;

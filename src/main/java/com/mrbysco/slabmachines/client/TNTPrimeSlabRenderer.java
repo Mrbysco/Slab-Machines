@@ -3,11 +3,13 @@ package com.mrbysco.slabmachines.client;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mrbysco.slabmachines.entity.TNTSlabEntity;
 import com.mrbysco.slabmachines.init.SlabRegistry;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.TNTMinecartRenderer;
 import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
@@ -36,9 +38,20 @@ public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity> {
         matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-90.0F));
         matrixStackIn.translate(-0.5D, -0.5D, 0.5D);
         matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
-        TNTMinecartRenderer.renderTntFlash(SlabRegistry.TNT_SLAB.get().getDefaultState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getFuse() / 5 % 2 == 0);
+        renderTntFlash(SlabRegistry.TNT_SLAB.get().getDefaultState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getFuse() / 5 % 2 == 0);
         matrixStackIn.pop();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+    }
+
+    public static void renderTntFlash(BlockState blockStateIn, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer, int combinedLight, boolean doFullBright) {
+        int i;
+        if (doFullBright) {
+            i = OverlayTexture.getPackedUV(OverlayTexture.getU(1.0F), 10);
+        } else {
+            i = OverlayTexture.NO_OVERLAY;
+        }
+
+        Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(blockStateIn, matrixStackIn, renderTypeBuffer, combinedLight, i);
     }
 
     /**

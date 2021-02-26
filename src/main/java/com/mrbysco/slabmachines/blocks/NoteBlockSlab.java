@@ -94,7 +94,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 		int i = state.get(NOTE);
 		float f = (float)Math.pow(2.0D, (double)(i - 12) / 12.0D);
 		worldIn.playSound((PlayerEntity)null, pos, state.get(INSTRUMENT).getSound(), SoundCategory.RECORDS, 3.0F, f);
-		worldIn.addParticle(ParticleTypes.NOTE, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.2D, (double)pos.getZ() + 0.5D, (double)i / 24.0D, 0.0D, 0.0D);
+		worldIn.addParticle(ParticleTypes.NOTE, (double)pos.getX() + 0.5D, (double)pos.getY() + 1D, (double)pos.getZ() + 0.5D, (double)i / 24.0D, 0.0D, 0.0D);
 		return true;
 	}
 	
