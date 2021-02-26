@@ -1,0 +1,12 @@
+{
+  "parent": "slabmachines:block/slab_base_bottom",
+  "textures": {
+    "particle": "slabmachines:block/furnace_slab_front",
+    "down": "minecraft:block/furnace_top",
+    "up": "minecraft:block/furnace_top",
+    "north": "slabmachines:block/furnace_slab_front",
+    "east": "slabmachines:block/furnace_slab_side",
+    "south": "slabmachines:block/furnace_slab_side",
+    "west": "slabmachines:block/furnace_slab_side"
+  }
+}

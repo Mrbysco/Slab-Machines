@@ -1,57 +1,64 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "textures": {
-		"particle": "#north",
-		"down": "blocks/furnace_top",
-		"up": "blocks/furnace_top",
-		"east": "slabmachines:blocks/furnaceslab_side",
-		"south": "slabmachines:blocks/furnaceslab_side",
-		"west": "slabmachines:blocks/furnaceslab_side"
-	}
-  },
   "variants": {
-	"variant": {
-	  "default": {}
-	},
-	"half": {
-	  "top": {
-		"model": "slabmachines:slab_base_top"
-	  },
-	  "bottom": {
-		"model": "slabmachines:slab_base_bottom"
-	  }
-	},
-	"facing": {
-	  "north": {},
-	  "south": {
-		"y": 180
-	  },
-	  "west": {
-		"y": 270
-	  },
-	  "east": {
-		"y": 90
-	  }
-	},
-	"burning": {
-	  "true": {
-		"textures": {
-		  "north": "slabmachines:blocks/furnaceslab_front_active"
-		}
-	  },
-	  "false": {
-		"textures": {
-		  "north": "slabmachines:blocks/furnaceslab_front"
-		}
-	  }
-	},
-	"inventory": [{
-	  "model": "slabmachines:slab_base_bottom",
-	  "textures": {
-		"north": "slabmachines:blocks/furnaceslab_front"
-	  },
-	  "transform": "forge:default-block"
-	}]
+    "type=top,facing=east,lit=false": {
+      "model": "slabmachines:block/furnace_slab_top",
+      "y": 90
+    },
+    "type=top,facing=east,lit=true": {
+      "model": "slabmachines:block/furnace_slab_top_on",
+      "y": 90
+    },
+    "type=top,facing=north,lit=false": {
+      "model": "slabmachines:block/furnace_slab_top"
+    },
+    "type=top,facing=north,lit=true": {
+      "model": "slabmachines:block/furnace_slab_top_on"
+    },
+    "type=top,facing=south,lit=false": {
+      "model": "slabmachines:block/furnace_slab_top",
+      "y": 180
+    },
+    "type=top,facing=south,lit=true": {
+      "model": "slabmachines:block/furnace_slab_top_on",
+      "y": 180
+    },
+    "type=top,facing=west,lit=false": {
+      "model": "slabmachines:block/furnace_slab_top",
+      "y": 270
+    },
+    "type=top,facing=west,lit=true": {
+      "model": "slabmachines:block/furnace_slab_top_on",
+      "y": 270
+    },
+    "type=bottom,facing=east,lit=false": {
+      "model": "slabmachines:block/furnace_slab",
+      "y": 90
+    },
+    "type=bottom,facing=east,lit=true": {
+      "model": "slabmachines:block/furnace_slab_on",
+      "y": 90
+    },
+    "type=bottom,facing=north,lit=false": {
+      "model": "slabmachines:block/furnace_slab"
+    },
+    "type=bottom,facing=north,lit=true": {
+      "model": "slabmachines:block/furnace_slab_on"
+    },
+    "type=bottom,facing=south,lit=false": {
+      "model": "slabmachines:block/furnace_slab",
+      "y": 180
+    },
+    "type=bottom,facing=south,lit=true": {
+      "model": "slabmachines:block/furnace_slab_on",
+      "y": 180
+    },
+    "type=bottom,facing=west,lit=false": {
+      "model": "slabmachines:block/furnace_slab",
+      "y": 270
+    },
+    "type=bottom,facing=west,lit=true": {
+      "model": "slabmachines:block/furnace_slab_on",
+      "y": 270
+    }
   }
 }

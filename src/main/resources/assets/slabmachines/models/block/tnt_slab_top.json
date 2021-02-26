@@ -1,0 +1,12 @@
+{
+  "parent": "slabmachines:block/slab_base_top",
+  "textures": {
+    "particle": "slabmachines:block/tnt_slab_side",
+    "down": "minecraft:block/tnt_bottom",
+    "up": "minecraft:block/tnt_top",
+    "north": "slabmachines:block/tnt_slab_side",
+    "east": "slabmachines:block/tnt_slab_side",
+    "south": "slabmachines:block/tnt_slab_side",
+    "west": "slabmachines:block/tnt_slab_side"
+  }
+}

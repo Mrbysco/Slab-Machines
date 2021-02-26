@@ -1,5 +1,0 @@
-{
-    "conditions" : {
-        "tinkersInstalled": "com.mrbysco.slabmachines.init.recipe.TinkersInstalledRecipeCondition"
-    }
-}

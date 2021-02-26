@@ -1,12 +1,12 @@
 {
   "textures": {
-	"particle": "blocks/crafting_table_front",
-	"down": "blocks/planks_oak",
-	"up": "blocks/crafting_table_top",
-	"north": "slabmachines:blocks/craftingslab_front",
-	"east": "slabmachines:blocks/craftingslab_side",
-	"south": "slabmachines:blocks/craftingslab_side",
-	"west": "slabmachines:blocks/craftingslab_front"
+	"particle": "minecraft:block/crafting_table_front",
+	"down": "minecraft:block/oak_planks",
+	"up": "minecraft:block/crafting_table_top",
+	"north": "slabmachines:block/crafting_table_slab_front",
+	"east": "slabmachines:block/crafting_table_slab_side",
+	"south": "slabmachines:block/crafting_table_slab_side",
+	"west": "slabmachines:block/crafting_table_slab_front"
   },
   "elements": [
 	{
@@ -44,5 +44,39 @@
 		}
 	  }
 	}
-  ]
+  ],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation":  [ 75, 45, 0 ],
+			"translation":  [ 0, 2.5, 0 ],
+			"scale":  [ 0.375, 0.375, 0.375 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation":  [ 75, 45, 0 ],
+			"translation":  [ 0, 2.5, 0 ],
+			"scale":  [ 0.375, 0.375, 0.375 ]
+		},
+		"firstperson_righthand": {
+			"rotation":  [ 0, 45, 0 ],
+			"scale":  [ 0.4, 0.4, 0.4 ]
+		},
+		"firstperson_lefthand": {
+			"rotation":  [ 0, 45, 0 ],
+			"scale":  [ 0.4, 0.4, 0.4 ]
+		},
+		"gui": {
+			"rotation":  [ 30, 225, 0 ],
+			"scale":  [ 0.625, 0.625, 0.625 ]
+		},
+		"head": {
+			"translation":  [ 0, 10.434, 0 ]
+		},
+		"ground": {
+			"translation":  [ 0, 3, 0 ],
+			"scale":  [ 0.25, 0.25, 0.25 ]
+		},
+		"fixed": {
+			"scale":  [ 0.5, 0.5, 0.5 ]
+		}
+	}
 }

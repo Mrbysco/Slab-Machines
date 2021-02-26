@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "slabmachines:crafting_table_slab"
+  },
+  "pattern": [
+	"SS",
+	"SS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+	"S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  }
+}

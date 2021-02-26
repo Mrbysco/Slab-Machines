@@ -1,37 +1,34 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "textures": {
-		"particle": "slabmachines:blocks/chestslab_front",
-		"down": "slabmachines:blocks/chestslab_bottom",
-		"up": "slabmachines:blocks/chestslab_top",
-		"north": "slabmachines:blocks/trappedchestslab_front",
-		"east": "slabmachines:blocks/chestslab_side",
-		"south": "slabmachines:blocks/chestslab_side",
-		"west": "slabmachines:blocks/chestslab_side"
-	}
-  },
   "variants": {
-	"variant": {
-	  "default": {}
-	},
-	"half": {
-	  "top": {
-		"model": "slabmachines:slab_base_top"
-	  },
-	  "bottom": {
-		"model": "slabmachines:slab_base_bottom"
-	  }
-	},
-	"facing": {
-	  "north": {},
-	  "south": { "y": 180 },
-	  "west": { "y": 270 },
-	  "east": { "y": 90 }
-	},
-	"inventory": [{
-	  "model": "slabmachines:slab_base_bottom",
-	  "transform": "forge:default-block"
-	}]
+    "type=top,facing=east": {
+      "model": "slabmachines:block/trapped_chest_slab_top",
+      "y": 90
+    },
+    "type=top,facing=north": {
+      "model": "slabmachines:block/trapped_chest_slab_top"
+    },
+    "type=top,facing=south": {
+      "model": "slabmachines:block/trapped_chest_slab_top",
+      "y": 180
+    },
+    "type=top,facing=west": {
+      "model": "slabmachines:block/trapped_chest_slab_top",
+      "y": 270
+    },
+    "type=bottom,facing=east": {
+      "model": "slabmachines:block/trapped_chest_slab",
+      "y": 90
+    },
+    "type=bottom,facing=north": {
+      "model": "slabmachines:block/trapped_chest_slab"
+    },
+    "type=bottom,facing=south": {
+      "model": "slabmachines:block/trapped_chest_slab",
+      "y": 180
+    },
+    "type=bottom,facing=west": {
+      "model": "slabmachines:block/trapped_chest_slab",
+      "y": 270
+    }
   }
 }

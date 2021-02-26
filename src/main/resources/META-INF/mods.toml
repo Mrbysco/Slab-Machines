@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+issueTrackerURL="https://github.com/Mrbysco/Slab-Machines/issues"
+license="GNU Lesser General Public License v3.0"
+
+[[mods]]
+modId="slabmachines"
+version="${file.jarVersion}"
+displayName="Slab Machines"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/slab-machines"
+authors="Mrbysco"
+description='''
+Machines but as a slab
+'''
