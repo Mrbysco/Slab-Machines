@@ -1,16 +1,15 @@
 package com.mrbysco.slabmachines.blocks;
 
-import com.mrbysco.slabmachines.tileentity.TileChestSlab;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
+import com.mrbysco.slabmachines.blockentity.ChestSlabBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 
 public class TrappedChestSlabBlock extends ChestSlabBlock {
@@ -27,20 +26,11 @@ public class TrappedChestSlabBlock extends ChestSlabBlock {
 		return true;
 	}
 
-	public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return MathHelper.clamp(getPlayersUsing(blockAccess, blockState, pos), 0, 15);
+	public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos pos, Direction side) {
+		return Mth.clamp(ChestSlabBlockEntity.getOpenCount(blockGetter, pos), 0, 15);
 	}
 
-	public int getPlayersUsing(IBlockReader worldIn, BlockState state, BlockPos pos) {
-		TileEntity tileentity = worldIn.getBlockEntity(pos);
-		if (tileentity instanceof TileChestSlab) {
-			return ((TileChestSlab)tileentity).numPlayersUsing;
-		}
-
-		return 0;
-	}
-
-	public int getDirectSignal(BlockState blockState, IBlockReader worldIn, BlockPos pos, Direction side) {
-		return side == Direction.UP ? worldIn.getBlockState(pos).getSignal(worldIn, pos, side) : 0;
+	public int getDirectSignal(BlockState blockState, BlockGetter level, BlockPos pos, Direction side) {
+		return side == Direction.UP ? level.getBlockState(pos).getSignal(level, pos, side) : 0;
 	}
 }

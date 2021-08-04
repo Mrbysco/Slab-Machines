@@ -3,43 +3,43 @@ package com.mrbysco.slabmachines.blocks;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
 import com.mrbysco.slabmachines.container.SlabBenchContainer;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.inventory.container.SimpleNamedContainerProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.ToolType;
 
 public class CraftingTableSlabBlock extends CustomSlabBlock {
-	private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent(SlabReference.MOD_PREFIX + "container.crafting");
+	private static final Component CONTAINER_NAME = new TranslatableComponent(SlabReference.MOD_PREFIX + "container.crafting");
 
 	public CraftingTableSlabBlock(Properties properties) {
 		super(properties.strength(2.0F, 5.0F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isClientSide) {
-			return ActionResultType.SUCCESS;
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+		if (level.isClientSide) {
+			return InteractionResult.SUCCESS;
 		} else {
-			player.openMenu(state.getMenuProvider(worldIn, pos));
+			player.openMenu(state.getMenuProvider(level, pos));
 			player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
-			return ActionResultType.CONSUME;
+			return InteractionResult.CONSUME;
 		}
 	}
 
-	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
-		return new SimpleNamedContainerProvider((id, inventory, player) -> {
-			return new SlabBenchContainer(id, inventory, IWorldPosCallable.create(worldIn, pos));
+	public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+		return new SimpleMenuProvider((id, inventory, player) -> {
+			return new SlabBenchContainer(id, inventory, ContainerLevelAccess.create(level, pos));
 		}, CONTAINER_NAME);
 	}
 }

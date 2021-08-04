@@ -4,7 +4,7 @@ import com.mrbysco.slabmachines.client.ClientHandler;
 import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.container.SlabBenchContainer;
 import com.mrbysco.slabmachines.init.SlabRegistry;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -31,17 +31,18 @@ public class SlabMachines {
 		SlabRegistry.BLOCKS.register(eventBus);
 		SlabRegistry.ITEMS.register(eventBus);
 		SlabRegistry.ENTITIES.register(eventBus);
-		SlabRegistry.TILES.register(eventBus);
+		SlabRegistry.BLOCK_ENTITIES.register(eventBus);
 		SlabRegistry.CONTAINERS.register(eventBus);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			eventBus.addListener(ClientHandler::registerRenders);
+			eventBus.addListener(ClientHandler::registerEntityRenders);
 		});
 	}
 
 	public void interModEnqueueEvent(InterModEnqueueEvent event) {
 		InterModComms.sendTo("craftingtweaks", "RegisterProvider", () -> {
-			CompoundNBT tagCompound = new CompoundNBT();
+			CompoundTag tagCompound = new CompoundTag();
 			tagCompound.putString("ContainerClass", SlabBenchContainer.class.getName());
 			return tagCompound;
 		});

@@ -1,80 +1,70 @@
 package com.mrbysco.slabmachines.blocks;
 
 import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
-import com.mrbysco.slabmachines.tileentity.TileChestSlab;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.entity.monster.piglin.PiglinTasks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
+import com.mrbysco.slabmachines.blockentity.ChestSlabBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
-public class ChestSlabBlock extends FacingMultiSlabBlock {
+public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock {
     public ChestSlabBlock(Properties properties) {
 		super(properties.strength(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isClientSide) {
-			return ActionResultType.SUCCESS;
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+		if (level.isClientSide) {
+			return InteractionResult.SUCCESS;
 		} else {
-			INamedContainerProvider inamedcontainerprovider = this.getMenuProvider(state, worldIn, pos);
-			if (inamedcontainerprovider != null) {
-				player.openMenu(inamedcontainerprovider);
+			MenuProvider menuProvider = this.getMenuProvider(state, level, pos);
+			if (menuProvider != null) {
+				player.openMenu(menuProvider);
 				player.awardStat(this.getOpenStat());
-				PiglinTasks.angerNearbyPiglins(player, true);
+				PiglinAi.angerNearbyPiglins(player, true);
 			}
 
-			return ActionResultType.CONSUME;
+			return InteractionResult.CONSUME;
 		}
 	}
 
 	@Nullable
-	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
-		TileEntity tileentity = worldIn.getBlockEntity(pos);
-		return tileentity instanceof INamedContainerProvider ? (INamedContainerProvider)tileentity : null;
+	public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		return blockEntity instanceof MenuProvider ? (MenuProvider)blockEntity : null;
 	}
 
 	protected Stat<ResourceLocation> getOpenStat() {
 		return Stats.CUSTOM.get(Stats.OPEN_CHEST);
 	}
 
-	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
-			TileEntity tileentity = worldIn.getBlockEntity(pos);
-			if (tileentity instanceof IInventory) {
-				InventoryHelper.dropContents(worldIn, pos, (IInventory)tileentity);
-				worldIn.updateNeighbourForOutputSignal(pos, this);
+			BlockEntity tileentity = level.getBlockEntity(pos);
+			if (tileentity instanceof Container) {
+				Containers.dropContents(level, pos, (Container)tileentity);
+				level.updateNeighbourForOutputSignal(pos, this);
 			}
 
-			super.onRemove(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, level, pos, newState, isMoving);
 		}
-	}
-
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileChestSlab();
 	}
 
 	@Override
@@ -83,7 +73,13 @@ public class ChestSlabBlock extends FacingMultiSlabBlock {
 	}
 	
 	@Override
-	public int getAnalogOutputSignal(BlockState state, World worldIn, BlockPos pos) {
-		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
+	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
+	}
+
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new ChestSlabBlockEntity(pos, state);
 	}
 }

@@ -5,29 +5,29 @@ import com.mojang.datafixers.util.Pair;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
 import com.mrbysco.slabmachines.init.SlabRegistry;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
-import net.minecraft.block.Block;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.LootTableProvider;
-import net.minecraft.data.loot.BlockLootTables;
-import net.minecraft.loot.ConstantRange;
-import net.minecraft.loot.ItemLootEntry;
-import net.minecraft.loot.LootParameterSet;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTable.Builder;
-import net.minecraft.loot.LootTableManager;
-import net.minecraft.loot.ValidationTracker;
-import net.minecraft.loot.conditions.BlockStateProperty;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTable.Builder;
+import net.minecraft.world.level.storage.loot.LootTables;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -53,7 +53,7 @@ public class DataCreator {
             generator.addProvider(new Loots(generator));
         }
         if (event.includeClient()) {
-            generator.addProvider(new ItemModels(generator, helper));
+//            generator.addProvider(new ItemModels(generator, helper));
         }
     }
 
@@ -63,25 +63,27 @@ public class DataCreator {
         }
 
         @Override
-        protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootParameterSet>> getTables() {
+        protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootContextParamSet>> getTables() {
             return ImmutableList.of(
-                    Pair.of(Blocks::new, LootParameterSets.BLOCK)
+                    Pair.of(Blocks::new, LootContextParamSets.BLOCK)
             );
         }
 
         @Override
-        protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
-            map.forEach((name, table) -> LootTableManager.validate(validationtracker, name, table));
+        protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
+            map.forEach((name, table) -> LootTables.validate(validationtracker, name, table));
         }
-        private class Blocks extends BlockLootTables {
+        private class Blocks extends BlockLoot {
             @Override
             protected void addTables() {
                 this.dropSelf(CRAFTING_TABLE_SLAB.get());
-                this.add(FURNACE_SLAB.get(), BlockLootTables::createNameableBlockEntityTable);
-                this.add(CHEST_SLAB.get(), BlockLootTables::createNameableBlockEntityTable);
-                this.add(TRAPPED_CHEST_SLAB.get(), BlockLootTables::createNameableBlockEntityTable);
+                this.add(FURNACE_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+                this.add(CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+                this.add(TRAPPED_CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
                 this.dropSelf(NOTE_SLAB.get());
-                this.add(TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(TNT_SLAB.get()).when(BlockStateProperty.hasBlockStateProperties(TNT_SLAB.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
+                this.add(TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(TNT_SLAB.get()).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TNT_SLAB.get())
+                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
             }
 
             @Override
