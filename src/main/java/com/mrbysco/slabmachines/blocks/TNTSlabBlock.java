@@ -35,8 +35,8 @@ public class TNTSlabBlock extends CustomSlabBlock {
     public static final BooleanProperty ETHOSLAB = BooleanProperty.create("etho");
 
     public TNTSlabBlock(Properties properties) {
-        super(properties.zeroHardnessAndResistance().sound(SoundType.PLANT).harvestTool(ToolType.AXE).harvestLevel(0));
-        this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)).with(ETHOSLAB, Boolean.valueOf(false)));
+        super(properties.instabreak().sound(SoundType.GRASS).harvestTool(ToolType.AXE).harvestLevel(0));
+        this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, Boolean.valueOf(false)).setValue(ETHOSLAB, Boolean.valueOf(false)));
     }
 
     public void catchFire(BlockState state, World world, BlockPos pos, @Nullable net.minecraft.util.Direction face, @Nullable LivingEntity igniter) {
@@ -45,14 +45,14 @@ public class TNTSlabBlock extends CustomSlabBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        ItemStack stack = context.getItem();
-        return super.getStateForPlacement(context).with(ETHOSLAB, Boolean.valueOf(stack.getDisplayName().getUnformattedComponentText().equalsIgnoreCase("Etho slab")));
+        ItemStack stack = context.getItemInHand();
+        return super.getStateForPlacement(context).setValue(ETHOSLAB, Boolean.valueOf(stack.getHoverName().getContents().equalsIgnoreCase("Etho slab")));
     }
 
     @Override
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
-        if (!oldState.isIn(state.getBlock())) {
-            if (worldIn.isBlockPowered(pos)) {
+    public void onPlace(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (!oldState.is(state.getBlock())) {
+            if (worldIn.hasNeighborSignal(pos)) {
                 catchFire(state, worldIn, pos, null, null);
                 worldIn.removeBlock(pos, false);
             }
@@ -63,58 +63,58 @@ public class TNTSlabBlock extends CustomSlabBlock {
         BlockState partState = worldIn.getBlockState(pos);
         boolean etho = false;
         if(partState.getProperties().contains(ETHOSLAB)) {
-            etho = partState.get(ETHOSLAB);
+            etho = partState.getValue(ETHOSLAB);
         }
         return etho;
     }
 
-    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosionIn) {
-        if (!worldIn.isRemote) {
-            TNTSlabEntity tntentity = new TNTSlabEntity(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, explosionIn.getExplosivePlacedBy(), isEthoSlab(worldIn, pos));
-            tntentity.setFuse((short)(worldIn.rand.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
-            worldIn.addEntity(tntentity);
+    public void wasExploded(World worldIn, BlockPos pos, Explosion explosionIn) {
+        if (!worldIn.isClientSide) {
+            TNTSlabEntity tntentity = new TNTSlabEntity(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, explosionIn.getSourceMob(), isEthoSlab(worldIn, pos));
+            tntentity.setFuse((short)(worldIn.random.nextInt(tntentity.getLife() / 4) + tntentity.getLife() / 8));
+            worldIn.addFreshEntity(tntentity);
         }
     }
 
     public void explode(World worldIn, BlockPos pos, LivingEntity igniter) {
-        if (!worldIn.isRemote) {
+        if (!worldIn.isClientSide) {
             TNTSlabEntity tntentity = new TNTSlabEntity(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, igniter, isEthoSlab(worldIn, pos));
-            worldIn.addEntity(tntentity);
-            worldIn.playSound((PlayerEntity)null, tntentity.getPosX(), tntentity.getPosY(), tntentity.getPosZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            worldIn.addFreshEntity(tntentity);
+            worldIn.playSound((PlayerEntity)null, tntentity.getX(), tntentity.getY(), tntentity.getZ(), SoundEvents.TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(TYPE, WATERLOGGED, UNSTABLE, ETHOSLAB);
     }
 
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        ItemStack itemstack = player.getHeldItem(handIn);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        ItemStack itemstack = player.getItemInHand(handIn);
         Item item = itemstack.getItem();
         if (item != Items.FLINT_AND_STEEL && item != Items.FIRE_CHARGE) {
-            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+            return super.use(state, worldIn, pos, player, handIn, hit);
         } else {
-            catchFire(state, worldIn, pos, hit.getFace(), player);
-            worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
+            catchFire(state, worldIn, pos, hit.getDirection(), player);
+            worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
             if (!player.isCreative()) {
                 if (item == Items.FLINT_AND_STEEL) {
-                    itemstack.damageItem(1, player, (player1) -> {
-                        player1.sendBreakAnimation(handIn);
+                    itemstack.hurtAndBreak(1, player, (player1) -> {
+                        player1.broadcastBreakEvent(handIn);
                     });
                 } else {
                     itemstack.shrink(1);
                 }
             }
 
-            return ActionResultType.func_233537_a_(worldIn.isRemote);
+            return ActionResultType.sidedSuccess(worldIn.isClientSide);
         }
     }
 
-    public void onProjectileCollision(World worldIn, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
-        if (!worldIn.isRemote) {
-            Entity entity = projectile.func_234616_v_();
-            if (projectile.isBurning()) {
-                BlockPos blockpos = hit.getPos();
+    public void onProjectileHit(World worldIn, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
+        if (!worldIn.isClientSide) {
+            Entity entity = projectile.getOwner();
+            if (projectile.isOnFire()) {
+                BlockPos blockpos = hit.getBlockPos();
                 catchFire(state, worldIn, blockpos, null, entity instanceof LivingEntity ? (LivingEntity)entity : null);
                 worldIn.removeBlock(blockpos, false);
             }
@@ -123,20 +123,20 @@ public class TNTSlabBlock extends CustomSlabBlock {
     }
 
 	@Override
-	public boolean canDropFromExplosion(Explosion explosionIn) {
+	public boolean dropFromExplosion(Explosion explosionIn) {
 		return false;
 	}
 	
 	@Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        if (worldIn.isBlockPowered(pos)) {
+        if (worldIn.hasNeighborSignal(pos)) {
             catchFire(state, worldIn, pos, null, null);
             worldIn.removeBlock(pos, false);
         }
     }
 	
 	@Override
-	public BlockRenderType getRenderType(BlockState state)
+	public BlockRenderType getRenderShape(BlockState state)
     {
         return BlockRenderType.MODEL;
     }

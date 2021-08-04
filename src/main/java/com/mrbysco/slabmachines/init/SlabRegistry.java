@@ -35,25 +35,25 @@ public class SlabRegistry {
 
     public static final RegistryObject<ContainerType<SlabBenchContainer>> SLAB_WORKBENCH_CONTAINER = CONTAINERS.register("slab_workbench", () -> IForgeContainerType.create((windowId, inv, data) -> new SlabBenchContainer(windowId, inv)));
 
-    public static final RegistryObject<Block> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(AbstractBlock.Properties.create(Material.WOOD)));
-    public static final RegistryObject<Block> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(AbstractBlock.Properties.create(Material.ROCK)));
-    public static final RegistryObject<Block> CHEST_SLAB = BLOCKS.register("chest_slab", () -> new ChestSlabBlock(AbstractBlock.Properties.create(Material.WOOD)));
-    public static final RegistryObject<Block> TRAPPED_CHEST_SLAB = BLOCKS.register("trapped_chest_slab", () -> new TrappedChestSlabBlock(AbstractBlock.Properties.create(Material.WOOD)));
-    public static final RegistryObject<Block> NOTE_SLAB = BLOCKS.register("note_slab", () -> new NoteBlockSlab(AbstractBlock.Properties.create(Material.WOOD)));
-    public static final RegistryObject<Block> TNT_SLAB = BLOCKS.register("tnt_slab", () -> new TNTSlabBlock(AbstractBlock.Properties.create(Material.TNT)));
+    public static final RegistryObject<Block> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(AbstractBlock.Properties.of(Material.WOOD)));
+    public static final RegistryObject<Block> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(AbstractBlock.Properties.of(Material.STONE)));
+    public static final RegistryObject<Block> CHEST_SLAB = BLOCKS.register("chest_slab", () -> new ChestSlabBlock(AbstractBlock.Properties.of(Material.WOOD)));
+    public static final RegistryObject<Block> TRAPPED_CHEST_SLAB = BLOCKS.register("trapped_chest_slab", () -> new TrappedChestSlabBlock(AbstractBlock.Properties.of(Material.WOOD)));
+    public static final RegistryObject<Block> NOTE_SLAB = BLOCKS.register("note_slab", () -> new NoteBlockSlab(AbstractBlock.Properties.of(Material.WOOD)));
+    public static final RegistryObject<Block> TNT_SLAB = BLOCKS.register("tnt_slab", () -> new TNTSlabBlock(AbstractBlock.Properties.of(Material.EXPLOSIVE)));
 
-    public static final RegistryObject<Item> CRAFTING_TABLE_SLAB_ITEM = ITEMS.register("crafting_table_slab", () -> new BlockItem(CRAFTING_TABLE_SLAB.get(), new Item.Properties().group(SlabTab.SLAB_TAB)));
-    public static final RegistryObject<Item> FURNACE_SLAB_ITEM = ITEMS.register("furnace_slab", () -> new BlockItem(FURNACE_SLAB.get(), new Item.Properties().group(SlabTab.SLAB_TAB)));
-    public static final RegistryObject<Item> CHEST_SLAB_ITEM = ITEMS.register("chest_slab", () -> new BlockItem(CHEST_SLAB.get(), new Item.Properties().group(SlabTab.SLAB_TAB)));
-    public static final RegistryObject<Item> TRAPPED_CHEST_SLAB_ITEM = ITEMS.register("trapped_chest_slab", () -> new BlockItem(TRAPPED_CHEST_SLAB.get(), new Item.Properties().group(SlabTab.SLAB_TAB)));
-    public static final RegistryObject<Item> NOTE_SLAB_ITEM = ITEMS.register("note_slab", () -> new BlockItem(NOTE_SLAB.get(), new Item.Properties().group(SlabTab.SLAB_TAB)));
-    public static final RegistryObject<Item> TNT_SLAB_ITEM = ITEMS.register("tnt_slab", () -> new BlockItem(TNT_SLAB.get(), new Item.Properties().group(SlabTab.SLAB_TAB)));
+    public static final RegistryObject<Item> CRAFTING_TABLE_SLAB_ITEM = ITEMS.register("crafting_table_slab", () -> new BlockItem(CRAFTING_TABLE_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
+    public static final RegistryObject<Item> FURNACE_SLAB_ITEM = ITEMS.register("furnace_slab", () -> new BlockItem(FURNACE_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
+    public static final RegistryObject<Item> CHEST_SLAB_ITEM = ITEMS.register("chest_slab", () -> new BlockItem(CHEST_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
+    public static final RegistryObject<Item> TRAPPED_CHEST_SLAB_ITEM = ITEMS.register("trapped_chest_slab", () -> new BlockItem(TRAPPED_CHEST_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
+    public static final RegistryObject<Item> NOTE_SLAB_ITEM = ITEMS.register("note_slab", () -> new BlockItem(NOTE_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
+    public static final RegistryObject<Item> TNT_SLAB_ITEM = ITEMS.register("tnt_slab", () -> new BlockItem(TNT_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
 
-    public static final RegistryObject<TileEntityType<TileFurnaceSlab>> FURNACE_SLAB_TILE = TILES.register("furnace_slab", () -> TileEntityType.Builder.create(TileFurnaceSlab::new, FURNACE_SLAB.get()).build(null));
-    public static final RegistryObject<TileEntityType<TileChestSlab>> CHEST_SLAB_TILE = TILES.register("chest_slab", () -> TileEntityType.Builder.create(TileChestSlab::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
+    public static final RegistryObject<TileEntityType<TileFurnaceSlab>> FURNACE_SLAB_TILE = TILES.register("furnace_slab", () -> TileEntityType.Builder.of(TileFurnaceSlab::new, FURNACE_SLAB.get()).build(null));
+    public static final RegistryObject<TileEntityType<TileChestSlab>> CHEST_SLAB_TILE = TILES.register("chest_slab", () -> TileEntityType.Builder.of(TileChestSlab::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
 
-    public static final RegistryObject<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITIES.register("tnt_slab", () -> register("tnt_slab", EntityType.Builder.<TNTSlabEntity>create(TNTSlabEntity::new, EntityClassification.MISC)
-            .size(1.0F, 0.5F).trackingRange(10).func_233608_b_(10).setCustomClientFactory(TNTSlabEntity::new)));
+    public static final RegistryObject<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITIES.register("tnt_slab", () -> register("tnt_slab", EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, EntityClassification.MISC)
+            .sized(1.0F, 0.5F).clientTrackingRange(10).updateInterval(10).setCustomClientFactory(TNTSlabEntity::new)));
 
     public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder, boolean sendVelocityUpdates) {
         return builder.build(id);

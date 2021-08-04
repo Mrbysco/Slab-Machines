@@ -15,7 +15,7 @@ public class ClientHandler {
     public static void registerRenders(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(SlabRegistry.TNT_SLAB_ENTITY.get(), TNTPrimeSlabRenderer::new);
 
-        ScreenManager.registerFactory(SlabRegistry.SLAB_WORKBENCH_CONTAINER.get(), new Factory());
+        ScreenManager.register(SlabRegistry.SLAB_WORKBENCH_CONTAINER.get(), new Factory());
     }
 
     private static class Factory implements IScreenFactory {

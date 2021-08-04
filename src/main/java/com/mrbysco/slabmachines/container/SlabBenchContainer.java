@@ -22,7 +22,7 @@ public class SlabBenchContainer extends WorkbenchContainer {
 	}
 
 	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
-		return isWithinUsableDistance(this.worldPosCallable, playerIn, SlabRegistry.CRAFTING_TABLE_SLAB.get());
+	public boolean stillValid(PlayerEntity playerIn) {
+		return stillValid(this.access, playerIn, SlabRegistry.CRAFTING_TABLE_SLAB.get());
 	}
 }

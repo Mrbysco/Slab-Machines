@@ -35,69 +35,69 @@ public class FurnaceSlabBlock extends FacingMultiSlabBlock {
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	public FurnaceSlabBlock(Properties properties) {
-		super(properties.hardnessAndResistance(2.0F, 10.0F).sound(SoundType.STONE).harvestLevel(0).harvestTool(ToolType.PICKAXE));
-		this.setDefaultState(this.getDefaultState().with(LIT, Boolean.valueOf(false)));
+		super(properties.strength(2.0F, 10.0F).sound(SoundType.STONE).harvestLevel(0).harvestTool(ToolType.PICKAXE));
+		this.registerDefaultState(this.defaultBlockState().setValue(LIT, Boolean.valueOf(false)));
 	}
 
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isClientSide) {
 			return ActionResultType.SUCCESS;
 		} else {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+			TileEntity tileentity = worldIn.getBlockEntity(pos);
 			if (tileentity instanceof TileFurnaceSlab) {
-				player.openContainer((INamedContainerProvider)tileentity);
-				player.addStat(Stats.INTERACT_WITH_FURNACE);
+				player.openMenu((INamedContainerProvider)tileentity);
+				player.awardStat(Stats.INTERACT_WITH_FURNACE);
 			}
 			return ActionResultType.CONSUME;
 		}
 	}
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.isIn(newState.getBlock())) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (!state.is(newState.getBlock())) {
+			TileEntity tileentity = worldIn.getBlockEntity(pos);
 			if (tileentity instanceof TileFurnaceSlab) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (TileFurnaceSlab)tileentity);
-				((TileFurnaceSlab)tileentity).grantStoredRecipeExperience(worldIn, Vector3d.copyCentered(pos));
-				worldIn.updateComparatorOutputLevel(pos, this);
+				InventoryHelper.dropContents(worldIn, pos, (TileFurnaceSlab)tileentity);
+				((TileFurnaceSlab)tileentity).getRecipesToAwardAndPopExperience(worldIn, Vector3d.atCenterOf(pos));
+				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
 		}
 	}
 
 	@Override
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.get(LIT)) {
+		if (stateIn.getValue(LIT)) {
 			double posX = (double)pos.getX() + 0.5D;
-			double posY = (double)pos.getY() + ((stateIn.get(CustomSlabBlock.TYPE) == CustomSlabType.TOP) ? 0.5D : 0);
+			double posY = (double)pos.getY() + ((stateIn.getValue(CustomSlabBlock.TYPE) == CustomSlabType.TOP) ? 0.5D : 0);
 			double posZ = (double)pos.getZ() + 0.5D;
 			if (rand.nextDouble() < 0.1D) {
-				worldIn.playSound(posX, posY, posZ, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				worldIn.playLocalSound(posX, posY, posZ, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
 
-			Direction direction = stateIn.get(FACING);
+			Direction direction = stateIn.getValue(FACING);
 			Direction.Axis direction$axis = direction.getAxis();
 			double d3 = 0.52D;
 			double d4 = rand.nextDouble() * 0.6D - 0.3D;
-			double d5 = direction$axis == Direction.Axis.X ? (double)direction.getXOffset() * 0.52D : d4;
+			double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d4;
 			double d6 = rand.nextDouble() * 6.0D / 16.0D;
-			double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getZOffset() * 0.52D : d4;
+			double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
 			worldIn.addParticle(ParticleTypes.SMOKE, posX + d5, posY + d6, posZ + d7, 0.0D, 0.0D, 0.0D);
 			worldIn.addParticle(ParticleTypes.FLAME, posX + d5, posY + d6, posZ + d7, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return Container.calcRedstone(worldIn.getTileEntity(pos));
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 
 	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(TYPE, FACING, LIT, WATERLOGGED);
 	}
 

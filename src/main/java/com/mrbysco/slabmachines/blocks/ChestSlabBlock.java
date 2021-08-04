@@ -26,19 +26,19 @@ import javax.annotation.Nullable;
 
 public class ChestSlabBlock extends FacingMultiSlabBlock {
     public ChestSlabBlock(Properties properties) {
-		super(properties.hardnessAndResistance(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
+		super(properties.strength(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isClientSide) {
 			return ActionResultType.SUCCESS;
 		} else {
-			INamedContainerProvider inamedcontainerprovider = this.getContainer(state, worldIn, pos);
+			INamedContainerProvider inamedcontainerprovider = this.getMenuProvider(state, worldIn, pos);
 			if (inamedcontainerprovider != null) {
-				player.openContainer(inamedcontainerprovider);
-				player.addStat(this.getOpenStat());
-				PiglinTasks.func_234478_a_(player, true);
+				player.openMenu(inamedcontainerprovider);
+				player.awardStat(this.getOpenStat());
+				PiglinTasks.angerNearbyPiglins(player, true);
 			}
 
 			return ActionResultType.CONSUME;
@@ -46,8 +46,8 @@ public class ChestSlabBlock extends FacingMultiSlabBlock {
 	}
 
 	@Nullable
-	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-		TileEntity tileentity = worldIn.getTileEntity(pos);
+	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
+		TileEntity tileentity = worldIn.getBlockEntity(pos);
 		return tileentity instanceof INamedContainerProvider ? (INamedContainerProvider)tileentity : null;
 	}
 
@@ -55,15 +55,15 @@ public class ChestSlabBlock extends FacingMultiSlabBlock {
 		return Stats.CUSTOM.get(Stats.OPEN_CHEST);
 	}
 
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.isIn(newState.getBlock())) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (!state.is(newState.getBlock())) {
+			TileEntity tileentity = worldIn.getBlockEntity(pos);
 			if (tileentity instanceof IInventory) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileentity);
-				worldIn.updateComparatorOutputLevel(pos, this);
+				InventoryHelper.dropContents(worldIn, pos, (IInventory)tileentity);
+				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
 		}
 	}
 
@@ -78,12 +78,12 @@ public class ChestSlabBlock extends FacingMultiSlabBlock {
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 	
 	@Override
-	public int getComparatorInputOverride(BlockState state, World worldIn, BlockPos pos) {
-		return Container.calcRedstone(worldIn.getTileEntity(pos));
+	public int getAnalogOutputSignal(BlockState state, World worldIn, BlockPos pos) {
+		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 }

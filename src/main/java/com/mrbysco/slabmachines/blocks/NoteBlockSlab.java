@@ -26,86 +26,86 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 public class NoteBlockSlab extends CustomSlabBlock {
-	public static final EnumProperty<NoteBlockInstrument> INSTRUMENT = BlockStateProperties.NOTE_BLOCK_INSTRUMENT;
+	public static final EnumProperty<NoteBlockInstrument> INSTRUMENT = BlockStateProperties.NOTEBLOCK_INSTRUMENT;
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-	public static final IntegerProperty NOTE = BlockStateProperties.NOTE_0_24;
+	public static final IntegerProperty NOTE = BlockStateProperties.NOTE;
 
     public NoteBlockSlab(Properties properties) {
-		super(properties.hardnessAndResistance(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
-		this.setDefaultState(this.getDefaultState().with(INSTRUMENT, NoteBlockInstrument.HARP).with(NOTE, Integer.valueOf(0)).with(POWERED, Boolean.valueOf(false)));
+		super(properties.strength(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
+		this.registerDefaultState(this.defaultBlockState().setValue(INSTRUMENT, NoteBlockInstrument.HARP).setValue(NOTE, Integer.valueOf(0)).setValue(POWERED, Boolean.valueOf(false)));
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return super.getStateForPlacement(context).with(INSTRUMENT, NoteBlockInstrument.byState(context.getWorld().getBlockState(context.getPos().down())));
+		return super.getStateForPlacement(context).setValue(INSTRUMENT, NoteBlockInstrument.byState(context.getLevel().getBlockState(context.getClickedPos().below())));
 	}
 
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN ? stateIn.with(INSTRUMENT, NoteBlockInstrument.byState(facingState)) : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return facing == Direction.DOWN ? stateIn.setValue(INSTRUMENT, NoteBlockInstrument.byState(facingState)) : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isClientSide) {
 			return ActionResultType.SUCCESS;
 		} else {
-			int _new = net.minecraftforge.common.ForgeHooks.onNoteChange(worldIn, pos, state, state.get(NOTE), state.func_235896_a_(NOTE).get(NOTE));
+			int _new = net.minecraftforge.common.ForgeHooks.onNoteChange(worldIn, pos, state, state.getValue(NOTE), state.cycle(NOTE).getValue(NOTE));
 			if (_new == -1) return ActionResultType.FAIL;
-			state = state.with(NOTE, _new);
-			worldIn.setBlockState(pos, state, 3);
+			state = state.setValue(NOTE, _new);
+			worldIn.setBlock(pos, state, 3);
 			this.triggerNote(worldIn, pos);
-			player.addStat(Stats.TUNE_NOTEBLOCK);
+			player.awardStat(Stats.TUNE_NOTEBLOCK);
 			return ActionResultType.CONSUME;
 		}
 	}
 
 	@Override
-	public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-		if (!worldIn.isRemote) {
+	public void attack(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+		if (!worldIn.isClientSide) {
 			this.triggerNote(worldIn, pos);
-			player.addStat(Stats.PLAY_NOTEBLOCK);
+			player.awardStat(Stats.PLAY_NOTEBLOCK);
 		}
 	}
 
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		boolean flag = worldIn.isBlockPowered(pos);
-		if (flag != state.get(POWERED)) {
+		boolean flag = worldIn.hasNeighborSignal(pos);
+		if (flag != state.getValue(POWERED)) {
 			if (flag) {
 				this.triggerNote(worldIn, pos);
 			}
 
-			worldIn.setBlockState(pos, state.with(POWERED, Boolean.valueOf(flag)), 3);
+			worldIn.setBlock(pos, state.setValue(POWERED, Boolean.valueOf(flag)), 3);
 		}
 	}
 
 	private void triggerNote(World worldIn, BlockPos pos) {
-		if (worldIn.isAirBlock(pos.up())) {
-			worldIn.addBlockEvent(pos, this, 0, 0);
+		if (worldIn.isEmptyBlock(pos.above())) {
+			worldIn.blockEvent(pos, this, 0, 0);
 		}
 
 	}
 	
 	@Override
-	public boolean eventReceived(BlockState state, World worldIn, BlockPos pos, int id, int param) {
-		net.minecraftforge.event.world.NoteBlockEvent.Play e = new net.minecraftforge.event.world.NoteBlockEvent.Play(worldIn, pos, state, state.get(NOTE), state.get(INSTRUMENT));
+	public boolean triggerEvent(BlockState state, World worldIn, BlockPos pos, int id, int param) {
+		net.minecraftforge.event.world.NoteBlockEvent.Play e = new net.minecraftforge.event.world.NoteBlockEvent.Play(worldIn, pos, state, state.getValue(NOTE), state.getValue(INSTRUMENT));
 		if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(e)) return false;
-		state = state.with(NOTE, e.getVanillaNoteId()).with(INSTRUMENT, e.getInstrument());
-		int i = state.get(NOTE);
+		state = state.setValue(NOTE, e.getVanillaNoteId()).setValue(INSTRUMENT, e.getInstrument());
+		int i = state.getValue(NOTE);
 		float f = (float)Math.pow(2.0D, (double)(i - 12) / 12.0D);
-		worldIn.playSound((PlayerEntity)null, pos, state.get(INSTRUMENT).getSound(), SoundCategory.RECORDS, 3.0F, f);
+		worldIn.playSound((PlayerEntity)null, pos, state.getValue(INSTRUMENT).getSoundEvent(), SoundCategory.RECORDS, 3.0F, f);
 		worldIn.addParticle(ParticleTypes.NOTE, (double)pos.getX() + 0.5D, (double)pos.getY() + 1D, (double)pos.getZ() + 0.5D, (double)i / 24.0D, 0.0D, 0.0D);
 		return true;
 	}
 	
 	@Override
-	public BlockRenderType getRenderType(BlockState state)
+	public BlockRenderType getRenderShape(BlockState state)
     {
         return BlockRenderType.MODEL;
     }
 
 	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(TYPE, WATERLOGGED, INSTRUMENT, POWERED, NOTE);
 	}
 }

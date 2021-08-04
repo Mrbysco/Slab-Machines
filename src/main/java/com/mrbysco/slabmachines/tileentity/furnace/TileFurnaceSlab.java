@@ -19,7 +19,7 @@ public class TileFurnaceSlab extends AbstractFurnaceTileEntity implements ISlabF
     }
 
     @Override
-    public int getInventoryStackLimit() {
+    public int getMaxStackSize() {
     	return SlabConfig.COMMON.slabFurnaceSlotLimit.get();
     }
 
@@ -30,15 +30,15 @@ public class TileFurnaceSlab extends AbstractFurnaceTileEntity implements ISlabF
 
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return new FurnaceContainer(id, player, this, this.furnaceData);
+        return new FurnaceContainer(id, player, this, this.dataAccess);
     }
 
     @Override
-    public boolean isUsableByPlayer(PlayerEntity player) {
-        if (this.world.getTileEntity(this.pos) != this) {
+    public boolean stillValid(PlayerEntity player) {
+        if (this.level.getBlockEntity(this.worldPosition) != this) {
             return false;
         } else {
-            return player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+            return player.distanceToSqr((double)this.worldPosition.getX() + 0.5D, (double)this.worldPosition.getY() + 0.5D, (double)this.worldPosition.getZ() + 0.5D) <= 64.0D;
         }
     }
 

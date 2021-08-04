@@ -26,24 +26,24 @@ import javax.annotation.Nullable;
 public class CustomSlabBlock extends Block implements IWaterLoggable {
 	public static final EnumProperty<CustomSlabType> TYPE = EnumProperty.create("type", CustomSlabType.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-	protected static final VoxelShape BOTTOM_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
-	protected static final VoxelShape TOP_SHAPE = Block.makeCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+	protected static final VoxelShape BOTTOM_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
+	protected static final VoxelShape TOP_SHAPE = Block.box(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 	public CustomSlabBlock(Properties builder) {
 		super(builder);
-		this.setDefaultState(this.stateContainer.getBaseState().with(TYPE, CustomSlabType.BOTTOM).with(WATERLOGGED, Boolean.valueOf(false)));
+		this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, CustomSlabType.BOTTOM).setValue(WATERLOGGED, Boolean.valueOf(false)));
 	}
 
-	public boolean isTransparent(BlockState state) {
+	public boolean useShapeForLightOcclusion(BlockState state) {
 		return true;
 	}
 
-	protected void fillStateContainer(Builder<Block, BlockState> p_206840_1_) {
+	protected void createBlockStateDefinition(Builder<Block, BlockState> p_206840_1_) {
 		p_206840_1_.add(new Property[]{TYPE, WATERLOGGED});
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-		CustomSlabType slabType = (CustomSlabType)state.get(TYPE);
+		CustomSlabType slabType = (CustomSlabType)state.getValue(TYPE);
 		switch(slabType) {
 			case TOP:
 				return TOP_SHAPE;
@@ -54,36 +54,36 @@ public class CustomSlabBlock extends Block implements IWaterLoggable {
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockPos pos = context.getPos();
-		FluidState fluidState = context.getWorld().getFluidState(pos);
-		BlockState state = (BlockState)((BlockState)this.getDefaultState().with(TYPE, CustomSlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-		Direction direction = context.getFace();
+		BlockPos pos = context.getClickedPos();
+		FluidState fluidState = context.getLevel().getFluidState(pos);
+		BlockState state = (BlockState)((BlockState)this.defaultBlockState().setValue(TYPE, CustomSlabType.BOTTOM)).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+		Direction direction = context.getClickedFace();
 
-		return direction != Direction.DOWN && (direction == Direction.UP || !(context.getHitVec().y - (double)pos.getY() > 0.5D)) ? state : (BlockState)state.with(TYPE, CustomSlabType.TOP);
+		return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double)pos.getY() > 0.5D)) ? state : (BlockState)state.setValue(TYPE, CustomSlabType.TOP);
 	}
 
-	public boolean isReplaceable(BlockState state, BlockItemUseContext context) {
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext context) {
 		return false;
 	}
 
 	public FluidState getFluidState(BlockState state) {
-		return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return (Boolean)state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if ((Boolean)stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if ((Boolean)stateIn.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 
-		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+		return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		switch(type) {
 			case LAND:
 				return false;
 			case WATER:
-				return worldIn.getFluidState(pos).isTagged(FluidTags.WATER);
+				return worldIn.getFluidState(pos).is(FluidTags.WATER);
 			case AIR:
 				return false;
 			default:

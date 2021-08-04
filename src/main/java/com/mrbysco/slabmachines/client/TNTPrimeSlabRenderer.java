@@ -20,14 +20,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity> {
     public TNTPrimeSlabRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
-        this.shadowSize = 0.5F;
+        this.shadowRadius = 0.5F;
     }
 
     public void render(TNTSlabEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        matrixStackIn.push();
+        matrixStackIn.pushPose();
         matrixStackIn.translate(0.0D, 0.5D, 0.0D);
-        if ((float)entityIn.getFuse() - partialTicks + 1.0F < 10.0F) {
-            float f = 1.0F - ((float)entityIn.getFuse() - partialTicks + 1.0F) / 10.0F;
+        if ((float)entityIn.getLife() - partialTicks + 1.0F < 10.0F) {
+            float f = 1.0F - ((float)entityIn.getLife() - partialTicks + 1.0F) / 10.0F;
             f = MathHelper.clamp(f, 0.0F, 1.0F);
             f = f * f;
             f = f * f;
@@ -35,30 +35,30 @@ public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity> {
             matrixStackIn.scale(f1, f1, f1);
         }
 
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-90.0F));
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
         matrixStackIn.translate(-0.5D, -0.5D, 0.5D);
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
-        renderTntFlash(SlabRegistry.TNT_SLAB.get().getDefaultState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getFuse() / 5 % 2 == 0);
-        matrixStackIn.pop();
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90.0F));
+        renderTntFlash(SlabRegistry.TNT_SLAB.get().defaultBlockState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getLife() / 5 % 2 == 0);
+        matrixStackIn.popPose();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }
 
     public static void renderTntFlash(BlockState blockStateIn, MatrixStack matrixStackIn, IRenderTypeBuffer renderTypeBuffer, int combinedLight, boolean doFullBright) {
         int i;
         if (doFullBright) {
-            i = OverlayTexture.getPackedUV(OverlayTexture.getU(1.0F), 10);
+            i = OverlayTexture.pack(OverlayTexture.u(1.0F), 10);
         } else {
             i = OverlayTexture.NO_OVERLAY;
         }
 
-        Minecraft.getInstance().getBlockRendererDispatcher().renderBlock(blockStateIn, matrixStackIn, renderTypeBuffer, combinedLight, i);
+        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(blockStateIn, matrixStackIn, renderTypeBuffer, combinedLight, i);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    public ResourceLocation getEntityTexture(TNTSlabEntity entity)
+    public ResourceLocation getTextureLocation(TNTSlabEntity entity)
     {
-        return AtlasTexture.LOCATION_BLOCKS_TEXTURE;
+        return AtlasTexture.LOCATION_BLOCKS;
     }
 }

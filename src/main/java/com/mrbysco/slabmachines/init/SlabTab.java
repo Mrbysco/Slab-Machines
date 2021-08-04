@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class SlabTab {
 	public static final ItemGroup SLAB_TAB = (new ItemGroup(SlabReference.MOD_ID) {
 		@OnlyIn(Dist.CLIENT)
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(SlabRegistry.CRAFTING_TABLE_SLAB.get());
 		}
 	});

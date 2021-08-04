@@ -34,7 +34,7 @@ public class SlabMachines {
 		SlabRegistry.TILES.register(eventBus);
 		SlabRegistry.CONTAINERS.register(eventBus);
 
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			eventBus.addListener(ClientHandler::registerRenders);
 		});
 	}

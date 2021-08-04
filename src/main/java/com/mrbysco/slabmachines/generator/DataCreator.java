@@ -71,17 +71,17 @@ public class DataCreator {
 
         @Override
         protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
-            map.forEach((name, table) -> LootTableManager.validateLootTable(validationtracker, name, table));
+            map.forEach((name, table) -> LootTableManager.validate(validationtracker, name, table));
         }
         private class Blocks extends BlockLootTables {
             @Override
             protected void addTables() {
-                this.registerDropSelfLootTable(CRAFTING_TABLE_SLAB.get());
-                this.registerLootTable(FURNACE_SLAB.get(), BlockLootTables::droppingWithName);
-                this.registerLootTable(CHEST_SLAB.get(), BlockLootTables::droppingWithName);
-                this.registerLootTable(TRAPPED_CHEST_SLAB.get(), BlockLootTables::droppingWithName);
-                this.registerDropSelfLootTable(NOTE_SLAB.get());
-                this.registerLootTable(TNT_SLAB.get(), LootTable.builder().addLootPool(withSurvivesExplosion(TNT_SLAB.get(), LootPool.builder().rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(TNT_SLAB.get()).acceptCondition(BlockStateProperty.builder(TNT_SLAB.get()).fromProperties(StatePropertiesPredicate.Builder.newBuilder().withBoolProp(TNTSlabBlock.UNSTABLE, false)))))));
+                this.dropSelf(CRAFTING_TABLE_SLAB.get());
+                this.add(FURNACE_SLAB.get(), BlockLootTables::createNameableBlockEntityTable);
+                this.add(CHEST_SLAB.get(), BlockLootTables::createNameableBlockEntityTable);
+                this.add(TRAPPED_CHEST_SLAB.get(), BlockLootTables::createNameableBlockEntityTable);
+                this.dropSelf(NOTE_SLAB.get());
+                this.add(TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(TNT_SLAB.get()).when(BlockStateProperty.hasBlockStateProperties(TNT_SLAB.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
             }
 
             @Override

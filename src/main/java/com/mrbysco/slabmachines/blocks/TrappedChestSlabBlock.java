@@ -15,7 +15,7 @@ import net.minecraftforge.common.ToolType;
 
 public class TrappedChestSlabBlock extends ChestSlabBlock {
     public TrappedChestSlabBlock(Properties properties) {
-		super(properties.hardnessAndResistance(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
+		super(properties.strength(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
 	}
 
 	@Override
@@ -23,16 +23,16 @@ public class TrappedChestSlabBlock extends ChestSlabBlock {
 		return Stats.CUSTOM.get(Stats.TRIGGER_TRAPPED_CHEST);
 	}
 
-	public boolean canProvidePower(BlockState state) {
+	public boolean isSignalSource(BlockState state) {
 		return true;
 	}
 
-	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
+	public int getSignal(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
 		return MathHelper.clamp(getPlayersUsing(blockAccess, blockState, pos), 0, 15);
 	}
 
 	public int getPlayersUsing(IBlockReader worldIn, BlockState state, BlockPos pos) {
-		TileEntity tileentity = worldIn.getTileEntity(pos);
+		TileEntity tileentity = worldIn.getBlockEntity(pos);
 		if (tileentity instanceof TileChestSlab) {
 			return ((TileChestSlab)tileentity).numPlayersUsing;
 		}
@@ -40,7 +40,7 @@ public class TrappedChestSlabBlock extends ChestSlabBlock {
 		return 0;
 	}
 
-	public int getStrongPower(BlockState blockState, IBlockReader worldIn, BlockPos pos, Direction side) {
-		return side == Direction.UP ? worldIn.getBlockState(pos).getWeakPower(worldIn, pos, side) : 0;
+	public int getDirectSignal(BlockState blockState, IBlockReader worldIn, BlockPos pos, Direction side) {
+		return side == Direction.UP ? worldIn.getBlockState(pos).getSignal(worldIn, pos, side) : 0;
 	}
 }

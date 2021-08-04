@@ -34,14 +34,14 @@ public class TileChestSlab extends ChestTileEntity {
     /**
      * Returns the number of slots in the inventory.
      */
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return 27;
     }
 
     /**
      * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
      */
-    public int getInventoryStackLimit() {
+    public int getMaxStackSize() {
         return SlabConfig.COMMON.slabChestSlotLimit.get();
     }
 
@@ -52,15 +52,15 @@ public class TileChestSlab extends ChestTileEntity {
 
     @Override
     public void tick() {
-        int i = this.pos.getX();
-        int j = this.pos.getY();
-        int k = this.pos.getZ();
+        int i = this.worldPosition.getX();
+        int j = this.worldPosition.getY();
+        int k = this.worldPosition.getZ();
         ++this.ticksSinceSync;
-        this.numPlayersUsing = calculatePlayersUsingSync(this.world, this, this.ticksSinceSync, i, j, k, this.numPlayersUsing);
-        this.prevLidAngle = this.lidAngle;
+        this.numPlayersUsing = calculatePlayersUsingSync(this.level, this, this.ticksSinceSync, i, j, k, this.numPlayersUsing);
+        this.oOpenness = this.lidAngle;
         float f = 0.1F;
         if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
-            this.playSound(SoundEvents.BLOCK_CHEST_OPEN);
+            this.playSound(SoundEvents.CHEST_OPEN);
         }
 
         if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F) {
@@ -77,7 +77,7 @@ public class TileChestSlab extends ChestTileEntity {
 
             float f2 = 0.5F;
             if (this.lidAngle < 0.5F && f1 >= 0.5F) {
-                this.playSound(SoundEvents.BLOCK_CHEST_CLOSE);
+                this.playSound(SoundEvents.CHEST_CLOSE);
             }
 
             if (this.lidAngle < 0.0F) {
@@ -87,47 +87,47 @@ public class TileChestSlab extends ChestTileEntity {
     }
 
     private void playSound(SoundEvent soundIn) {
-        double d0 = (double)this.pos.getX() + 0.5D;
-        double d1 = (double)this.pos.getY() + 0.5D;
-        double d2 = (double)this.pos.getZ() + 0.5D;
+        double d0 = (double)this.worldPosition.getX() + 0.5D;
+        double d1 = (double)this.worldPosition.getY() + 0.5D;
+        double d2 = (double)this.worldPosition.getZ() + 0.5D;
 
-        this.world.playSound((PlayerEntity)null, d0, d1, d2, soundIn, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+        this.level.playSound((PlayerEntity)null, d0, d1, d2, soundIn, SoundCategory.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
     }
 
-    public boolean receiveClientEvent(int id, int type) {
+    public boolean triggerEvent(int id, int type) {
         if (id == 1) {
             this.numPlayersUsing = type;
             return true;
         } else {
-            return super.receiveClientEvent(id, type);
+            return super.triggerEvent(id, type);
         }
     }
 
-    public void openInventory(PlayerEntity player) {
+    public void startOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             if (this.numPlayersUsing < 0) {
                 this.numPlayersUsing = 0;
             }
 
             ++this.numPlayersUsing;
-            this.onOpenOrClose();
+            this.signalOpenCount();
         }
 
     }
 
-    public void closeInventory(PlayerEntity player) {
+    public void stopOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             --this.numPlayersUsing;
-            this.onOpenOrClose();
+            this.signalOpenCount();
         }
 
     }
 
-    protected void onOpenOrClose() {
+    protected void signalOpenCount() {
         Block block = this.getBlockState().getBlock();
         if (block instanceof TrappedChestSlabBlock) {
-            this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
-            this.world.notifyNeighborsOfStateChange(this.pos, block);
+            this.level.blockEvent(this.worldPosition, block, 1, this.numPlayersUsing);
+            this.level.updateNeighborsAt(this.worldPosition, block);
         }
 
     }
@@ -135,9 +135,9 @@ public class TileChestSlab extends ChestTileEntity {
     public static int getPlayersUsing(IBlockReader reader, BlockPos posIn) {
         BlockState blockstate = reader.getBlockState(posIn);
         if (blockstate.hasTileEntity()) {
-            TileEntity tileentity = reader.getTileEntity(posIn);
+            TileEntity tileentity = reader.getBlockEntity(posIn);
             if (tileentity instanceof ChestTileEntity) {
-                return ((ChestTileEntity)tileentity).numPlayersUsing;
+                return ((ChestTileEntity)tileentity).openCount;
             }
         }
 
@@ -145,7 +145,7 @@ public class TileChestSlab extends ChestTileEntity {
     }
 
     public static int calculatePlayersUsingSync(World worldIn, LockableTileEntity tile, int p_213977_2_, int x, int y, int z, int users) {
-        if (!worldIn.isRemote && users != 0 && (p_213977_2_ + x + y + z) % 200 == 0) {
+        if (!worldIn.isClientSide && users != 0 && (p_213977_2_ + x + y + z) % 200 == 0) {
             users = calculatePlayersUsing(worldIn, tile, x, y, z);
         }
 
@@ -156,9 +156,9 @@ public class TileChestSlab extends ChestTileEntity {
         int i = 0;
         float f = 5.0F;
 
-        for (PlayerEntity playerentity : worldIn.getEntitiesWithinAABB(PlayerEntity.class, new AxisAlignedBB((double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) z - 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F), (double) ((float) (z + 1) + 5.0F)))) {
-            if (playerentity.openContainer instanceof ChestContainer) {
-                IInventory iinventory = ((ChestContainer) playerentity.openContainer).getLowerChestInventory();
+        for (PlayerEntity playerentity : worldIn.getEntitiesOfClass(PlayerEntity.class, new AxisAlignedBB((double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) z - 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F), (double) ((float) (z + 1) + 5.0F)))) {
+            if (playerentity.containerMenu instanceof ChestContainer) {
+                IInventory iinventory = ((ChestContainer) playerentity.containerMenu).getContainer();
                 if (iinventory == tile)
                     ++i;
             }
