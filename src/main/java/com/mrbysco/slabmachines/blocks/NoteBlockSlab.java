@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolType;
 
 public class NoteBlockSlab extends CustomSlabBlock {
 	public static final EnumProperty<NoteBlockInstrument> INSTRUMENT = BlockStateProperties.NOTEBLOCK_INSTRUMENT;
@@ -31,7 +30,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 	public static final IntegerProperty NOTE = BlockStateProperties.NOTE;
 
     public NoteBlockSlab(Properties properties) {
-		super(properties.strength(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
+		super(properties.strength(2.5F).sound(SoundType.WOOD));
 		this.registerDefaultState(this.defaultBlockState().setValue(INSTRUMENT, NoteBlockInstrument.HARP).setValue(NOTE, Integer.valueOf(0)).setValue(POWERED, Boolean.valueOf(false)));
 	}
 

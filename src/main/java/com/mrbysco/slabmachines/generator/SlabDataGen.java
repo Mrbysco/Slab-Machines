@@ -9,7 +9,9 @@ import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -35,15 +37,10 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.mrbysco.slabmachines.init.SlabRegistry.CHEST_SLAB;
-import static com.mrbysco.slabmachines.init.SlabRegistry.CRAFTING_TABLE_SLAB;
-import static com.mrbysco.slabmachines.init.SlabRegistry.FURNACE_SLAB;
-import static com.mrbysco.slabmachines.init.SlabRegistry.NOTE_SLAB;
-import static com.mrbysco.slabmachines.init.SlabRegistry.TNT_SLAB;
-import static com.mrbysco.slabmachines.init.SlabRegistry.TRAPPED_CHEST_SLAB;
+import static com.mrbysco.slabmachines.init.SlabRegistry.*;
 
 @Mod.EventBusSubscriber(modid = SlabReference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class DataCreator {
+public class SlabDataGen {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
@@ -51,6 +48,7 @@ public class DataCreator {
 
         if (event.includeServer()) {
             generator.addProvider(new Loots(generator));
+            generator.addProvider(new MineableProvider(generator, helper));
         }
         if (event.includeClient()) {
 //            generator.addProvider(new ItemModels(generator, helper));
@@ -90,6 +88,18 @@ public class DataCreator {
             protected Iterable<Block> getKnownBlocks() {
                 return (Iterable<Block>) SlabRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
             }
+        }
+    }
+
+    private static class MineableProvider extends BlockTagsProvider {
+        public MineableProvider(DataGenerator gen, ExistingFileHelper fileHelper) {
+            super(gen, SlabReference.MOD_ID, fileHelper);
+        }
+
+        @Override
+        protected void addTags() {
+            this.tag(BlockTags.MINEABLE_WITH_AXE).add(CRAFTING_TABLE_SLAB.get()).add(CHEST_SLAB.get()).add(TRAPPED_CHEST_SLAB.get()).add(NOTE_SLAB.get());
+            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(FURNACE_SLAB.get());
         }
     }
 

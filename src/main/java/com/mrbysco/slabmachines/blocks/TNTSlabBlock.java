@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
@@ -35,7 +34,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
     public static final BooleanProperty ETHOSLAB = BooleanProperty.create("etho");
 
     public TNTSlabBlock(Properties properties) {
-        super(properties.instabreak().sound(SoundType.GRASS).harvestTool(ToolType.AXE).harvestLevel(0));
+        super(properties.instabreak().sound(SoundType.GRASS));
         this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, Boolean.valueOf(false)).setValue(ETHOSLAB, Boolean.valueOf(false)));
     }
 

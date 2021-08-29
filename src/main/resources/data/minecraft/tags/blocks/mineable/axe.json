@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "slabmachines:crafting_table_slab",
+    "slabmachines:chest_slab",
+    "slabmachines:trapped_chest_slab",
+    "slabmachines:note_slab"
+  ]
+}

@@ -12,3 +12,15 @@ authors="Mrbysco"
 description='''
 Machines but as a slab
 '''
+[[dependencies.slabmachines]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.17.1,1.18)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.slabmachines]]
+modId="forge"
+mandatory=true
+versionRange="[37.0.31,38)"
+ordering="NONE"
+side="BOTH"

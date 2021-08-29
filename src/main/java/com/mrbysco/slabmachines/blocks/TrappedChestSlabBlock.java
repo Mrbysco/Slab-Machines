@@ -10,11 +10,10 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ToolType;
 
 public class TrappedChestSlabBlock extends ChestSlabBlock {
     public TrappedChestSlabBlock(Properties properties) {
-		super(properties.strength(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
+		super(properties.strength(2.5F).sound(SoundType.WOOD));
 	}
 
 	@Override

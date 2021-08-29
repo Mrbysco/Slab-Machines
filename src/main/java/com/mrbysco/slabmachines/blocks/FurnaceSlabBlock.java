@@ -1,10 +1,10 @@
 package com.mrbysco.slabmachines.blocks;
 
+import com.mrbysco.slabmachines.blockentity.furnace.FurnaceSlabBlockEntity;
 import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
 import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
 import com.mrbysco.slabmachines.blocks.base.enums.CustomSlabType;
 import com.mrbysco.slabmachines.init.SlabRegistry;
-import com.mrbysco.slabmachines.blockentity.furnace.FurnaceSlabBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -32,7 +32,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -41,7 +40,7 @@ public class FurnaceSlabBlock extends FacingMultiSlabBlock implements EntityBloc
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	public FurnaceSlabBlock(Properties properties) {
-		super(properties.strength(2.0F, 10.0F).sound(SoundType.STONE).harvestLevel(0).harvestTool(ToolType.PICKAXE));
+		super(properties.strength(2.0F, 10.0F).sound(SoundType.STONE));
 		this.registerDefaultState(this.defaultBlockState().setValue(LIT, Boolean.valueOf(false)));
 	}
 

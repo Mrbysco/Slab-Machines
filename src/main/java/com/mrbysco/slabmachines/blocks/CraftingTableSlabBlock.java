@@ -17,13 +17,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolType;
 
 public class CraftingTableSlabBlock extends CustomSlabBlock {
 	private static final Component CONTAINER_NAME = new TranslatableComponent(SlabReference.MOD_PREFIX + "container.crafting");
 
 	public CraftingTableSlabBlock(Properties properties) {
-		super(properties.strength(2.0F, 5.0F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
+		super(properties.strength(2.0F, 5.0F).sound(SoundType.WOOD));
 	}
 
 	@Override

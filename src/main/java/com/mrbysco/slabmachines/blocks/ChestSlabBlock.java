@@ -1,7 +1,7 @@
 package com.mrbysco.slabmachines.blocks;
 
-import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
 import com.mrbysco.slabmachines.blockentity.ChestSlabBlockEntity;
+import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stat;
@@ -20,13 +20,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
 public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock {
     public ChestSlabBlock(Properties properties) {
-		super(properties.strength(2.5F).sound(SoundType.WOOD).harvestTool(ToolType.AXE).harvestLevel(0));
+		super(properties.strength(2.5F).sound(SoundType.WOOD));
 	}
 
 	@Override
