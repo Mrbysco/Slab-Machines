@@ -73,7 +73,7 @@ public class CustomSlabBlock extends Block implements SimpleWaterloggedBlock {
 
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
 		if ((Boolean)stateIn.getValue(WATERLOGGED)) {
-			level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 
 		return super.updateShape(stateIn, facing, facingState, level, currentPos, facingPos);

@@ -17,8 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PlayMessages.SpawnEntity;
 
 import javax.annotation.Nullable;
 
@@ -43,7 +43,7 @@ public class TNTSlabEntity extends PrimedTnt {
         this.etho = etho;
     }
 
-	public TNTSlabEntity(FMLPlayMessages.SpawnEntity spawnEntity, Level level) {
+	public TNTSlabEntity(SpawnEntity spawnEntity, Level level) {
 		this(SlabRegistry.TNT_SLAB_ENTITY.get(), level);
 	}
 

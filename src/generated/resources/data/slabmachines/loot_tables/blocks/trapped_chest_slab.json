@@ -13,15 +13,14 @@
               "source": "block_entity"
             }
           ],
-          "name": "slabmachines:furnace_slab"
+          "name": "slabmachines:trapped_chest_slab"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
-      ],
-      "functions": []
+      ]
     }
   ]
 }

@@ -7,15 +7,20 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "slabmachines:crafting_table_slab"
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            }
+          ],
+          "name": "slabmachines:furnace_slab"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
-      ],
-      "functions": []
+      ]
     }
   ]
 }

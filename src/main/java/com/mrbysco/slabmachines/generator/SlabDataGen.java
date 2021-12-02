@@ -28,7 +28,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class SlabDataGen {
             generator.addProvider(new MineableProvider(generator, helper));
         }
         if (event.includeClient()) {
-//            generator.addProvider(new ItemModels(generator, helper));
+            generator.addProvider(new ItemModels(generator, helper));
         }
     }
 
