@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[37,)"
+loaderVersion="[38,)"
 issueTrackerURL="https://github.com/Mrbysco/Slab-Machines/issues"
 license="GNU Lesser General Public License v3.0"
 
@@ -16,11 +16,5 @@ Machines but as a slab
 modId="minecraft"
 mandatory=true
 versionRange="[1.18,1.19)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.slabmachines]]
-modId="forge"
-mandatory=true
-versionRange="[38,39)"
 ordering="NONE"
 side="BOTH"
