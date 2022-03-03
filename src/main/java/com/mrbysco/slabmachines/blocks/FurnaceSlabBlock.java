@@ -50,18 +50,19 @@ public class FurnaceSlabBlock extends FacingMultiSlabBlock implements EntityBloc
 		} else {
 			BlockEntity tileentity = level.getBlockEntity(pos);
 			if (tileentity instanceof FurnaceSlabBlockEntity) {
-				player.openMenu((MenuProvider)tileentity);
+				player.openMenu((MenuProvider) tileentity);
 				player.awardStat(Stats.INTERACT_WITH_FURNACE);
 			}
 			return InteractionResult.CONSUME;
 		}
 	}
+
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity instanceof FurnaceSlabBlockEntity) {
-				Containers.dropContents(level, pos, (FurnaceSlabBlockEntity)blockEntity);
-				((FurnaceSlabBlockEntity)blockEntity).getRecipesToAwardAndPopExperience((ServerLevel)level, Vec3.atCenterOf(pos));
+				Containers.dropContents(level, pos, (FurnaceSlabBlockEntity) blockEntity);
+				((FurnaceSlabBlockEntity) blockEntity).getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(pos));
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -72,9 +73,9 @@ public class FurnaceSlabBlock extends FacingMultiSlabBlock implements EntityBloc
 	@Override
 	public void animateTick(BlockState stateIn, Level level, BlockPos pos, Random rand) {
 		if (stateIn.getValue(LIT)) {
-			double posX = (double)pos.getX() + 0.5D;
-			double posY = (double)pos.getY() + ((stateIn.getValue(CustomSlabBlock.TYPE) == CustomSlabType.TOP) ? 0.5D : 0);
-			double posZ = (double)pos.getZ() + 0.5D;
+			double posX = (double) pos.getX() + 0.5D;
+			double posY = (double) pos.getY() + ((stateIn.getValue(CustomSlabBlock.TYPE) == CustomSlabType.TOP) ? 0.5D : 0);
+			double posZ = (double) pos.getZ() + 0.5D;
 			if (rand.nextDouble() < 0.1D) {
 				level.playLocalSound(posX, posY, posZ, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
 			}
@@ -83,9 +84,9 @@ public class FurnaceSlabBlock extends FacingMultiSlabBlock implements EntityBloc
 			Direction.Axis direction$axis = direction.getAxis();
 			double d3 = 0.52D;
 			double d4 = rand.nextDouble() * 0.6D - 0.3D;
-			double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * d3 : d4;
+			double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * d3 : d4;
 			double d6 = rand.nextDouble() * 6.0D / 16.0D;
-			double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * d3 : d4;
+			double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * d3 : d4;
 			level.addParticle(ParticleTypes.SMOKE, posX + d5, posY + d6, posZ + d7, 0.0D, 0.0D, 0.0D);
 			level.addParticle(ParticleTypes.FLAME, posX + d5, posY + d6, posZ + d7, 0.0D, 0.0D, 0.0D);
 		}

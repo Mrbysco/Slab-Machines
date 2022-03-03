@@ -46,7 +46,7 @@ public class CustomSlabBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		CustomSlabType slabType = (CustomSlabType)state.getValue(TYPE);
+		CustomSlabType slabType = (CustomSlabType) state.getValue(TYPE);
 		return switch (slabType) {
 			case TOP -> TOP_SHAPE;
 			default -> BOTTOM_SHAPE;
@@ -57,10 +57,10 @@ public class CustomSlabBlock extends Block implements SimpleWaterloggedBlock {
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockPos pos = context.getClickedPos();
 		FluidState fluidState = context.getLevel().getFluidState(pos);
-		BlockState state = (BlockState)((BlockState)this.defaultBlockState().setValue(TYPE, CustomSlabType.BOTTOM)).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+		BlockState state = (BlockState) ((BlockState) this.defaultBlockState().setValue(TYPE, CustomSlabType.BOTTOM)).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
 		Direction direction = context.getClickedFace();
 
-		return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double)pos.getY() > 0.5D)) ? state : (BlockState)state.setValue(TYPE, CustomSlabType.TOP);
+		return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double) pos.getY() > 0.5D)) ? state : (BlockState) state.setValue(TYPE, CustomSlabType.TOP);
 	}
 
 	public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
@@ -68,11 +68,11 @@ public class CustomSlabBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	public FluidState getFluidState(BlockState state) {
-		return (Boolean)state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+		return (Boolean) state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		if ((Boolean)stateIn.getValue(WATERLOGGED)) {
+		if ((Boolean) stateIn.getValue(WATERLOGGED)) {
 			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 
@@ -80,7 +80,7 @@ public class CustomSlabBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
-		switch(type) {
+		switch (type) {
 			case LAND:
 				return false;
 			case WATER:

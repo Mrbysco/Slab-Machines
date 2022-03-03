@@ -29,7 +29,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 	public static final IntegerProperty NOTE = BlockStateProperties.NOTE;
 
-    public NoteBlockSlab(Properties properties) {
+	public NoteBlockSlab(Properties properties) {
 		super(properties.strength(2.5F).sound(SoundType.WOOD));
 		this.registerDefaultState(this.defaultBlockState().setValue(INSTRUMENT, NoteBlockInstrument.HARP).setValue(NOTE, Integer.valueOf(0)).setValue(POWERED, Boolean.valueOf(false)));
 	}
@@ -84,24 +84,23 @@ public class NoteBlockSlab extends CustomSlabBlock {
 		}
 
 	}
-	
+
 	@Override
 	public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
 		net.minecraftforge.event.world.NoteBlockEvent.Play e = new net.minecraftforge.event.world.NoteBlockEvent.Play(level, pos, state, state.getValue(NOTE), state.getValue(INSTRUMENT));
 		if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(e)) return false;
 		state = state.setValue(NOTE, e.getVanillaNoteId()).setValue(INSTRUMENT, e.getInstrument());
 		int i = state.getValue(NOTE);
-		float f = (float)Math.pow(2.0D, (double)(i - 12) / 12.0D);
-		level.playSound((Player)null, pos, state.getValue(INSTRUMENT).getSoundEvent(), SoundSource.RECORDS, 3.0F, f);
-		level.addParticle(ParticleTypes.NOTE, (double)pos.getX() + 0.5D, (double)pos.getY() + 1D, (double)pos.getZ() + 0.5D, (double)i / 24.0D, 0.0D, 0.0D);
+		float f = (float) Math.pow(2.0D, (double) (i - 12) / 12.0D);
+		level.playSound((Player) null, pos, state.getValue(INSTRUMENT).getSoundEvent(), SoundSource.RECORDS, 3.0F, f);
+		level.addParticle(ParticleTypes.NOTE, (double) pos.getX() + 0.5D, (double) pos.getY() + 1D, (double) pos.getZ() + 0.5D, (double) i / 24.0D, 0.0D, 0.0D);
 		return true;
 	}
-	
+
 	@Override
-	public RenderShape getRenderShape(BlockState state)
-    {
-        return RenderShape.MODEL;
-    }
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.MODEL;
+	}
 
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> blockStateBuilder) {

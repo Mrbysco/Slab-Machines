@@ -1,5 +1,6 @@
 package com.mrbysco.slabmachines;
 
+import com.mojang.logging.LogUtils;
 import com.mrbysco.slabmachines.client.ClientHandler;
 import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.container.SlabBenchContainer;
@@ -14,12 +15,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 @Mod(SlabReference.MOD_ID)
 public class SlabMachines {
-	public static final Logger LOGGER = LogManager.getLogger(SlabReference.MOD_ID);
+	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public SlabMachines() {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

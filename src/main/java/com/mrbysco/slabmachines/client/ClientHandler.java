@@ -12,18 +12,18 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientHandler {
-    public static void registerRenders(FMLClientSetupEvent event) {
-        MenuScreens.register(SlabRegistry.SLAB_WORKBENCH_CONTAINER.get(), new Factory());
-    }
+	public static void registerRenders(FMLClientSetupEvent event) {
+		MenuScreens.register(SlabRegistry.SLAB_WORKBENCH_CONTAINER.get(), new Factory());
+	}
 
-    public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(SlabRegistry.TNT_SLAB_ENTITY.get(), TNTPrimeSlabRenderer::new);
-    }
+	public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(SlabRegistry.TNT_SLAB_ENTITY.get(), TNTPrimeSlabRenderer::new);
+	}
 
-    private static class Factory implements ScreenConstructor {
-        @Override
-        public CraftingScreen create(AbstractContainerMenu container, Inventory pInv, Component name) {
-            return new CraftingScreen((SlabBenchContainer) container, pInv, name);
-        }
-    }
+	private static class Factory implements ScreenConstructor {
+		@Override
+		public CraftingScreen create(AbstractContainerMenu container, Inventory pInv, Component name) {
+			return new CraftingScreen((SlabBenchContainer) container, pInv, name);
+		}
+	}
 }

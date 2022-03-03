@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TrappedChestSlabBlock extends ChestSlabBlock {
-    public TrappedChestSlabBlock(Properties properties) {
+	public TrappedChestSlabBlock(Properties properties) {
 		super(properties.strength(2.5F).sound(SoundType.WOOD));
 	}
 

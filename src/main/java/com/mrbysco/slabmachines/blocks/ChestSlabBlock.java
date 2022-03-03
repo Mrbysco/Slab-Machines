@@ -24,7 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import javax.annotation.Nullable;
 
 public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock {
-    public ChestSlabBlock(Properties properties) {
+	public ChestSlabBlock(Properties properties) {
 		super(properties.strength(2.5F).sound(SoundType.WOOD));
 	}
 
@@ -47,7 +47,7 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 	@Nullable
 	public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
-		return blockEntity instanceof MenuProvider ? (MenuProvider)blockEntity : null;
+		return blockEntity instanceof MenuProvider ? (MenuProvider) blockEntity : null;
 	}
 
 	protected Stat<ResourceLocation> getOpenStat() {
@@ -58,7 +58,7 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 		if (!state.is(newState.getBlock())) {
 			BlockEntity tileentity = level.getBlockEntity(pos);
 			if (tileentity instanceof Container) {
-				Containers.dropContents(level, pos, (Container)tileentity);
+				Containers.dropContents(level, pos, (Container) tileentity);
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -70,7 +70,7 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
-	
+
 	@Override
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
 		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));

@@ -18,48 +18,47 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity> {
-    public TNTPrimeSlabRenderer(Context context) {
-        super(context);
-        this.shadowRadius = 0.5F;
-    }
+	public TNTPrimeSlabRenderer(Context context) {
+		super(context);
+		this.shadowRadius = 0.5F;
+	}
 
-    public void render(TNTSlabEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
-        poseStack.pushPose();
-        poseStack.translate(0.0D, 0.5D, 0.0D);
-        int var7 = entityIn.getFuse();
-        if ((float)var7 - partialTicks + 1.0F < 10.0F) {
-            float var8 = 1.0F - ((float)var7 - partialTicks + 1.0F) / 10.0F;
-            var8 = Mth.clamp(var8, 0.0F, 1.0F);
-            var8 *= var8;
-            var8 *= var8;
-            float var9 = 1.0F + var8 * 0.3F;
-            poseStack.scale(var9, var9, var9);
-        }
+	public void render(TNTSlabEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
+		poseStack.pushPose();
+		poseStack.translate(0.0D, 0.5D, 0.0D);
+		int var7 = entityIn.getFuse();
+		if ((float) var7 - partialTicks + 1.0F < 10.0F) {
+			float var8 = 1.0F - ((float) var7 - partialTicks + 1.0F) / 10.0F;
+			var8 = Mth.clamp(var8, 0.0F, 1.0F);
+			var8 *= var8;
+			var8 *= var8;
+			float var9 = 1.0F + var8 * 0.3F;
+			poseStack.scale(var9, var9, var9);
+		}
 
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
-        poseStack.translate(-0.5D, -0.5D, 0.5D);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
-        renderTntFlash(SlabRegistry.TNT_SLAB.get().defaultBlockState(), poseStack, bufferSource, packedLightIn, var7 / 5 % 2 == 0);
-        poseStack.popPose();
-        super.render(entityIn, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
-    }
+		poseStack.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
+		poseStack.translate(-0.5D, -0.5D, 0.5D);
+		poseStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
+		renderTntFlash(SlabRegistry.TNT_SLAB.get().defaultBlockState(), poseStack, bufferSource, packedLightIn, var7 / 5 % 2 == 0);
+		poseStack.popPose();
+		super.render(entityIn, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
+	}
 
-    public static void renderTntFlash(BlockState state, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, boolean doFullBright) {
-        int i;
-        if (doFullBright) {
-            i = OverlayTexture.pack(OverlayTexture.u(1.0F), 10);
-        } else {
-            i = OverlayTexture.NO_OVERLAY;
-        }
+	public static void renderTntFlash(BlockState state, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, boolean doFullBright) {
+		int i;
+		if (doFullBright) {
+			i = OverlayTexture.pack(OverlayTexture.u(1.0F), 10);
+		} else {
+			i = OverlayTexture.NO_OVERLAY;
+		}
 
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(state, poseStack, bufferSource, combinedLight, i);
-    }
+		Minecraft.getInstance().getBlockRenderer().renderSingleBlock(state, poseStack, bufferSource, combinedLight, i);
+	}
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
-    public ResourceLocation getTextureLocation(TNTSlabEntity entity)
-    {
-        return TextureAtlas.LOCATION_BLOCKS;
-    }
+	/**
+	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+	 */
+	public ResourceLocation getTextureLocation(TNTSlabEntity entity) {
+		return TextureAtlas.LOCATION_BLOCKS;
+	}
 }

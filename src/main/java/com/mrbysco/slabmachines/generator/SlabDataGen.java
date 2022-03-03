@@ -41,92 +41,93 @@ import static com.mrbysco.slabmachines.init.SlabRegistry.*;
 
 @Mod.EventBusSubscriber(modid = SlabReference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SlabDataGen {
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        ExistingFileHelper helper = event.getExistingFileHelper();
+	@SubscribeEvent
+	public static void gatherData(GatherDataEvent event) {
+		DataGenerator generator = event.getGenerator();
+		ExistingFileHelper helper = event.getExistingFileHelper();
 
-        if (event.includeServer()) {
-            generator.addProvider(new Loots(generator));
-            generator.addProvider(new MineableProvider(generator, helper));
-        }
-        if (event.includeClient()) {
-            generator.addProvider(new ItemModels(generator, helper));
-        }
-    }
+		if (event.includeServer()) {
+			generator.addProvider(new Loots(generator));
+			generator.addProvider(new MineableProvider(generator, helper));
+		}
+		if (event.includeClient()) {
+			generator.addProvider(new ItemModels(generator, helper));
+		}
+	}
 
-    private static class Loots extends LootTableProvider {
-        public Loots(DataGenerator gen) {
-            super(gen);
-        }
+	private static class Loots extends LootTableProvider {
+		public Loots(DataGenerator gen) {
+			super(gen);
+		}
 
-        @Override
-        protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootContextParamSet>> getTables() {
-            return ImmutableList.of(
-                    Pair.of(Blocks::new, LootContextParamSets.BLOCK)
-            );
-        }
+		@Override
+		protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootContextParamSet>> getTables() {
+			return ImmutableList.of(
+					Pair.of(Blocks::new, LootContextParamSets.BLOCK)
+			);
+		}
 
-        @Override
-        protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
-            map.forEach((name, table) -> LootTables.validate(validationtracker, name, table));
-        }
-        private class Blocks extends BlockLoot {
-            @Override
-            protected void addTables() {
-                this.dropSelf(CRAFTING_TABLE_SLAB.get());
-                this.add(FURNACE_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
-                this.add(CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
-                this.add(TRAPPED_CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
-                this.dropSelf(NOTE_SLAB.get());
-                this.add(TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(TNT_SLAB.get()).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TNT_SLAB.get())
-                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
-            }
+		@Override
+		protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
+			map.forEach((name, table) -> LootTables.validate(validationtracker, name, table));
+		}
 
-            @Override
-            protected Iterable<Block> getKnownBlocks() {
-                return (Iterable<Block>) SlabRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
-            }
-        }
-    }
+		private class Blocks extends BlockLoot {
+			@Override
+			protected void addTables() {
+				this.dropSelf(CRAFTING_TABLE_SLAB.get());
+				this.add(FURNACE_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+				this.add(CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+				this.add(TRAPPED_CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+				this.dropSelf(NOTE_SLAB.get());
+				this.add(TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+						.add(LootItem.lootTableItem(TNT_SLAB.get()).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TNT_SLAB.get())
+								.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
+			}
 
-    private static class MineableProvider extends BlockTagsProvider {
-        public MineableProvider(DataGenerator gen, ExistingFileHelper fileHelper) {
-            super(gen, SlabReference.MOD_ID, fileHelper);
-        }
+			@Override
+			protected Iterable<Block> getKnownBlocks() {
+				return (Iterable<Block>) SlabRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+			}
+		}
+	}
 
-        @Override
-        protected void addTags() {
-            this.tag(BlockTags.MINEABLE_WITH_AXE).add(CRAFTING_TABLE_SLAB.get()).add(CHEST_SLAB.get()).add(TRAPPED_CHEST_SLAB.get()).add(NOTE_SLAB.get());
-            this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(FURNACE_SLAB.get());
-        }
-    }
+	private static class MineableProvider extends BlockTagsProvider {
+		public MineableProvider(DataGenerator gen, ExistingFileHelper fileHelper) {
+			super(gen, SlabReference.MOD_ID, fileHelper);
+		}
 
-    private static class ItemModels extends ItemModelProvider {
-        public ItemModels(DataGenerator gen, ExistingFileHelper helper) {
-            super(gen, SlabReference.MOD_ID, helper);
-        }
+		@Override
+		protected void addTags() {
+			this.tag(BlockTags.MINEABLE_WITH_AXE).add(CRAFTING_TABLE_SLAB.get()).add(CHEST_SLAB.get()).add(TRAPPED_CHEST_SLAB.get()).add(NOTE_SLAB.get());
+			this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(FURNACE_SLAB.get());
+		}
+	}
 
-        @Override
-        protected void registerModels() {
-            makeSlab(CRAFTING_TABLE_SLAB.get());
-            makeSlab(FURNACE_SLAB.get());
-            makeSlab(CHEST_SLAB.get());
-            makeSlab(TRAPPED_CHEST_SLAB.get());
-            makeSlab(NOTE_SLAB.get());
-            makeSlab(TNT_SLAB.get());
-        }
+	private static class ItemModels extends ItemModelProvider {
+		public ItemModels(DataGenerator gen, ExistingFileHelper helper) {
+			super(gen, SlabReference.MOD_ID, helper);
+		}
 
-        private void makeSlab(Block block) {
-            String path = block.getRegistryName().getPath();
-            getBuilder(path)
-                    .parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
-        }
+		@Override
+		protected void registerModels() {
+			makeSlab(CRAFTING_TABLE_SLAB.get());
+			makeSlab(FURNACE_SLAB.get());
+			makeSlab(CHEST_SLAB.get());
+			makeSlab(TRAPPED_CHEST_SLAB.get());
+			makeSlab(NOTE_SLAB.get());
+			makeSlab(TNT_SLAB.get());
+		}
 
-        @Override
-        public String getName() {
-            return "Item Models";
-        }
-    }
+		private void makeSlab(Block block) {
+			String path = block.getRegistryName().getPath();
+			getBuilder(path)
+					.parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
+		}
+
+		@Override
+		public String getName() {
+			return "Item Models";
+		}
+	}
 }
