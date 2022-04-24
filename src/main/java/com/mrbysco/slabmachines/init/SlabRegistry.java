@@ -20,6 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -36,7 +37,9 @@ public class SlabRegistry {
 	public static final RegistryObject<MenuType<SlabBenchContainer>> SLAB_WORKBENCH_CONTAINER = CONTAINERS.register("slab_workbench", () -> IForgeMenuType.create((windowId, inv, data) -> new SlabBenchContainer(windowId, inv)));
 
 	public static final RegistryObject<Block> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(BlockBehaviour.Properties.of(Material.WOOD)));
-	public static final RegistryObject<Block> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(BlockBehaviour.Properties.of(Material.STONE)));
+	public static final RegistryObject<Block> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(BlockBehaviour.Properties.of(Material.STONE).lightLevel((state) -> {
+		return state.getValue(BlockStateProperties.LIT) ? 7 : 0;
+	})));
 	public static final RegistryObject<Block> CHEST_SLAB = BLOCKS.register("chest_slab", () -> new ChestSlabBlock(BlockBehaviour.Properties.of(Material.WOOD)));
 	public static final RegistryObject<Block> TRAPPED_CHEST_SLAB = BLOCKS.register("trapped_chest_slab", () -> new TrappedChestSlabBlock(BlockBehaviour.Properties.of(Material.WOOD)));
 	public static final RegistryObject<Block> NOTE_SLAB = BLOCKS.register("note_slab", () -> new NoteBlockSlab(BlockBehaviour.Properties.of(Material.WOOD)));
