@@ -5,7 +5,6 @@ import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.FurnaceMenu;
@@ -26,7 +25,7 @@ public class FurnaceSlabBlockEntity extends AbstractFurnaceBlockEntity implement
 
 	@Override
 	protected Component getDefaultName() {
-		return new TranslatableComponent(SlabReference.MOD_PREFIX + "container.furnace");
+		return Component.translatable(SlabReference.MOD_PREFIX + "container.furnace");
 	}
 
 	@Override

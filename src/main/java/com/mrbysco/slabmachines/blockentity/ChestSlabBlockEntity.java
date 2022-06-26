@@ -6,7 +6,6 @@ import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -67,7 +66,7 @@ public class ChestSlabBlockEntity extends ChestBlockEntity {
 
 	@Override
 	protected Component getDefaultName() {
-		return new TranslatableComponent(SlabReference.MOD_PREFIX + "container.chest");
+		return Component.translatable(SlabReference.MOD_PREFIX + "container.chest");
 	}
 
 	@Override

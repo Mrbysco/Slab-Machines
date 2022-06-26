@@ -5,7 +5,6 @@ import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
 import com.mrbysco.slabmachines.container.SlabBenchContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class CraftingTableSlabBlock extends CustomSlabBlock {
-	private static final Component CONTAINER_NAME = new TranslatableComponent(SlabReference.MOD_PREFIX + "container.crafting");
+	private static final Component CONTAINER_NAME = Component.translatable(SlabReference.MOD_PREFIX + "container.crafting");
 
 	public CraftingTableSlabBlock(Properties properties) {
 		super(properties.strength(2.0F, 5.0F).sound(SoundType.WOOD));

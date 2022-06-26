@@ -28,16 +28,15 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
-import static com.mrbysco.slabmachines.init.SlabRegistry.*;
 
 @Mod.EventBusSubscriber(modid = SlabReference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SlabDataGen {
@@ -47,11 +46,11 @@ public class SlabDataGen {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(new Loots(generator));
-			generator.addProvider(new MineableProvider(generator, helper));
+			generator.addProvider(event.includeServer(), new Loots(generator));
+			generator.addProvider(event.includeServer(), new MineableProvider(generator, helper));
 		}
 		if (event.includeClient()) {
-			generator.addProvider(new ItemModels(generator, helper));
+			generator.addProvider(event.includeClient(), new ItemModels(generator, helper));
 		}
 	}
 
@@ -75,13 +74,13 @@ public class SlabDataGen {
 		private class Blocks extends BlockLoot {
 			@Override
 			protected void addTables() {
-				this.dropSelf(CRAFTING_TABLE_SLAB.get());
-				this.add(FURNACE_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
-				this.add(CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
-				this.add(TRAPPED_CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
-				this.dropSelf(NOTE_SLAB.get());
-				this.add(TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-						.add(LootItem.lootTableItem(TNT_SLAB.get()).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(TNT_SLAB.get())
+				this.dropSelf(SlabRegistry.CRAFTING_TABLE_SLAB.get());
+				this.add(SlabRegistry.FURNACE_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+				this.add(SlabRegistry.CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+				this.add(SlabRegistry.TRAPPED_CHEST_SLAB.get(), BlockLoot::createNameableBlockEntityTable);
+				this.dropSelf(SlabRegistry.NOTE_SLAB.get());
+				this.add(SlabRegistry.TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(SlabRegistry.TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+						.add(LootItem.lootTableItem(SlabRegistry.TNT_SLAB.get()).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(SlabRegistry.TNT_SLAB.get())
 								.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
 			}
 
@@ -99,8 +98,8 @@ public class SlabDataGen {
 
 		@Override
 		protected void addTags() {
-			this.tag(BlockTags.MINEABLE_WITH_AXE).add(CRAFTING_TABLE_SLAB.get()).add(CHEST_SLAB.get()).add(TRAPPED_CHEST_SLAB.get()).add(NOTE_SLAB.get());
-			this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(FURNACE_SLAB.get());
+			this.tag(BlockTags.MINEABLE_WITH_AXE).add(SlabRegistry.CRAFTING_TABLE_SLAB.get(), SlabRegistry.CHEST_SLAB.get(), SlabRegistry.TRAPPED_CHEST_SLAB.get(), SlabRegistry.NOTE_SLAB.get());
+			this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(SlabRegistry.FURNACE_SLAB.get());
 		}
 	}
 
@@ -111,16 +110,16 @@ public class SlabDataGen {
 
 		@Override
 		protected void registerModels() {
-			makeSlab(CRAFTING_TABLE_SLAB.get());
-			makeSlab(FURNACE_SLAB.get());
-			makeSlab(CHEST_SLAB.get());
-			makeSlab(TRAPPED_CHEST_SLAB.get());
-			makeSlab(NOTE_SLAB.get());
-			makeSlab(TNT_SLAB.get());
+			makeSlab(SlabRegistry.CRAFTING_TABLE_SLAB.get());
+			makeSlab(SlabRegistry.FURNACE_SLAB.get());
+			makeSlab(SlabRegistry.CHEST_SLAB.get());
+			makeSlab(SlabRegistry.TRAPPED_CHEST_SLAB.get());
+			makeSlab(SlabRegistry.NOTE_SLAB.get());
+			makeSlab(SlabRegistry.TNT_SLAB.get());
 		}
 
 		private void makeSlab(Block block) {
-			String path = block.getRegistryName().getPath();
+			String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
 			getBuilder(path)
 					.parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
 		}

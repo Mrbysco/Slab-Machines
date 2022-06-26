@@ -45,7 +45,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		ItemStack stack = context.getItemInHand();
-		return super.getStateForPlacement(context).setValue(ETHOSLAB, Boolean.valueOf(stack.getHoverName().getContents().equalsIgnoreCase("Etho slab")));
+		return super.getStateForPlacement(context).setValue(ETHOSLAB, Boolean.valueOf(stack.getHoverName().getString().equalsIgnoreCase("Etho slab")));
 	}
 
 	@Override

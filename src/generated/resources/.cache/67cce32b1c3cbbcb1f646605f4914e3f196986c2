@@ -1,0 +1,7 @@
+// 1.19	2022-06-26T21:59:42.4433391	LootTables
+226a0ea02d5ad285470d615b26658baa5a61831e data/slabmachines/loot_tables/blocks/chest_slab.json
+da9c09966e109ff1c05c9c5b964ba2d1ec83981f data/slabmachines/loot_tables/blocks/crafting_table_slab.json
+714a379a8d535375c64fc169512315b846cdbdd3 data/slabmachines/loot_tables/blocks/furnace_slab.json
+a86d75465d40a58ceec4360a0975fe6505a0ee41 data/slabmachines/loot_tables/blocks/note_slab.json
+ad4c59a3896f18e958bc0b4006758cd1bbf8b7c5 data/slabmachines/loot_tables/blocks/tnt_slab.json
+d5d4853f04beb2807f3faedb37ebe399b3dfce79 data/slabmachines/loot_tables/blocks/trapped_chest_slab.json
