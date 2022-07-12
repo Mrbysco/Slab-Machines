@@ -30,11 +30,11 @@ import net.minecraftforge.registries.RegistryObject;
 public class SlabRegistry {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SlabReference.MOD_ID);
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SlabReference.MOD_ID);
-	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, SlabReference.MOD_ID);
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, SlabReference.MOD_ID);
-	public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, SlabReference.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SlabReference.MOD_ID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SlabReference.MOD_ID);
+	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, SlabReference.MOD_ID);
 
-	public static final RegistryObject<MenuType<SlabBenchContainer>> SLAB_WORKBENCH_CONTAINER = CONTAINERS.register("slab_workbench", () -> IForgeMenuType.create((windowId, inv, data) -> new SlabBenchContainer(windowId, inv)));
+	public static final RegistryObject<MenuType<SlabBenchContainer>> SLAB_WORKBENCH_CONTAINER = MENU_TYPES.register("slab_workbench", () -> IForgeMenuType.create((windowId, inv, data) -> new SlabBenchContainer(windowId, inv)));
 
 	public static final RegistryObject<Block> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(BlockBehaviour.Properties.of(Material.WOOD)));
 	public static final RegistryObject<Block> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(BlockBehaviour.Properties.of(Material.STONE).lightLevel((state) -> {
@@ -52,10 +52,10 @@ public class SlabRegistry {
 	public static final RegistryObject<Item> NOTE_SLAB_ITEM = ITEMS.register("note_slab", () -> new BlockItem(NOTE_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
 	public static final RegistryObject<Item> TNT_SLAB_ITEM = ITEMS.register("tnt_slab", () -> new BlockItem(TNT_SLAB.get(), new Item.Properties().tab(SlabTab.SLAB_TAB)));
 
-	public static final RegistryObject<BlockEntityType<FurnaceSlabBlockEntity>> FURNACE_SLAB_BE = BLOCK_ENTITIES.register("furnace_slab", () -> BlockEntityType.Builder.of(FurnaceSlabBlockEntity::new, FURNACE_SLAB.get()).build(null));
-	public static final RegistryObject<BlockEntityType<ChestSlabBlockEntity>> CHEST_SLAB_BE = BLOCK_ENTITIES.register("chest_slab", () -> BlockEntityType.Builder.of(ChestSlabBlockEntity::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
+	public static final RegistryObject<BlockEntityType<FurnaceSlabBlockEntity>> FURNACE_SLAB_BE = BLOCK_ENTITY_TYPES.register("furnace_slab", () -> BlockEntityType.Builder.of(FurnaceSlabBlockEntity::new, FURNACE_SLAB.get()).build(null));
+	public static final RegistryObject<BlockEntityType<ChestSlabBlockEntity>> CHEST_SLAB_BE = BLOCK_ENTITY_TYPES.register("chest_slab", () -> BlockEntityType.Builder.of(ChestSlabBlockEntity::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
 
-	public static final RegistryObject<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITIES.register("tnt_slab", () -> register("tnt_slab", EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, MobCategory.MISC)
+	public static final RegistryObject<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITY_TYPES.register("tnt_slab", () -> register("tnt_slab", EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, MobCategory.MISC)
 			.sized(1.0F, 0.5F).clientTrackingRange(10).updateInterval(10).setCustomClientFactory(TNTSlabEntity::new)));
 
 

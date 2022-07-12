@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.event.level.NoteBlockEvent;
 
 public class NoteBlockSlab extends CustomSlabBlock {
 	public static final EnumProperty<NoteBlockInstrument> INSTRUMENT = BlockStateProperties.NOTEBLOCK_INSTRUMENT;
@@ -87,7 +88,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 
 	@Override
 	public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
-		net.minecraftforge.event.world.NoteBlockEvent.Play e = new net.minecraftforge.event.world.NoteBlockEvent.Play(level, pos, state, state.getValue(NOTE), state.getValue(INSTRUMENT));
+		NoteBlockEvent.Play e = new NoteBlockEvent.Play(level, pos, state, state.getValue(NOTE), state.getValue(INSTRUMENT));
 		if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(e)) return false;
 		state = state.setValue(NOTE, e.getVanillaNoteId()).setValue(INSTRUMENT, e.getInstrument());
 		int i = state.getValue(NOTE);

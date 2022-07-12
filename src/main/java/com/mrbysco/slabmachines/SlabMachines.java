@@ -30,9 +30,9 @@ public class SlabMachines {
 
 		SlabRegistry.BLOCKS.register(eventBus);
 		SlabRegistry.ITEMS.register(eventBus);
-		SlabRegistry.ENTITIES.register(eventBus);
-		SlabRegistry.BLOCK_ENTITIES.register(eventBus);
-		SlabRegistry.CONTAINERS.register(eventBus);
+		SlabRegistry.ENTITY_TYPES.register(eventBus);
+		SlabRegistry.BLOCK_ENTITY_TYPES.register(eventBus);
+		SlabRegistry.MENU_TYPES.register(eventBus);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			eventBus.addListener(ClientHandler::registerRenders);
