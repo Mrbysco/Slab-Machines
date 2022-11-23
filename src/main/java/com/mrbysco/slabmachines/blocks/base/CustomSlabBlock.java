@@ -80,16 +80,12 @@ public class CustomSlabBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
-		switch (type) {
-			case LAND:
-				return false;
-			case WATER:
-				return level.getFluidState(pos).is(FluidTags.WATER);
-			case AIR:
-				return false;
-			default:
-				return false;
-		}
+		return switch (type) {
+			case LAND -> false;
+			case WATER -> level.getFluidState(pos).is(FluidTags.WATER);
+			case AIR -> false;
+			default -> false;
+		};
 	}
 
 	@Nullable

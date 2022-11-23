@@ -28,8 +28,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,12 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.mrbysco.slabmachines.init.SlabRegistry.*;
+import static com.mrbysco.slabmachines.init.SlabRegistry.CHEST_SLAB;
+import static com.mrbysco.slabmachines.init.SlabRegistry.CRAFTING_TABLE_SLAB;
+import static com.mrbysco.slabmachines.init.SlabRegistry.FURNACE_SLAB;
+import static com.mrbysco.slabmachines.init.SlabRegistry.NOTE_SLAB;
+import static com.mrbysco.slabmachines.init.SlabRegistry.TNT_SLAB;
+import static com.mrbysco.slabmachines.init.SlabRegistry.TRAPPED_CHEST_SLAB;
 
 @Mod.EventBusSubscriber(modid = SlabReference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SlabDataGen {
@@ -72,7 +77,7 @@ public class SlabDataGen {
 			map.forEach((name, table) -> LootTables.validate(validationtracker, name, table));
 		}
 
-		private class Blocks extends BlockLoot {
+		private static class Blocks extends BlockLoot {
 			@Override
 			protected void addTables() {
 				this.dropSelf(CRAFTING_TABLE_SLAB.get());
