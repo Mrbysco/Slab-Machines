@@ -1,0 +1,48 @@
+{
+    "_comment": "Creative Tab Name",
+    "itemGroup.slabmachines": "Slab Machines",
+
+    "_comment": "Config Name",
+    "slabmachines.config.title": "Slab Machines Config",
+
+    "_comment": "blocks",
+    "block.slabmachines.crafting_table_slab": "Banco di Lavoro a lastra",
+    "block.slabmachines.furnace_slab": "Fornace a lastra",
+    "block.slabmachines.trapped_chest_slab": "Baule trappola a lastra",
+    "block.slabmachines.chest_slab": "Baule a lastra",
+    "block.slabmachines.note_slab": "Blocco musicale a lastra",
+    "block.slabmachines.tnt_slab": "TNT a lastra",
+
+    "_comment": "tinkers compat",
+    "block.slabmachines.crafting_station_slab": "Banco di lavoro a lastra",
+    "block.slabmachines.part_builder_slab": "Costruttore di parti a lastra",
+    "block.slabmachines.part_chest_slab": "Baule per parti a lastra",
+    "block.slabmachines.pattern_chest_slab": "Baule per schemi a lastra",
+    "block.slabmachines.stencil_table_slab": "Tavolo matrici a lastra",
+    "block.slabmachines.tool_forge_slab": "Forgia per strumenti a lastra",
+    "block.slabmachines.tool_station_slab": "Stazione per strumenti a lastra",
+
+    "_comment": "Gui Id",
+    "slabmachines:slab_furnace": "Fornace a lastra",
+    "slabmachines:slab_chest": "Baule a lastra",
+
+    "_comment": "container",
+    "slabmachines:container.furnace": "Fornace a lastra",
+    "slabmachines:container.chest": "Baule a lastra",
+    "slabmachines:container.crafting": "Banco di lavoro a lastra",
+
+    "_comment": "TileEntities",
+    "slabmachines:slabfurnace": "Fornace a lastra Tileentity",
+    "slabmachines:slabchest": "Baule a lastra Tileentity",
+
+    "slabmachines:slabcraftingstation": "Banco di lavoro a lastra Tileentity",
+    "slabmachines:slabpartbuilder": "Costruttore di parti a lastra Tileentity",
+    "slabmachines:slabpartchest": "Baule per parti a lastra Tileentity",
+    "slabmachines:slabpatternchest": "Baule per schemi a lastra Tileentity",
+    "slabmachines:slabstenciltable": "Tavolo matrici a lastra Tileentity",
+    "slabmachines:slabtoolforge": "Forgia per strumenti a lastra Tileentity",
+    "slabmachines:slabtoolstation": "Stazione per strumenti a lastra Tileentity",
+
+    "_comment": "Entity",
+    "entity.slabmachines.tnt_slab": "TNT a lastra attivata"
+}

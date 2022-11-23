@@ -2,7 +2,6 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.+'
 }
-apply from: 'https://raw.githubusercontent.com/SizableShrimp/ForgeUpdatesRemapper/main/remapper.gradle'
 
 version = "${version}"
 group = 'com.mrbysco.slabmachines' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -13,7 +12,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings  channel: "${mcp_channel}", version: "${mcp_mappings}"
+    mappings channel: "${mcp_channel}", version: "${mcp_mappings}"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 

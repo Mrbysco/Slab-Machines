@@ -71,7 +71,7 @@ public class SlabDataGen {
 			map.forEach((name, table) -> LootTables.validate(validationtracker, name, table));
 		}
 
-		private class Blocks extends BlockLoot {
+		private static class Blocks extends BlockLoot {
 			@Override
 			protected void addTables() {
 				this.dropSelf(SlabRegistry.CRAFTING_TABLE_SLAB.get());
