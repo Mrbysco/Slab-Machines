@@ -18,7 +18,7 @@ public class SlabTab {
 		SLAB_TAB = event.registerCreativeModeTab(new ResourceLocation(SlabReference.MOD_ID, "tab"), builder ->
 				builder.icon(() -> new ItemStack(SlabRegistry.CRAFTING_TABLE_SLAB.get()))
 						.title(Component.translatable("itemGroup.statues.items"))
-						.displayItems((features, output, hasPermissions) -> {
+						.displayItems((displayParameters, output) -> {
 							List<ItemStack> stacks = SlabRegistry.ITEMS.getEntries().stream()
 									.map(reg -> new ItemStack(reg.get())).toList();
 							output.acceptAll(stacks);

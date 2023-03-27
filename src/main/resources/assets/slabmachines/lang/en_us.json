@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab Name",
-    "itemGroup.slabmachines": "Slab Machines",
+    "itemGroup.slabmachines.tab": "Slab Machines",
 
     "_comment": "Config Name",
     "slabmachines.config.title": "Slab Machines Config",
