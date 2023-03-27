@@ -5,6 +5,7 @@ import com.mrbysco.slabmachines.client.ClientHandler;
 import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.container.SlabBenchContainer;
 import com.mrbysco.slabmachines.init.SlabRegistry;
+import com.mrbysco.slabmachines.init.SlabTab;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,6 +34,8 @@ public class SlabMachines {
 		SlabRegistry.ENTITY_TYPES.register(eventBus);
 		SlabRegistry.BLOCK_ENTITY_TYPES.register(eventBus);
 		SlabRegistry.MENU_TYPES.register(eventBus);
+
+		eventBus.register(new SlabTab());
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			eventBus.addListener(ClientHandler::registerRenders);

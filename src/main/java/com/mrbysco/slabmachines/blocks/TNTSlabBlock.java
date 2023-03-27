@@ -69,7 +69,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 
 	public void wasExploded(Level level, BlockPos pos, Explosion explosionIn) {
 		if (!level.isClientSide) {
-			TNTSlabEntity tntentity = new TNTSlabEntity(level, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, explosionIn.getSourceMob(), isEthoSlab(level, pos));
+			TNTSlabEntity tntentity = new TNTSlabEntity(level, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, explosionIn.getIndirectSourceEntity(), isEthoSlab(level, pos));
 			tntentity.setFuse((short) (level.random.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
 			level.addFreshEntity(tntentity);
 		}
