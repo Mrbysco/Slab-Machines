@@ -1,7 +1,9 @@
-// 1.20	2023-06-13T03:38:23.6785041	Block States: slabmachines
+// 1.20	2023-06-13T23:49:27.8277938	Block States: slabmachines
+68a4bae52a8cca570ec4259bf9dae0a7a3324611 assets/slabmachines/blockstates/blast_furnace_slab.json
 5dee1a03ebbb860111d03ed35e5fd746540e7f93 assets/slabmachines/blockstates/chest_slab.json
 28ca602473a8ca0bab089854da1f1fbd5a942429 assets/slabmachines/blockstates/crafting_table_slab.json
 0c4c2a38a26c2236d4b2bfcf28ee93d429a511f9 assets/slabmachines/blockstates/furnace_slab.json
 07b85ed1a77e43eca7e745ac3040bacc91066029 assets/slabmachines/blockstates/note_slab.json
+f9d9c803cc6c32561931a9ddd24597ea198e0d0d assets/slabmachines/blockstates/smoker_slab.json
 3fcad693f15e355f053fe9855bed393dc12422e7 assets/slabmachines/blockstates/tnt_slab.json
 686ac1c589541455e4a4c20ce047817238c8ccb7 assets/slabmachines/blockstates/trapped_chest_slab.json

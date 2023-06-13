@@ -1,6 +1,7 @@
 package com.mrbysco.slabmachines.datagen.assets;
 
 import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.blocks.AbstractFurnaceSlabBlock;
 import com.mrbysco.slabmachines.blocks.FurnaceSlabBlock;
 import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
 import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
@@ -24,7 +25,7 @@ public class SlabBlockstateProvider extends BlockStateProvider {
 		for (RegistryObject<Block> registryObject : SlabRegistry.BLOCKS.getEntries()) {
 			if (registryObject.get() instanceof CustomSlabBlock) {
 				if (registryObject.get() instanceof FacingMultiSlabBlock) {
-					if (registryObject.get() instanceof FurnaceSlabBlock) {
+					if (registryObject.get() instanceof AbstractFurnaceSlabBlock) {
 						generateFurnaceSlab(registryObject);
 					} else {
 						generateFacingSlab(registryObject);

@@ -1,7 +1,9 @@
-// 1.20	2023-06-13T03:57:26.3873272	Loot Tables
+// 1.20	2023-06-13T23:49:27.8292961	Loot Tables
+5ca6acfb2906582e0c3ef6a7e60dc80dc85fe85b data/slabmachines/loot_tables/blocks/blast_furnace_slab.json
 2bec8384148c89868821c04f2e9c15966722fab9 data/slabmachines/loot_tables/blocks/chest_slab.json
 703b1823c4c62ac52ab22658ca30a67c2eafaf3b data/slabmachines/loot_tables/blocks/crafting_table_slab.json
 9429e3a23ad04e63ce4b149c03f86c8383ac142a data/slabmachines/loot_tables/blocks/furnace_slab.json
 f46b384420fcf7d5b400d5278a6454b205826f2d data/slabmachines/loot_tables/blocks/note_slab.json
+8970f84e8e840b8038479a0a3cde644d49a25572 data/slabmachines/loot_tables/blocks/smoker_slab.json
 9b72f1d40a4d2bfe55cfdc50069f0fc70fd532ae data/slabmachines/loot_tables/blocks/tnt_slab.json
 354a80dd2dd24edcec8d3d1e92a2395bbfffd375 data/slabmachines/loot_tables/blocks/trapped_chest_slab.json

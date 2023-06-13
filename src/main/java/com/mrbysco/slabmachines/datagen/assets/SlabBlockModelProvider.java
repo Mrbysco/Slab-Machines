@@ -25,6 +25,14 @@ public class SlabBlockModelProvider extends BlockModelProvider {
 				modTexture("furnace_slab_side"), modTexture("furnace_slab_front"));
 		generateFurnaceSlab(SlabRegistry.FURNACE_SLAB, mcLoc("block/furnace_top"), mcLoc("block/furnace_top"),
 				modTexture("furnace_slab_side"), modTexture("furnace_slab_front_active"));
+		generateSlab(SlabRegistry.BLAST_FURNACE_SLAB, mcLoc("block/blast_furnace_top"), mcLoc("block/blast_furnace_top"),
+				modTexture("blast_furnace_slab_side"), modTexture("blast_furnace_slab_front"));
+		generateFurnaceSlab(SlabRegistry.BLAST_FURNACE_SLAB, mcLoc("block/blast_furnace_top"), mcLoc("block/blast_furnace_top"),
+				modTexture("blast_furnace_slab_side"), modTexture("blast_furnace_slab_front_active"));
+		generateSlab(SlabRegistry.SMOKER_SLAB, mcLoc("block/smoker_top"), mcLoc("block/smoker_top"),
+				modTexture("smoker_slab_side"), modTexture("smoker_slab_front"));
+		generateFurnaceSlab(SlabRegistry.SMOKER_SLAB, mcLoc("block/smoker_top"), mcLoc("block/smoker_top"),
+				modTexture("smoker_slab_side"), modTexture("smoker_slab_front_active"));
 		generateSlab(SlabRegistry.NOTE_SLAB, mcLoc("block/note_block"), mcLoc("block/note_block"),
 				modTexture("note_slab_side"), null);
 		generateSlab(SlabRegistry.TNT_SLAB, mcLoc("block/tnt_bottom"), mcLoc("block/tnt_top"),

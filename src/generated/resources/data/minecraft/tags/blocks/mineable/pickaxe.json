@@ -1,5 +1,7 @@
 {
   "values": [
-    "slabmachines:furnace_slab"
+    "slabmachines:furnace_slab",
+    "slabmachines:blast_furnace_slab",
+    "slabmachines:smoker_slab"
   ]
 }

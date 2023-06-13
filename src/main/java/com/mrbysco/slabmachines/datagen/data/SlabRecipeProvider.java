@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -112,5 +113,34 @@ public class SlabRecipeProvider extends RecipeProvider {
 				.requires(Items.CRAFTING_TABLE)
 				.unlockedBy("has_crafting_table", has(Items.CRAFTING_TABLE))
 				.save(consumer, new ResourceLocation(SlabReference.MOD_ID, "slab_from_crafting_table"));
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.SMOKER_SLAB.get())
+				.pattern(" S ")
+				.pattern("SFS")
+				.pattern(" S ")
+				.define('S', ItemTags.PLANKS)
+				.define('F', SlabRegistry.FURNACE_SLAB.get())
+				.unlockedBy("has_cobblestone_slab", has(SlabReference.COBBLESTONE_SLABS))
+				.save(consumer);
+
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.SMOKER_SLAB.get(), 2)
+				.requires(Items.SMOKER)
+				.unlockedBy("has_smoker", has(Items.SMOKER))
+				.save(consumer, new ResourceLocation(SlabReference.MOD_ID, "slab_from_smoker"));
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.BLAST_FURNACE_SLAB.get())
+				.pattern("NNN")
+				.pattern("NFN")
+				.pattern("SSS")
+				.define('S', Blocks.SMOOTH_STONE_SLAB)
+				.define('N', Tags.Items.NUGGETS_IRON)
+				.define('F', SlabRegistry.FURNACE_SLAB.get())
+				.unlockedBy("has_cobblestone_slab", has(SlabReference.COBBLESTONE_SLABS))
+				.save(consumer);
+
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.BLAST_FURNACE_SLAB.get(), 2)
+				.requires(Items.BLAST_FURNACE)
+				.unlockedBy("has_blast_furnace", has(Items.BLAST_FURNACE))
+				.save(consumer, new ResourceLocation(SlabReference.MOD_ID, "slab_from_blast_furnace"));
 	}
 }

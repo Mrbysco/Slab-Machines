@@ -1,4 +1,5 @@
 {
+  "block.slabmachines.blast_furnace_slab": "Blast Furnace Slab",
   "block.slabmachines.chest_slab": "Chest Slab",
   "block.slabmachines.crafting_station_slab": "Crafting Station Slab",
   "block.slabmachines.crafting_table_slab": "Crafting Slab",
@@ -7,6 +8,7 @@
   "block.slabmachines.part_builder_slab": "Part Builder Slab",
   "block.slabmachines.part_chest_slab": "Part Chest Slab",
   "block.slabmachines.pattern_chest_slab": "Pattern Chest Slab",
+  "block.slabmachines.smoker_slab": "Smoker Slab",
   "block.slabmachines.stencil_table_slab": "Stencil Table Slab",
   "block.slabmachines.tnt_slab": "Tnt Slab",
   "block.slabmachines.tool_forge_slab": "Tool Forge Slab",
@@ -15,7 +17,9 @@
   "entity.slabmachines.tnt_slab": "Slab Primed TNT",
   "itemGroup.slabmachines.tab": "Slab Machines",
   "slabmachines.config.title": "Slab Machines Config",
+  "slabmachines:container.blast_furnace": "Blast Furnace Slab",
   "slabmachines:container.chest": "Chest Slab",
   "slabmachines:container.crafting": "Crafting Slab",
-  "slabmachines:container.furnace": "Furnace Slab"
+  "slabmachines:container.furnace": "Furnace Slab",
+  "slabmachines:container.smoker": "Smoker Slab"
 }

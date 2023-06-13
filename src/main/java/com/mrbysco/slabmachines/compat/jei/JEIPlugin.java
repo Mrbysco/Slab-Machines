@@ -25,6 +25,8 @@ public class JEIPlugin implements IModPlugin {
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.CRAFTING_TABLE_SLAB.get()), RecipeTypes.CRAFTING);
 		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.FURNACE_SLAB.get()), RecipeTypes.SMELTING);
+		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.BLAST_FURNACE_SLAB.get()), RecipeTypes.BLASTING);
+		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.SMOKER_SLAB.get()), RecipeTypes.SMOKING);
 	}
 
 	@Override

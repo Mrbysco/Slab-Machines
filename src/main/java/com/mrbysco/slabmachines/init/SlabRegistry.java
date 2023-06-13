@@ -2,11 +2,15 @@ package com.mrbysco.slabmachines.init;
 
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.blockentity.ChestSlabBlockEntity;
+import com.mrbysco.slabmachines.blockentity.furnace.BlastFurnaceSlabBlockEntity;
 import com.mrbysco.slabmachines.blockentity.furnace.FurnaceSlabBlockEntity;
+import com.mrbysco.slabmachines.blockentity.furnace.SmokerSlabBlockEntity;
+import com.mrbysco.slabmachines.blocks.BlastFurnaceSlabBlock;
 import com.mrbysco.slabmachines.blocks.ChestSlabBlock;
 import com.mrbysco.slabmachines.blocks.CraftingTableSlabBlock;
 import com.mrbysco.slabmachines.blocks.FurnaceSlabBlock;
 import com.mrbysco.slabmachines.blocks.NoteBlockSlab;
+import com.mrbysco.slabmachines.blocks.SmokerSlabBlock;
 import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
 import com.mrbysco.slabmachines.blocks.TrappedChestSlabBlock;
 import com.mrbysco.slabmachines.container.SlabBenchContainer;
@@ -46,6 +50,10 @@ public class SlabRegistry {
 	public static final RegistryObject<Block> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE)));
 	public static final RegistryObject<Block> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(BlockBehaviour.Properties.copy(Blocks.FURNACE).lightLevel((state) ->
 			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
+	public static final RegistryObject<Block> BLAST_FURNACE_SLAB = BLOCKS.register("blast_furnace_slab", () -> new BlastFurnaceSlabBlock(BlockBehaviour.Properties.copy(Blocks.FURNACE).lightLevel((state) ->
+			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
+	public static final RegistryObject<Block> SMOKER_SLAB = BLOCKS.register("smoker_slab", () -> new SmokerSlabBlock(BlockBehaviour.Properties.copy(Blocks.FURNACE).lightLevel((state) ->
+			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
 	public static final RegistryObject<Block> CHEST_SLAB = BLOCKS.register("chest_slab", () -> new ChestSlabBlock(BlockBehaviour.Properties.copy(Blocks.CHEST)));
 	public static final RegistryObject<Block> TRAPPED_CHEST_SLAB = BLOCKS.register("trapped_chest_slab", () -> new TrappedChestSlabBlock(BlockBehaviour.Properties.copy(Blocks.TRAPPED_CHEST)));
 	public static final RegistryObject<Block> NOTE_SLAB = BLOCKS.register("note_slab", () -> new NoteBlockSlab(BlockBehaviour.Properties.copy(Blocks.NOTE_BLOCK)));
@@ -53,6 +61,8 @@ public class SlabRegistry {
 
 	public static final RegistryObject<Item> CRAFTING_TABLE_SLAB_ITEM = ITEMS.register("crafting_table_slab", () -> new BlockItem(CRAFTING_TABLE_SLAB.get(), new Item.Properties()));
 	public static final RegistryObject<Item> FURNACE_SLAB_ITEM = ITEMS.register("furnace_slab", () -> new BlockItem(FURNACE_SLAB.get(), new Item.Properties()));
+	public static final RegistryObject<Item> BLAST_FURNACE_SLAB_ITEM = ITEMS.register("blast_furnace_slab", () -> new BlockItem(BLAST_FURNACE_SLAB.get(), new Item.Properties()));
+	public static final RegistryObject<Item> SMOKER_SLAB_ITEM = ITEMS.register("smoker_slab", () -> new BlockItem(SMOKER_SLAB.get(), new Item.Properties()));
 	public static final RegistryObject<Item> CHEST_SLAB_ITEM = ITEMS.register("chest_slab", () -> new BlockItem(CHEST_SLAB.get(), new Item.Properties()));
 	public static final RegistryObject<Item> TRAPPED_CHEST_SLAB_ITEM = ITEMS.register("trapped_chest_slab", () -> new BlockItem(TRAPPED_CHEST_SLAB.get(), new Item.Properties()));
 	public static final RegistryObject<Item> NOTE_SLAB_ITEM = ITEMS.register("note_slab", () -> new BlockItem(NOTE_SLAB.get(), new Item.Properties()));
@@ -68,6 +78,8 @@ public class SlabRegistry {
 			}).build());
 
 	public static final RegistryObject<BlockEntityType<FurnaceSlabBlockEntity>> FURNACE_SLAB_BE = BLOCK_ENTITY_TYPES.register("furnace_slab", () -> BlockEntityType.Builder.of(FurnaceSlabBlockEntity::new, FURNACE_SLAB.get()).build(null));
+	public static final RegistryObject<BlockEntityType<BlastFurnaceSlabBlockEntity>> BLAST_FURNACE_SLAB_BE = BLOCK_ENTITY_TYPES.register("blast_furnace_slab", () -> BlockEntityType.Builder.of(BlastFurnaceSlabBlockEntity::new, BLAST_FURNACE_SLAB.get()).build(null));
+	public static final RegistryObject<BlockEntityType<SmokerSlabBlockEntity>> SMOKER_SLAB_BE = BLOCK_ENTITY_TYPES.register("smoker_slab", () -> BlockEntityType.Builder.of(SmokerSlabBlockEntity::new, SMOKER_SLAB.get()).build(null));
 	public static final RegistryObject<BlockEntityType<ChestSlabBlockEntity>> CHEST_SLAB_BE = BLOCK_ENTITY_TYPES.register("chest_slab", () -> BlockEntityType.Builder.of(ChestSlabBlockEntity::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
 
 	public static final RegistryObject<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITY_TYPES.register("tnt_slab", () -> register("tnt_slab", EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, MobCategory.MISC)

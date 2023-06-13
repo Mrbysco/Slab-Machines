@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:smoker"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "slabmachines:smoker_slab"
+  }
+}

@@ -1,6 +1,6 @@
 package com.mrbysco.slabmachines.blocks;
 
-import com.mrbysco.slabmachines.blockentity.furnace.FurnaceSlabBlockEntity;
+import com.mrbysco.slabmachines.blockentity.furnace.BlastFurnaceSlabBlockEntity;
 import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
 import com.mrbysco.slabmachines.blocks.base.enums.CustomSlabType;
 import com.mrbysco.slabmachines.init.SlabRegistry;
@@ -24,9 +24,9 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-public class FurnaceSlabBlock extends AbstractFurnaceSlabBlock {
+public class BlastFurnaceSlabBlock extends AbstractFurnaceSlabBlock {
 
-	public FurnaceSlabBlock(Properties properties) {
+	public BlastFurnaceSlabBlock(Properties properties) {
 		super(properties.strength(2.0F, 10.0F).sound(SoundType.STONE));
 	}
 
@@ -34,9 +34,9 @@ public class FurnaceSlabBlock extends AbstractFurnaceSlabBlock {
 		if (level.isClientSide) {
 			return InteractionResult.SUCCESS;
 		} else {
-			if (level.getBlockEntity(pos) instanceof FurnaceSlabBlockEntity furnaceBlockEntity) {
-				player.openMenu(furnaceBlockEntity);
-				player.awardStat(Stats.INTERACT_WITH_FURNACE);
+			if (level.getBlockEntity(pos) instanceof BlastFurnaceSlabBlockEntity blastFurnaceBlockEntity) {
+				player.openMenu(blastFurnaceBlockEntity);
+				player.awardStat(Stats.INTERACT_WITH_BLAST_FURNACE);
 			}
 			return InteractionResult.CONSUME;
 		}
@@ -49,7 +49,7 @@ public class FurnaceSlabBlock extends AbstractFurnaceSlabBlock {
 			double posY = (double) pos.getY() + ((stateIn.getValue(CustomSlabBlock.TYPE) == CustomSlabType.TOP) ? 0.5D : 0);
 			double posZ = (double) pos.getZ() + 0.5D;
 			if (rand.nextDouble() < 0.1D) {
-				level.playLocalSound(posX, posY, posZ, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+				level.playLocalSound(posX, posY, posZ, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
 			}
 
 			Direction direction = stateIn.getValue(FACING);
@@ -66,11 +66,11 @@ public class FurnaceSlabBlock extends AbstractFurnaceSlabBlock {
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-		return createFurnaceTicker(level, blockEntityType, SlabRegistry.FURNACE_SLAB_BE.get());
+		return createFurnaceTicker(level, blockEntityType, SlabRegistry.BLAST_FURNACE_SLAB_BE.get());
 	}
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new FurnaceSlabBlockEntity(pos, state);
+		return new BlastFurnaceSlabBlockEntity(pos, state);
 	}
 }
