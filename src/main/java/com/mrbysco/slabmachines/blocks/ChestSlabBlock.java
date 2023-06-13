@@ -56,9 +56,8 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
-			BlockEntity tileentity = level.getBlockEntity(pos);
-			if (tileentity instanceof Container) {
-				Containers.dropContents(level, pos, (Container) tileentity);
+			if (level.getBlockEntity(pos) instanceof Container container) {
+				Containers.dropContents(level, pos, container);
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
 

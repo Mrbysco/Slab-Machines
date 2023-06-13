@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:trapped_chest"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "slabmachines:trapped_chest_slab"
+  }
+}

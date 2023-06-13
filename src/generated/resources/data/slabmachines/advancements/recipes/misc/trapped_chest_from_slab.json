@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "slabmachines:trapped_chest_from_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_trapped_slab_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "slabmachines:trapped_chest_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_trapped_slab_chest",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "slabmachines:trapped_chest_from_slab"
+    ]
+  },
+  "sends_telemetry_event": false
+}

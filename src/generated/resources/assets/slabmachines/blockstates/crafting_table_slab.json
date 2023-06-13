@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slabmachines:block/crafting_table_slab"
+    },
+    "type=top": {
+      "model": "slabmachines:block/crafting_table_slab_top"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slabmachines:block/note_slab"
+    },
+    "type=top": {
+      "model": "slabmachines:block/note_slab_top"
+    }
+  }
+}

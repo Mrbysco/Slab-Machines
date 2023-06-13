@@ -60,22 +60,22 @@ public class TNTSlabEntity extends PrimedTnt {
 	@Override
 	public void explode() {
 		float f = 2.0F;
-		this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), f, Level.ExplosionInteraction.TNT);
+		this.level().explode(this, this.getX(), this.getY(0.0625D), this.getZ(), f, Level.ExplosionInteraction.TNT);
 
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			if (this.isEtho()) {
-				double radius = (double) (6F * (0.7F + this.level.random.nextFloat() * 0.6F));
+				double radius = (double) (6F * (0.7F + this.level().random.nextFloat() * 0.6F));
 
 				AABB hitbox = new AABB(this.getX() - 0.5f, this.getY() - 0.5f, this.getZ() - 0.5f, this.getX() + 0.5f, this.getY() + 0.5f, this.getZ() + 0.5f)
 						.expandTowards(-radius, -radius, -radius).expandTowards(radius, radius, radius);
-				for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, hitbox)) {
+				for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, hitbox)) {
 					if ((entity instanceof Player && !(entity instanceof FakePlayer)) || SlabConfig.COMMON.ethoSlabVillagers.get() && entity instanceof Villager) {
 						for (int i = 40; i >= 0; i--) {
 							if (entity.blockPosition().getY() + i > 256) {
 								return;
 							}
-							if (this.level.getBlockState(entity.blockPosition().offset(0, i, 0)).getBlock() == Blocks.AIR) {
-								this.level.setBlockAndUpdate(entity.blockPosition().offset(0, i, 0), Blocks.CHIPPED_ANVIL.defaultBlockState());
+							if (this.level().getBlockState(entity.blockPosition().offset(0, i, 0)).getBlock() == Blocks.AIR) {
+								this.level().setBlockAndUpdate(entity.blockPosition().offset(0, i, 0), Blocks.CHIPPED_ANVIL.defaultBlockState());
 								break;
 							}
 						}

@@ -36,8 +36,7 @@ public class CraftingTableSlabBlock extends CustomSlabBlock {
 	}
 
 	public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-		return new SimpleMenuProvider((id, inventory, player) -> {
-			return new SlabBenchContainer(id, inventory, ContainerLevelAccess.create(level, pos));
-		}, CONTAINER_NAME);
+		return new SimpleMenuProvider((id, inventory, player) ->
+				new SlabBenchContainer(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_NAME);
 	}
 }

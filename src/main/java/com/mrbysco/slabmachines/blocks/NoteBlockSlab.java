@@ -9,11 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -46,34 +47,32 @@ public class NoteBlockSlab extends CustomSlabBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.setInstrument(context.getLevel(), context.getClickedPos(), this.defaultBlockState());
+		return this.setInstrument(context.getLevel(), context.getClickedPos(), super.getStateForPlacement(context));
 	}
 
 	public BlockState updateShape(BlockState state, Direction direction, BlockState state1, LevelAccessor level, BlockPos pos, BlockPos pos1) {
-		boolean flag = isFeatureFlagEnabled(level) ? direction.getAxis() == Direction.Axis.Y : direction == Direction.DOWN;
+		boolean flag = direction.getAxis() == Direction.Axis.Y;
 		BlockState noteState = flag ? this.setInstrument(level, pos, state) : super.updateShape(state, direction, state1, level, pos, pos1);
 		return direction == Direction.DOWN ? noteState : super.updateShape(state, direction, state1, level, pos, pos1);
 	}
 
-
-	private static boolean isFeatureFlagEnabled(LevelAccessor levelAccessor) {
-		return levelAccessor.enabledFeatures().contains(FeatureFlags.UPDATE_1_20);
-	}
-
-	private BlockState setInstrument(LevelAccessor levelAccessor, BlockPos pos, BlockState state) {
-		if (isFeatureFlagEnabled(levelAccessor)) {
-			BlockState blockstate = levelAccessor.getBlockState(pos.above());
-			return state.setValue(INSTRUMENT, NoteBlockInstrument.byStateAbove(blockstate).orElseGet(() -> {
-				return NoteBlockInstrument.byStateBelow(levelAccessor.getBlockState(pos.below()));
-			}));
+	private BlockState setInstrument(LevelAccessor accessor, BlockPos pos, BlockState state) {
+		NoteBlockInstrument noteblockinstrument = accessor.getBlockState(pos.above()).instrument();
+		if (noteblockinstrument.worksAboveNoteBlock()) {
+			return state.setValue(INSTRUMENT, noteblockinstrument);
 		} else {
-			return state.setValue(INSTRUMENT, NoteBlockInstrument.byStateBelow(levelAccessor.getBlockState(pos.below())));
+			NoteBlockInstrument noteblockinstrument1 = accessor.getBlockState(pos.below()).instrument();
+			NoteBlockInstrument noteblockinstrument2 = noteblockinstrument1.worksAboveNoteBlock() ? NoteBlockInstrument.HARP : noteblockinstrument1;
+			return state.setValue(INSTRUMENT, noteblockinstrument2);
 		}
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		if (level.isClientSide) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		ItemStack itemstack = player.getItemInHand(hand);
+		if (itemstack.is(ItemTags.NOTE_BLOCK_TOP_INSTRUMENTS) && result.getDirection() == Direction.UP) {
+			return InteractionResult.PASS;
+		} else if (level.isClientSide) {
 			return InteractionResult.SUCCESS;
 		} else {
 			int _new = net.minecraftforge.common.ForgeHooks.onNoteChange(level, pos, state, state.getValue(NOTE), state.cycle(NOTE).getValue(NOTE));
@@ -107,7 +106,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 	}
 
 	private void playNote(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
-		if (!state.getValue(INSTRUMENT).requiresAirAbove() || level.getBlockState(pos.above()).isAir()) {
+		if (state.getValue(INSTRUMENT).worksAboveNoteBlock() || level.getBlockState(pos.above()).isAir()) {
 			level.blockEvent(pos, this, 0, 0);
 			level.gameEvent(entity, GameEvent.NOTE_BLOCK_PLAY, pos);
 		}

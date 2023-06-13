@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,type=bottom": {
+      "model": "slabmachines:block/chest_slab",
+      "y": 90
+    },
+    "facing=east,type=top": {
+      "model": "slabmachines:block/chest_slab_top",
+      "y": 90
+    },
+    "facing=north,type=bottom": {
+      "model": "slabmachines:block/chest_slab"
+    },
+    "facing=north,type=top": {
+      "model": "slabmachines:block/chest_slab_top"
+    },
+    "facing=south,type=bottom": {
+      "model": "slabmachines:block/chest_slab",
+      "y": 180
+    },
+    "facing=south,type=top": {
+      "model": "slabmachines:block/chest_slab_top",
+      "y": 180
+    },
+    "facing=west,type=bottom": {
+      "model": "slabmachines:block/chest_slab",
+      "y": 270
+    },
+    "facing=west,type=top": {
+      "model": "slabmachines:block/chest_slab_top",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "slabmachines:block/slab_base_top",
+  "textures": {
+    "down": "minecraft:block/oak_planks",
+    "east": "slabmachines:block/crafting_table_slab_side",
+    "north": "slabmachines:block/crafting_table_slab_front",
+    "particle": "slabmachines:block/crafting_table_slab_front",
+    "south": "slabmachines:block/crafting_table_slab_side",
+    "up": "minecraft:block/crafting_table_top",
+    "west": "slabmachines:block/crafting_table_slab_side"
+  }
+}

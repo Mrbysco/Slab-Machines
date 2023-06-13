@@ -16,7 +16,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
@@ -48,9 +47,8 @@ public class FurnaceSlabBlock extends FacingMultiSlabBlock implements EntityBloc
 		if (level.isClientSide) {
 			return InteractionResult.SUCCESS;
 		} else {
-			BlockEntity tileentity = level.getBlockEntity(pos);
-			if (tileentity instanceof FurnaceSlabBlockEntity) {
-				player.openMenu((MenuProvider) tileentity);
+			if (level.getBlockEntity(pos) instanceof FurnaceSlabBlockEntity furnaceSlabBlockEntity) {
+				player.openMenu(furnaceSlabBlockEntity);
 				player.awardStat(Stats.INTERACT_WITH_FURNACE);
 			}
 			return InteractionResult.CONSUME;
@@ -60,9 +58,9 @@ public class FurnaceSlabBlock extends FacingMultiSlabBlock implements EntityBloc
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
-			if (blockEntity instanceof FurnaceSlabBlockEntity) {
-				Containers.dropContents(level, pos, (FurnaceSlabBlockEntity) blockEntity);
-				((FurnaceSlabBlockEntity) blockEntity).getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(pos));
+			if (blockEntity instanceof FurnaceSlabBlockEntity furnaceSlabBlockEntity) {
+				Containers.dropContents(level, pos, furnaceSlabBlockEntity);
+				furnaceSlabBlockEntity.getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(pos));
 				level.updateNeighbourForOutputSignal(pos, this);
 			}
 

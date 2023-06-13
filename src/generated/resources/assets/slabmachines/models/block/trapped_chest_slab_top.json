@@ -1,0 +1,12 @@
+{
+  "parent": "slabmachines:block/slab_base_top",
+  "textures": {
+    "down": "slabmachines:block/chest_slab_bottom",
+    "east": "slabmachines:block/chest_slab_side",
+    "north": "slabmachines:block/trapped_chest_slab_front",
+    "particle": "slabmachines:block/trapped_chest_slab_front",
+    "south": "slabmachines:block/chest_slab_side",
+    "up": "slabmachines:block/chest_slab_top",
+    "west": "slabmachines:block/chest_slab_side"
+  }
+}

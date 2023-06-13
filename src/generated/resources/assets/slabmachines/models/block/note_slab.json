@@ -1,0 +1,12 @@
+{
+  "parent": "slabmachines:block/slab_base_bottom",
+  "textures": {
+    "down": "minecraft:block/note_block",
+    "east": "slabmachines:block/note_slab_side",
+    "north": "slabmachines:block/note_slab_side",
+    "particle": "slabmachines:block/note_slab_side",
+    "south": "slabmachines:block/note_slab_side",
+    "up": "minecraft:block/note_block",
+    "west": "slabmachines:block/note_slab_side"
+  }
+}

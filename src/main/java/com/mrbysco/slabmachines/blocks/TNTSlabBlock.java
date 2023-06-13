@@ -97,9 +97,8 @@ public class TNTSlabBlock extends CustomSlabBlock {
 			level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
 			if (!player.isCreative()) {
 				if (item == Items.FLINT_AND_STEEL) {
-					itemstack.hurtAndBreak(1, player, (player1) -> {
-						player1.broadcastBreakEvent(handIn);
-					});
+					itemstack.hurtAndBreak(1, player, (player1) ->
+							player1.broadcastBreakEvent(handIn));
 				} else {
 					itemstack.shrink(1);
 				}

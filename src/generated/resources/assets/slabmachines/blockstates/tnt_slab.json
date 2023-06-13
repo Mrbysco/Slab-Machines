@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "slabmachines:block/tnt_slab"
+    },
+    "type=top": {
+      "model": "slabmachines:block/tnt_slab_top"
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
-    "pack": {
-        "description": "Slab Machines resources",
-        "pack_format": 13,
-        "forge:client_resources_pack_format": 13,
-        "forge:server_data_pack_format": 12
-    }
+  "pack": {
+    "description": {
+      "text": "Slab Machines resources"
+    },
+    "pack_format": 15
+  }
 }
