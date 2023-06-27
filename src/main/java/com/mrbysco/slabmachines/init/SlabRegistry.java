@@ -23,6 +23,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -70,6 +71,7 @@ public class SlabRegistry {
 
 	public static final RegistryObject<CreativeModeTab> SLAB_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
 			.icon(() -> SlabRegistry.CRAFTING_TABLE_SLAB_ITEM.get().getDefaultInstance())
+			.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 			.title(Component.translatable("itemGroup.slabmachines.tab"))
 			.displayItems((displayParameters, output) -> {
 				List<ItemStack> stacks = SlabRegistry.ITEMS.getEntries().stream()
