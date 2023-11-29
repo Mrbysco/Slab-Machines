@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_slab_furnace",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_slab_furnace"
     ]
   ],
   "rewards": {

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[46,)"
+loaderVersion="[1,)"
 issueTrackerURL="https://github.com/Mrbysco/Slab-Machines/issues"
 license="GNU Lesser General Public License v3.0"
 
@@ -15,6 +15,12 @@ Machines but as a slab
 [[dependencies.slabmachines]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.20,1.21)"
+versionRange="[1.20.2,1.21)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.slabmachines]]
+modId="neoforge"
+mandatory=true
+versionRange="[20.2.64-beta,)"
 ordering="NONE"
 side="BOTH"

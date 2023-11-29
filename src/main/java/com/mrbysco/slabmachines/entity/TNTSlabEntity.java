@@ -16,9 +16,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages.SpawnEntity;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.network.NetworkHooks;
+import net.neoforged.neoforge.network.PlayMessages.SpawnEntity;
 
 import javax.annotation.Nullable;
 

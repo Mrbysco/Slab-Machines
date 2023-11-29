@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_trapped_chest",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_trapped_chest"
     ]
   ],
   "rewards": {

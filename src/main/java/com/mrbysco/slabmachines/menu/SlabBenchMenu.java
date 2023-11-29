@@ -1,4 +1,4 @@
-package com.mrbysco.slabmachines.container;
+package com.mrbysco.slabmachines.menu;
 
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.world.entity.player.Inventory;
@@ -7,12 +7,12 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.inventory.MenuType;
 
-public class SlabBenchContainer extends CraftingMenu {
-	public SlabBenchContainer(int id, Inventory playerInventory) {
+public class SlabBenchMenu extends CraftingMenu {
+	public SlabBenchMenu(int id, Inventory playerInventory) {
 		super(id, playerInventory);
 	}
 
-	public SlabBenchContainer(int id, Inventory playerInventory, ContainerLevelAccess worldPosCallable) {
+	public SlabBenchMenu(int id, Inventory playerInventory, ContainerLevelAccess worldPosCallable) {
 		super(id, playerInventory, worldPosCallable);
 	}
 

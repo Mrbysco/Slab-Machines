@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.CommonHooks;
 
 import javax.annotation.Nullable;
 
@@ -75,7 +76,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 		} else if (level.isClientSide) {
 			return InteractionResult.SUCCESS;
 		} else {
-			int _new = net.minecraftforge.common.ForgeHooks.onNoteChange(level, pos, state, state.getValue(NOTE), state.cycle(NOTE).getValue(NOTE));
+			int _new = CommonHooks.onNoteChange(level, pos, state, state.getValue(NOTE), state.cycle(NOTE).getValue(NOTE));
 			if (_new == -1) return InteractionResult.FAIL;
 			state = state.setValue(NOTE, _new);
 			level.setBlock(pos, state, 3);
@@ -114,8 +115,8 @@ public class NoteBlockSlab extends CustomSlabBlock {
 
 	@Override
 	public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
-		net.minecraftforge.event.level.NoteBlockEvent.Play e = new net.minecraftforge.event.level.NoteBlockEvent.Play(level, pos, state, state.getValue(NOTE), state.getValue(INSTRUMENT));
-		if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(e)) return false;
+		net.neoforged.neoforge.event.level.NoteBlockEvent.Play e = new net.neoforged.neoforge.event.level.NoteBlockEvent.Play(level, pos, state, state.getValue(NOTE), state.getValue(INSTRUMENT));
+		if (net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(e).isCanceled()) return false;
 		state = state.setValue(NOTE, e.getVanillaNoteId()).setValue(INSTRUMENT, e.getInstrument());
 		NoteBlockInstrument noteblockinstrument = state.getValue(INSTRUMENT);
 		float f;

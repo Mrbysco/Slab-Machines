@@ -1,13 +1,13 @@
 package com.mrbysco.slabmachines.datagen.assets;
 
 import com.mrbysco.slabmachines.SlabReference;
+import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.BlockModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.BlockModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.Nullable;
 
 public class SlabBlockModelProvider extends BlockModelProvider {
@@ -45,7 +45,7 @@ public class SlabBlockModelProvider extends BlockModelProvider {
 		return modLoc("block/" + path);
 	}
 
-	private void generateSlab(RegistryObject<Block> registryObject, ResourceLocation bottomTexture, ResourceLocation topTexture, ResourceLocation sideTexture, @Nullable ResourceLocation frontTexture) {
+	private void generateSlab(DeferredBlock<? extends CustomSlabBlock> registryObject, ResourceLocation bottomTexture, ResourceLocation topTexture, ResourceLocation sideTexture, @Nullable ResourceLocation frontTexture) {
 		String path = registryObject.getId().getPath();
 		ResourceLocation frontToUse = frontTexture != null ? frontTexture : sideTexture;
 		withExistingParent(path, modLoc("block/slab_base_bottom"))
@@ -67,7 +67,7 @@ public class SlabBlockModelProvider extends BlockModelProvider {
 				.texture("west", sideTexture);
 	}
 
-	private void generateFurnaceSlab(RegistryObject<Block> registryObject, ResourceLocation bottomTexture, ResourceLocation topTexture, ResourceLocation sideTexture, @Nullable ResourceLocation frontTexture) {
+	private void generateFurnaceSlab(DeferredBlock<? extends CustomSlabBlock> registryObject, ResourceLocation bottomTexture, ResourceLocation topTexture, ResourceLocation sideTexture, @Nullable ResourceLocation frontTexture) {
 		String path = registryObject.getId().getPath();
 		ResourceLocation frontToUse = frontTexture != null ? frontTexture : sideTexture;
 		withExistingParent(path + "_on", modLoc("block/slab_base_bottom"))

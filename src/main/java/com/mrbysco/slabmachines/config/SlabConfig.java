@@ -1,11 +1,10 @@
 package com.mrbysco.slabmachines.config;
 
 import com.mrbysco.slabmachines.SlabMachines;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class SlabConfig {
@@ -15,7 +14,7 @@ public class SlabConfig {
 		public final IntValue slabChestSlotLimit;
 		public final BooleanValue ethoSlabVillagers;
 
-		Common(ForgeConfigSpec.Builder builder) {
+		Common(net.neoforged.neoforge.common.ModConfigSpec.Builder builder) {
 			builder.comment("General settings")
 					.push("General");
 
@@ -35,11 +34,11 @@ public class SlabConfig {
 		}
 	}
 
-	public static final ForgeConfigSpec commonSpec;
+	public static final net.neoforged.neoforge.common.ModConfigSpec commonSpec;
 	public static final Common COMMON;
 
 	static {
-		final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		final Pair<Common, net.neoforged.neoforge.common.ModConfigSpec> specPair = new net.neoforged.neoforge.common.ModConfigSpec.Builder().configure(Common::new);
 		commonSpec = specPair.getRight();
 		COMMON = specPair.getLeft();
 	}

@@ -2,7 +2,7 @@ package com.mrbysco.slabmachines.blocks;
 
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
-import com.mrbysco.slabmachines.container.SlabBenchContainer;
+import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -37,6 +37,6 @@ public class CraftingTableSlabBlock extends CustomSlabBlock {
 
 	public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
 		return new SimpleMenuProvider((id, inventory, player) ->
-				new SlabBenchContainer(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_NAME);
+				new SlabBenchMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_NAME);
 	}
 }

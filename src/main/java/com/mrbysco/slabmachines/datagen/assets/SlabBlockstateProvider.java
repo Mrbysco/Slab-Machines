@@ -10,10 +10,10 @@ import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class SlabBlockstateProvider extends BlockStateProvider {
 	public SlabBlockstateProvider(PackOutput packOutput, ExistingFileHelper helper) {
@@ -22,7 +22,7 @@ public class SlabBlockstateProvider extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		for (RegistryObject<Block> registryObject : SlabRegistry.BLOCKS.getEntries()) {
+		for (DeferredHolder<Block, ? extends Block> registryObject : SlabRegistry.BLOCKS.getEntries()) {
 			if (registryObject.get() instanceof CustomSlabBlock) {
 				if (registryObject.get() instanceof FacingMultiSlabBlock) {
 					if (registryObject.get() instanceof AbstractFurnaceSlabBlock) {
@@ -37,7 +37,7 @@ public class SlabBlockstateProvider extends BlockStateProvider {
 		}
 	}
 
-	private void generateSlab(RegistryObject<Block> registryObject) {
+	private void generateSlab(DeferredHolder<Block, ? extends Block> registryObject) {
 		ModelFile topModel = models().getExistingFile(modLoc("block/" + registryObject.getId().getPath() + "_top"));
 		ModelFile bottomModel = models().getExistingFile(modLoc("block/" + registryObject.getId().getPath()));
 		getVariantBuilder(registryObject.get())
@@ -47,7 +47,7 @@ public class SlabBlockstateProvider extends BlockStateProvider {
 				.modelForState().modelFile(bottomModel).addModel();
 	}
 
-	private void generateFacingSlab(RegistryObject<Block> registryObject) {
+	private void generateFacingSlab(DeferredHolder<Block, ? extends Block> registryObject) {
 		ModelFile topModel = models().getExistingFile(modLoc("block/" + registryObject.getId().getPath() + "_top"));
 		ModelFile bottomModel = models().getExistingFile(modLoc("block/" + registryObject.getId().getPath()));
 		getVariantBuilder(registryObject.get())
@@ -69,7 +69,7 @@ public class SlabBlockstateProvider extends BlockStateProvider {
 				.modelForState().modelFile(bottomModel).rotationY(270).addModel();
 	}
 
-	private void generateFurnaceSlab(RegistryObject<Block> registryObject) {
+	private void generateFurnaceSlab(DeferredHolder<Block, ? extends Block> registryObject) {
 		ModelFile topModel = models().getExistingFile(modLoc("block/" + registryObject.getId().getPath() + "_top"));
 		ModelFile bottomModel = models().getExistingFile(modLoc("block/" + registryObject.getId().getPath()));
 		ModelFile topModelOn = models().getExistingFile(modLoc("block/" + registryObject.getId().getPath() + "_top_on"));

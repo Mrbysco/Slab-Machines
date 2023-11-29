@@ -6,9 +6,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class SlabItemModelProvider extends ItemModelProvider {
 	public SlabItemModelProvider(PackOutput packOutput, ExistingFileHelper helper) {
@@ -17,7 +17,7 @@ public class SlabItemModelProvider extends ItemModelProvider {
 
 	@Override
 	protected void registerModels() {
-		for (RegistryObject<Item> registryObject : SlabRegistry.ITEMS.getEntries()) {
+		for (DeferredHolder<Item, ? extends Item> registryObject : SlabRegistry.ITEMS.getEntries()) {
 			if (registryObject.get() instanceof BlockItem) {
 				withBlockParent(registryObject.getId());
 			}

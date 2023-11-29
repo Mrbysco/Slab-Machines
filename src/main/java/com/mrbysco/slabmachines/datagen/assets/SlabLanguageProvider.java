@@ -3,7 +3,7 @@ package com.mrbysco.slabmachines.datagen.assets;
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 public class SlabLanguageProvider extends LanguageProvider {
 

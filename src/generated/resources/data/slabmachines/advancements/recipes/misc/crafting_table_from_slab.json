@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_slab_crafting_table",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_slab_crafting_table"
     ]
   ],
   "rewards": {

@@ -16,7 +16,6 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +50,7 @@ public class SlabLootProvider extends LootTableProvider {
 
 		@Override
 		protected Iterable<Block> getKnownBlocks() {
-			return (Iterable<Block>) SlabRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+			return (Iterable<Block>) SlabRegistry.BLOCKS.getEntries().stream().map(holder -> (Block) holder.get())::iterator;
 		}
 	}
 
