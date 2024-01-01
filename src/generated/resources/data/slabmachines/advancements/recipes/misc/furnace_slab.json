@@ -30,6 +30,5 @@
     "recipes": [
       "slabmachines:furnace_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

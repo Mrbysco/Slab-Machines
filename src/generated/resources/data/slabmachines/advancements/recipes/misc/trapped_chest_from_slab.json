@@ -30,6 +30,5 @@
     "recipes": [
       "slabmachines:trapped_chest_from_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

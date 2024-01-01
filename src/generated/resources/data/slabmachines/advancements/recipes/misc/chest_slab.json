@@ -28,6 +28,5 @@
     "recipes": [
       "slabmachines:chest_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -30,6 +30,5 @@
     "recipes": [
       "slabmachines:note_block_from_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

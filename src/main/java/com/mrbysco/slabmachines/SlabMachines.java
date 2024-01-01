@@ -3,16 +3,15 @@ package com.mrbysco.slabmachines;
 import com.mojang.logging.LogUtils;
 import com.mrbysco.slabmachines.client.ClientHandler;
 import com.mrbysco.slabmachines.config.SlabConfig;
-import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import com.mrbysco.slabmachines.init.SlabRegistry;
+import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.InterModComms;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
@@ -20,12 +19,12 @@ import org.slf4j.Logger;
 public class SlabMachines {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public SlabMachines() {
-		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+	public SlabMachines(IEventBus eventBus) {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SlabConfig.commonSpec);
 		eventBus.register(SlabConfig.class);
 
 		eventBus.addListener(this::interModEnqueueEvent);
+		eventBus.addListener(SlabRegistry::registerCapabilities);
 
 		SlabRegistry.BLOCKS.register(eventBus);
 		SlabRegistry.ITEMS.register(eventBus);

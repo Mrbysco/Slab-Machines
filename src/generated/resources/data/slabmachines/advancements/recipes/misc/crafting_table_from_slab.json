@@ -30,6 +30,5 @@
     "recipes": [
       "slabmachines:crafting_table_from_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

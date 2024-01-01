@@ -13,8 +13,8 @@ import com.mrbysco.slabmachines.blocks.NoteBlockSlab;
 import com.mrbysco.slabmachines.blocks.SmokerSlabBlock;
 import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
 import com.mrbysco.slabmachines.blocks.TrappedChestSlabBlock;
-import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import com.mrbysco.slabmachines.entity.TNTSlabEntity;
+import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
@@ -28,7 +28,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -46,17 +50,17 @@ public class SlabRegistry {
 
 	public static final Supplier<MenuType<SlabBenchMenu>> SLAB_WORKBENCH_CONTAINER = MENU_TYPES.register("slab_workbench", () -> IMenuTypeExtension.create((windowId, inv, data) -> new SlabBenchMenu(windowId, inv)));
 
-	public static final DeferredBlock<CraftingTableSlabBlock> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE)));
-	public static final DeferredBlock<FurnaceSlabBlock> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(BlockBehaviour.Properties.copy(Blocks.FURNACE).lightLevel((state) ->
+	public static final DeferredBlock<CraftingTableSlabBlock> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
+	public static final DeferredBlock<FurnaceSlabBlock> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
 			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
-	public static final DeferredBlock<BlastFurnaceSlabBlock> BLAST_FURNACE_SLAB = BLOCKS.register("blast_furnace_slab", () -> new BlastFurnaceSlabBlock(BlockBehaviour.Properties.copy(Blocks.FURNACE).lightLevel((state) ->
+	public static final DeferredBlock<BlastFurnaceSlabBlock> BLAST_FURNACE_SLAB = BLOCKS.register("blast_furnace_slab", () -> new BlastFurnaceSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
 			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
-	public static final DeferredBlock<SmokerSlabBlock> SMOKER_SLAB = BLOCKS.register("smoker_slab", () -> new SmokerSlabBlock(BlockBehaviour.Properties.copy(Blocks.FURNACE).lightLevel((state) ->
+	public static final DeferredBlock<SmokerSlabBlock> SMOKER_SLAB = BLOCKS.register("smoker_slab", () -> new SmokerSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
 			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
-	public static final DeferredBlock<ChestSlabBlock> CHEST_SLAB = BLOCKS.register("chest_slab", () -> new ChestSlabBlock(BlockBehaviour.Properties.copy(Blocks.CHEST)));
-	public static final DeferredBlock<TrappedChestSlabBlock> TRAPPED_CHEST_SLAB = BLOCKS.register("trapped_chest_slab", () -> new TrappedChestSlabBlock(BlockBehaviour.Properties.copy(Blocks.TRAPPED_CHEST)));
-	public static final DeferredBlock<NoteBlockSlab> NOTE_SLAB = BLOCKS.register("note_slab", () -> new NoteBlockSlab(BlockBehaviour.Properties.copy(Blocks.NOTE_BLOCK)));
-	public static final DeferredBlock<TNTSlabBlock> TNT_SLAB = BLOCKS.register("tnt_slab", () -> new TNTSlabBlock(BlockBehaviour.Properties.copy(Blocks.TNT)));
+	public static final DeferredBlock<ChestSlabBlock> CHEST_SLAB = BLOCKS.register("chest_slab", () -> new ChestSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST)));
+	public static final DeferredBlock<TrappedChestSlabBlock> TRAPPED_CHEST_SLAB = BLOCKS.register("trapped_chest_slab", () -> new TrappedChestSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TRAPPED_CHEST)));
+	public static final DeferredBlock<NoteBlockSlab> NOTE_SLAB = BLOCKS.register("note_slab", () -> new NoteBlockSlab(BlockBehaviour.Properties.ofFullCopy(Blocks.NOTE_BLOCK)));
+	public static final DeferredBlock<TNTSlabBlock> TNT_SLAB = BLOCKS.register("tnt_slab", () -> new TNTSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TNT)));
 
 	public static final DeferredItem<BlockItem> CRAFTING_TABLE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(CRAFTING_TABLE_SLAB);
 	public static final DeferredItem<BlockItem> FURNACE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(FURNACE_SLAB);
@@ -85,4 +89,17 @@ public class SlabRegistry {
 	public static final Supplier<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITY_TYPES.register("tnt_slab", () -> EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, MobCategory.MISC)
 			.sized(1.0F, 0.5F).clientTrackingRange(10).updateInterval(10).setCustomClientFactory(TNTSlabEntity::new).build("tnt_slab"));
 
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		var sidedContainers = List.of(
+				BLAST_FURNACE_SLAB_BE.get(),
+				FURNACE_SLAB_BE.get(),
+				SMOKER_SLAB_BE.get()
+		);
+		for (var type : sidedContainers) {
+			event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, type, (sidedContainer, side) ->
+					side == null ? new InvWrapper(sidedContainer) : new SidedInvWrapper(sidedContainer, side));
+		}
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CHEST_SLAB_BE.get(), (chestSlabBlock, side) ->
+				new InvWrapper(chestSlabBlock));
+	}
 }
