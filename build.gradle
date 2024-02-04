@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.76'
+    id 'net.neoforged.gradle.userdev' version '7.0.88'
     id 'net.darkhax.curseforgegradle' version '1.1.17'
     id 'com.modrinth.minotaur' version "2.+"
 }
@@ -67,10 +67,10 @@ repositories {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
-//    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-//    compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
-//
-//    runtimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
+
+    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 }
 
 jar {
@@ -123,7 +123,7 @@ if (System.getenv().CURSEFORGE_KEY) {
         mainFile.changelogType = 'markdown'
 
 //        mainFile.addRequirement()
-//        mainFile.addOptional()
+        mainFile.addOptional("jei")
     }
 }
 
@@ -138,6 +138,10 @@ if (System.getenv().MODRINTH_KEY) {
         changelog = file("$project.rootDir/changelog.md").text
         gameVersions = ["${mc_version}"]
         loaders = ["neoforge"]
+
+        dependencies {
+            optional.project "jei"
+        }
     }
 }
 

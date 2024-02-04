@@ -3,8 +3,6 @@ package com.mrbysco.slabmachines.entity;
 import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -17,8 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.network.NetworkHooks;
-import net.neoforged.neoforge.network.PlayMessages.SpawnEntity;
 
 import javax.annotation.Nullable;
 
@@ -41,15 +37,6 @@ public class TNTSlabEntity extends PrimedTnt {
 		this.zo = z;
 		this.owner = igniter;
 		this.etho = etho;
-	}
-
-	public TNTSlabEntity(SpawnEntity spawnEntity, Level level) {
-		this(SlabRegistry.TNT_SLAB_ENTITY.get(), level);
-	}
-
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	protected void defineSynchedData() {

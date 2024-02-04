@@ -29,7 +29,7 @@ public class SlabDatagen {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(true, new SlabRecipeProvider(packOutput, lookupProvider));
+			generator.addProvider(true, new SlabRecipeProvider(packOutput));
 			generator.addProvider(true, new SlabLootProvider(packOutput));
 			SlabBlockTagProvider blockTags;
 			generator.addProvider(true, blockTags = new SlabBlockTagProvider(packOutput, lookupProvider, helper));

@@ -86,8 +86,7 @@ public class SlabRegistry {
 	public static final Supplier<BlockEntityType<SmokerSlabBlockEntity>> SMOKER_SLAB_BE = BLOCK_ENTITY_TYPES.register("smoker_slab", () -> BlockEntityType.Builder.of(SmokerSlabBlockEntity::new, SMOKER_SLAB.get()).build(null));
 	public static final Supplier<BlockEntityType<ChestSlabBlockEntity>> CHEST_SLAB_BE = BLOCK_ENTITY_TYPES.register("chest_slab", () -> BlockEntityType.Builder.of(ChestSlabBlockEntity::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
 
-	public static final Supplier<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITY_TYPES.register("tnt_slab", () -> EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, MobCategory.MISC)
-			.sized(1.0F, 0.5F).clientTrackingRange(10).updateInterval(10).setCustomClientFactory(TNTSlabEntity::new).build("tnt_slab"));
+	public static final Supplier<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITY_TYPES.register("tnt_slab", () -> EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, MobCategory.MISC).sized(1.0F, 0.5F).clientTrackingRange(10).updateInterval(10).build("tnt_slab"));
 
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
 		var sidedContainers = List.of(
