@@ -15,12 +15,12 @@ Machines but as a slab
 [[dependencies.slabmachines]]
 modId="minecraft"
 type="REQUIRED"
-versionRange="[1.21,1.22)"
+versionRange="[1.21.1,1.22)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.slabmachines]]
 modId="neoforge"
 type="required"
-versionRange="[21.0.110-beta,)"
+versionRange="[21.1.1,)"
 ordering="NONE"
 side="BOTH"
