@@ -12,6 +12,7 @@ import net.neoforged.fml.InterModComms;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -25,6 +26,7 @@ public class SlabMachines {
 		container.registerConfig(ModConfig.Type.COMMON, SlabConfig.commonSpec);
 		eventBus.register(SlabConfig.class);
 
+		eventBus.addListener(this::commonSetupEvent);
 		eventBus.addListener(this::interModEnqueueEvent);
 		eventBus.addListener(SlabRegistry::registerCapabilities);
 
@@ -48,5 +50,9 @@ public class SlabMachines {
 			tagCompound.putString("ContainerClass", SlabBenchMenu.class.getName());
 			return tagCompound;
 		});
+	}
+
+	public void commonSetupEvent(FMLCommonSetupEvent event) {
+		event.enqueueWork(SlabRegistry::registerPointOfInterests);
 	}
 }

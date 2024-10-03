@@ -15,15 +15,21 @@ import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
 import com.mrbysco.slabmachines.blocks.TrappedChestSlabBlock;
 import com.mrbysco.slabmachines.entity.TNTSlabEntity;
 import com.mrbysco.slabmachines.menu.SlabBenchMenu;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -36,6 +42,7 @@ import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.GameData;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -100,5 +107,20 @@ public class SlabRegistry {
 		}
 		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CHEST_SLAB_BE.get(), (chestSlabBlock, side) ->
 				new InvWrapper(chestSlabBlock));
+	}
+
+	public static void registerPointOfInterests() {
+		registerAllStatesToPointOfInterest(PoiTypes.ARMORER, BLAST_FURNACE_SLAB);
+		registerAllStatesToPointOfInterest(PoiTypes.BUTCHER, SMOKER_SLAB);
+	}
+
+	@SafeVarargs
+    private static void registerAllStatesToPointOfInterest(ResourceKey<PoiType> poi, Supplier<? extends Block>... blocks) {
+		Holder<PoiType> poiHolder = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poi);
+		for (var block : blocks) {
+			block.get().getStateDefinition().getPossibleStates().forEach(
+					state -> GameData.getBlockStatePointOfInterestTypeMap().put(state, poiHolder)
+			);
+		}
 	}
 }
