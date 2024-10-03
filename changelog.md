@@ -1,1 +1,1 @@
-* Initial update to 1.21
+* Add Point of Interest Types for Existing Slab Machines (Courtesy of [ChampionAsh5357](https://github.com/Mrbysco/Slab-Machines/pull/16))
