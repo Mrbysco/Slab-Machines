@@ -1,1 +1,2 @@
-* Add Point of Interest Types for Existing Slab Machines (Courtesy of [ChampionAsh5357](https://github.com/Mrbysco/Slab-Machines/pull/16))
+* Add Cartography Table Slab
+* Add Loom Slab
