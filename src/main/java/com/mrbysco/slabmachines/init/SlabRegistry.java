@@ -6,9 +6,11 @@ import com.mrbysco.slabmachines.blockentity.furnace.BlastFurnaceSlabBlockEntity;
 import com.mrbysco.slabmachines.blockentity.furnace.FurnaceSlabBlockEntity;
 import com.mrbysco.slabmachines.blockentity.furnace.SmokerSlabBlockEntity;
 import com.mrbysco.slabmachines.blocks.BlastFurnaceSlabBlock;
+import com.mrbysco.slabmachines.blocks.CartographyTableSlabBlock;
 import com.mrbysco.slabmachines.blocks.ChestSlabBlock;
 import com.mrbysco.slabmachines.blocks.CraftingTableSlabBlock;
 import com.mrbysco.slabmachines.blocks.FurnaceSlabBlock;
+import com.mrbysco.slabmachines.blocks.LoomSlabBlock;
 import com.mrbysco.slabmachines.blocks.NoteBlockSlab;
 import com.mrbysco.slabmachines.blocks.SmokerSlabBlock;
 import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
@@ -57,19 +59,23 @@ public class SlabRegistry {
 
 	public static final Supplier<MenuType<SlabBenchMenu>> SLAB_WORKBENCH_CONTAINER = MENU_TYPES.register("slab_workbench", () -> IMenuTypeExtension.create((windowId, inv, data) -> new SlabBenchMenu(windowId, inv)));
 
-	public static final DeferredBlock<CraftingTableSlabBlock> CRAFTING_TABLE_SLAB = BLOCKS.register("crafting_table_slab", () -> new CraftingTableSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
-	public static final DeferredBlock<FurnaceSlabBlock> FURNACE_SLAB = BLOCKS.register("furnace_slab", () -> new FurnaceSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
-			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
-	public static final DeferredBlock<BlastFurnaceSlabBlock> BLAST_FURNACE_SLAB = BLOCKS.register("blast_furnace_slab", () -> new BlastFurnaceSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
-			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
-	public static final DeferredBlock<SmokerSlabBlock> SMOKER_SLAB = BLOCKS.register("smoker_slab", () -> new SmokerSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
-			state.getValue(BlockStateProperties.LIT) ? 7 : 0)));
-	public static final DeferredBlock<ChestSlabBlock> CHEST_SLAB = BLOCKS.register("chest_slab", () -> new ChestSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST)));
-	public static final DeferredBlock<TrappedChestSlabBlock> TRAPPED_CHEST_SLAB = BLOCKS.register("trapped_chest_slab", () -> new TrappedChestSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TRAPPED_CHEST)));
-	public static final DeferredBlock<NoteBlockSlab> NOTE_SLAB = BLOCKS.register("note_slab", () -> new NoteBlockSlab(BlockBehaviour.Properties.ofFullCopy(Blocks.NOTE_BLOCK)));
-	public static final DeferredBlock<TNTSlabBlock> TNT_SLAB = BLOCKS.register("tnt_slab", () -> new TNTSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TNT)));
+	public static final DeferredBlock<CraftingTableSlabBlock> CRAFTING_TABLE_SLAB = BLOCKS.registerBlock("crafting_table_slab", CraftingTableSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
+	public static final DeferredBlock<CartographyTableSlabBlock> CARTOGRAPHY_TABLE_SLAB = BLOCKS.registerBlock("cartography_table_slab", CartographyTableSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CARTOGRAPHY_TABLE));
+	public static final DeferredBlock<LoomSlabBlock> LOOM_SLAB = BLOCKS.registerBlock("loom_slab", LoomSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LOOM));
+	public static final DeferredBlock<FurnaceSlabBlock> FURNACE_SLAB = BLOCKS.registerBlock("furnace_slab", FurnaceSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
+			state.getValue(BlockStateProperties.LIT) ? 7 : 0));
+	public static final DeferredBlock<BlastFurnaceSlabBlock> BLAST_FURNACE_SLAB = BLOCKS.registerBlock("blast_furnace_slab", BlastFurnaceSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
+			state.getValue(BlockStateProperties.LIT) ? 7 : 0));
+	public static final DeferredBlock<SmokerSlabBlock> SMOKER_SLAB = BLOCKS.registerBlock("smoker_slab", SmokerSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
+			state.getValue(BlockStateProperties.LIT) ? 7 : 0));
+	public static final DeferredBlock<ChestSlabBlock> CHEST_SLAB = BLOCKS.registerBlock("chest_slab", ChestSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
+	public static final DeferredBlock<TrappedChestSlabBlock> TRAPPED_CHEST_SLAB = BLOCKS.registerBlock("trapped_chest_slab", TrappedChestSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.TRAPPED_CHEST));
+	public static final DeferredBlock<NoteBlockSlab> NOTE_SLAB = BLOCKS.registerBlock("note_slab", NoteBlockSlab::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NOTE_BLOCK));
+	public static final DeferredBlock<TNTSlabBlock> TNT_SLAB = BLOCKS.registerBlock("tnt_slab", TNTSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.TNT));
 
 	public static final DeferredItem<BlockItem> CRAFTING_TABLE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(CRAFTING_TABLE_SLAB);
+	public static final DeferredItem<BlockItem> CARTOGRAPHY_TABLE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(CARTOGRAPHY_TABLE_SLAB);
+	public static final DeferredItem<BlockItem> LOOM_SLAB_ITEM = ITEMS.registerSimpleBlockItem(LOOM_SLAB);
 	public static final DeferredItem<BlockItem> FURNACE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(FURNACE_SLAB);
 	public static final DeferredItem<BlockItem> BLAST_FURNACE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(BLAST_FURNACE_SLAB);
 	public static final DeferredItem<BlockItem> SMOKER_SLAB_ITEM = ITEMS.registerSimpleBlockItem(SMOKER_SLAB);
@@ -79,7 +85,7 @@ public class SlabRegistry {
 	public static final DeferredItem<BlockItem> TNT_SLAB_ITEM = ITEMS.registerSimpleBlockItem(TNT_SLAB);
 
 	public static final Supplier<CreativeModeTab> SLAB_TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
-			.icon(() -> SlabRegistry.CRAFTING_TABLE_SLAB_ITEM.get().getDefaultInstance())
+			.icon(() -> SlabRegistry.CRAFTING_TABLE_SLAB.asItem().getDefaultInstance())
 			.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 			.title(Component.translatable("itemGroup.slabmachines.tab"))
 			.displayItems((displayParameters, output) -> {
@@ -114,8 +120,9 @@ public class SlabRegistry {
 		registerAllStatesToPointOfInterest(PoiTypes.BUTCHER, SMOKER_SLAB);
 	}
 
+	@SuppressWarnings("UnstableApiUsage")
 	@SafeVarargs
-    private static void registerAllStatesToPointOfInterest(ResourceKey<PoiType> poi, Supplier<? extends Block>... blocks) {
+	private static void registerAllStatesToPointOfInterest(ResourceKey<PoiType> poi, Supplier<? extends Block>... blocks) {
 		Holder<PoiType> poiHolder = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poi);
 		for (var block : blocks) {
 			block.get().getStateDefinition().getPossibleStates().forEach(

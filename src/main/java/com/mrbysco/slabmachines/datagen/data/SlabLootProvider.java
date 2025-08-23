@@ -39,6 +39,8 @@ public class SlabLootProvider extends LootTableProvider {
 		@Override
 		protected void generate() {
 			this.dropSelf(SlabRegistry.CRAFTING_TABLE_SLAB.get());
+			this.dropSelf(SlabRegistry.CARTOGRAPHY_TABLE_SLAB.get());
+			this.dropSelf(SlabRegistry.LOOM_SLAB.get());
 			this.add(SlabRegistry.FURNACE_SLAB.get(), this::createNameableBlockEntityTable);
 			this.add(SlabRegistry.BLAST_FURNACE_SLAB.get(), this::createNameableBlockEntityTable);
 			this.add(SlabRegistry.SMOKER_SLAB.get(), this::createNameableBlockEntityTable);

@@ -21,6 +21,11 @@ public class SlabBlockModelProvider extends BlockModelProvider {
 				modTexture("chest_slab_side"), modTexture("chest_slab_front"));
 		generateSlab(SlabRegistry.CRAFTING_TABLE_SLAB, mcLoc("block/oak_planks"), mcLoc("block/crafting_table_top"),
 				modTexture("crafting_table_slab_side"), modTexture("crafting_table_slab_front"));
+		generateSlab(SlabRegistry.CARTOGRAPHY_TABLE_SLAB, mcLoc("block/dark_oak_planks"), mcLoc("block/cartography_table_top"),
+				modTexture("cartography_table_slab_3"), modTexture("cartography_table_slab_3"),
+				modTexture("cartography_table_slab_1"), modTexture("cartography_table_slab_2"));
+		generateSlab(SlabRegistry.LOOM_SLAB, mcLoc("block/loom_bottom"), mcLoc("block/loom_top"),
+				modTexture("loom_slab_side"), modTexture("loom_slab_front"));
 		generateSlab(SlabRegistry.FURNACE_SLAB, mcLoc("block/furnace_top"), mcLoc("block/furnace_top"),
 				modTexture("furnace_slab_side"), modTexture("furnace_slab_front"));
 		generateFurnaceSlab(SlabRegistry.FURNACE_SLAB, mcLoc("block/furnace_top"), mcLoc("block/furnace_top"),
@@ -65,6 +70,31 @@ public class SlabBlockModelProvider extends BlockModelProvider {
 				.texture("east", sideTexture)
 				.texture("south", sideTexture)
 				.texture("west", sideTexture);
+	}
+
+	private void generateSlab(DeferredBlock<? extends CustomSlabBlock> registryObject,
+	                          ResourceLocation bottomTexture, ResourceLocation topTexture,
+	                          ResourceLocation northTexture, ResourceLocation eastTexture,
+	                          ResourceLocation southTexture, ResourceLocation westTexture
+	) {
+		String path = registryObject.getId().getPath();
+		withExistingParent(path, modLoc("block/slab_base_bottom"))
+				.texture("particle", northTexture)
+				.texture("down", bottomTexture)
+				.texture("up", topTexture)
+				.texture("north", northTexture)
+				.texture("east", eastTexture)
+				.texture("south", southTexture)
+				.texture("west", westTexture);
+
+		withExistingParent(path + "_top", modLoc("block/slab_base_top"))
+				.texture("particle", northTexture)
+				.texture("down", bottomTexture)
+				.texture("up", topTexture)
+				.texture("north", northTexture)
+				.texture("east", eastTexture)
+				.texture("south", southTexture)
+				.texture("west", westTexture);
 	}
 
 	private void generateFurnaceSlab(DeferredBlock<? extends CustomSlabBlock> registryObject, ResourceLocation bottomTexture, ResourceLocation topTexture, ResourceLocation sideTexture, @Nullable ResourceLocation frontTexture) {

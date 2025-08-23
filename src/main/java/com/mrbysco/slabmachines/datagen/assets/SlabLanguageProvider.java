@@ -18,6 +18,8 @@ public class SlabLanguageProvider extends LanguageProvider {
 		add("slabmachines.config.title", "Slab Machines Config");
 
 		addBlock(SlabRegistry.CRAFTING_TABLE_SLAB, "Crafting Slab");
+		addBlock(SlabRegistry.CARTOGRAPHY_TABLE_SLAB, "Cartography Slab");
+		addBlock(SlabRegistry.LOOM_SLAB, "Loom Slab");
 		addBlock(SlabRegistry.FURNACE_SLAB, "Furnace Slab");
 		addBlock(SlabRegistry.BLAST_FURNACE_SLAB, "Blast Furnace Slab");
 		addBlock(SlabRegistry.SMOKER_SLAB, "Smoker Slab");
@@ -39,6 +41,8 @@ public class SlabLanguageProvider extends LanguageProvider {
 		add("slabmachines:container.smoker", "Smoker Slab");
 		add("slabmachines:container.chest", "Chest Slab");
 		add("slabmachines:container.crafting", "Crafting Slab");
+		add("slabmachines:container.cartography", "Cartography Slab");
+		add("slabmachines:container.loom", "Loom Slab");
 
 		addEntityType(SlabRegistry.TNT_SLAB_ENTITY, "Slab Primed TNT");
 	}
