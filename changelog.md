@@ -1,1 +1,1 @@
-* Update to 1.21.5
+* Add missing POI for Cartography Table Slab and the Loom Slab
