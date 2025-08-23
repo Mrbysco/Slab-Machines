@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -13,6 +14,8 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +37,7 @@ public class TNTSlabEntity extends PrimedTnt {
 		this.xo = x;
 		this.yo = y;
 		this.zo = z;
-		this.owner = igniter;
+		this.owner = igniter != null ? new EntityReference<>(igniter) : null;
 		this.etho = etho;
 	}
 
@@ -73,15 +76,15 @@ public class TNTSlabEntity extends PrimedTnt {
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putBoolean("Etho", this.isEtho());
+	protected void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putBoolean("Etho", this.isEtho());
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		this.setEtho(compound.getBooleanOr("Etho", false));
+	protected void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
+		this.setEtho(input.getBooleanOr("Etho", false));
 	}
 
 

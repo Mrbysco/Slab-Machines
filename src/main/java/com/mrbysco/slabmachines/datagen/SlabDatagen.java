@@ -15,7 +15,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class SlabDatagen {
 
 	@SubscribeEvent
@@ -26,9 +26,8 @@ public class SlabDatagen {
 
 		generator.addProvider(true, new SlabRecipeProvider.Runner(packOutput, lookupProvider));
 		generator.addProvider(true, new SlabLootProvider(packOutput, lookupProvider));
-		SlabBlockTagProvider blockTags;
-		generator.addProvider(true, blockTags = new SlabBlockTagProvider(packOutput, lookupProvider));
-		generator.addProvider(true, new SlabItemTagProvider(packOutput, lookupProvider, blockTags.contentsGetter()));
+		generator.addProvider(true, new SlabBlockTagProvider(packOutput, lookupProvider));
+		generator.addProvider(true, new SlabItemTagProvider(packOutput, lookupProvider));
 
 		generator.addProvider(true, new SlabLanguageProvider(packOutput));
 		generator.addProvider(true, new SlabModelProvider(packOutput));
