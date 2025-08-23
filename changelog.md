@@ -1,2 +1,1 @@
-* Add Cartography Table Slab
-* Add Loom Slab
+* Add missing POI for Cartography Table Slab and the Loom Slab
