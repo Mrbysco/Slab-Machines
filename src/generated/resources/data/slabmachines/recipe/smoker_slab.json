@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "F": {
-      "item": "slabmachines:furnace_slab"
-    },
-    "S": {
-      "tag": "minecraft:planks"
-    }
+    "F": "slabmachines:furnace_slab",
+    "S": "#minecraft:planks"
   },
   "pattern": [
     " S ",

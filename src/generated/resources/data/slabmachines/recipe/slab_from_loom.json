@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:loom"
-    }
+    "minecraft:loom"
   ],
   "result": {
     "count": 2,

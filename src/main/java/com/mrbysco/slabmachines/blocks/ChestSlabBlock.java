@@ -4,11 +4,11 @@ import com.mrbysco.slabmachines.blockentity.ChestSlabBlockEntity;
 import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
@@ -20,8 +20,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock {
 	public ChestSlabBlock(Properties properties) {
@@ -37,7 +36,7 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 			if (menuProvider != null) {
 				player.openMenu(menuProvider);
 				player.awardStat(this.getOpenStat());
-				PiglinAi.angerNearbyPiglins(player, true);
+				PiglinAi.angerNearbyPiglins((ServerLevel) level, player, true);
 			}
 
 			return InteractionResult.CONSUME;

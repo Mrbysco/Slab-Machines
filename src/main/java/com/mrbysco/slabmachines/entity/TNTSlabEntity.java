@@ -15,8 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.util.FakePlayer;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class TNTSlabEntity extends PrimedTnt {
 	private static final EntityDataAccessor<Boolean> IS_ETHO = SynchedEntityData.defineId(TNTSlabEntity.class, EntityDataSerializers.BOOLEAN);

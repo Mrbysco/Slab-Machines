@@ -10,15 +10,16 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
@@ -32,10 +33,10 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.CommonHooks;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class NoteBlockSlab extends CustomSlabBlock {
 	public static final EnumProperty<NoteBlockInstrument> INSTRUMENT = BlockStateProperties.NOTEBLOCK_INSTRUMENT;
@@ -53,38 +54,38 @@ public class NoteBlockSlab extends CustomSlabBlock {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction direction, BlockState state1, LevelAccessor level, BlockPos pos, BlockPos pos1) {
+	protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
 		boolean flag = direction.getAxis() == Direction.Axis.Y;
-		BlockState noteState = flag ? this.setInstrument(level, pos, state) : super.updateShape(state, direction, state1, level, pos, pos1);
-		return direction == Direction.DOWN ? noteState : super.updateShape(state, direction, state1, level, pos, pos1);
+		BlockState noteState = flag ? this.setInstrument(level, pos, state) : super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
+		return direction == Direction.DOWN ? noteState : super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
 	}
 
-	private BlockState setInstrument(LevelAccessor accessor, BlockPos pos, BlockState state) {
-		NoteBlockInstrument noteblockinstrument = accessor.getBlockState(pos.above()).instrument();
+	private BlockState setInstrument(LevelReader levelReader, BlockPos pos, BlockState state) {
+		NoteBlockInstrument noteblockinstrument = levelReader.getBlockState(pos.above()).instrument();
 		if (noteblockinstrument.worksAboveNoteBlock()) {
 			return state.setValue(INSTRUMENT, noteblockinstrument);
 		} else {
-			NoteBlockInstrument noteblockinstrument1 = accessor.getBlockState(pos.below()).instrument();
+			NoteBlockInstrument noteblockinstrument1 = levelReader.getBlockState(pos.below()).instrument();
 			NoteBlockInstrument noteblockinstrument2 = noteblockinstrument1.worksAboveNoteBlock() ? NoteBlockInstrument.HARP : noteblockinstrument1;
 			return state.setValue(INSTRUMENT, noteblockinstrument2);
 		}
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (itemstack.is(ItemTags.NOTE_BLOCK_TOP_INSTRUMENTS) && result.getDirection() == Direction.UP) {
-			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+			return InteractionResult.PASS;
 		} else if (level.isClientSide) {
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		} else {
 			int _new = CommonHooks.onNoteChange(level, pos, state, state.getValue(NOTE), state.cycle(NOTE).getValue(NOTE));
-			if (_new == -1) return ItemInteractionResult.FAIL;
+			if (_new == -1) return InteractionResult.FAIL;
 			state = state.setValue(NOTE, _new);
 			level.setBlock(pos, state, 3);
 			this.playNote(player, state, level, pos);
 			player.awardStat(Stats.TUNE_NOTEBLOCK);
-			return ItemInteractionResult.CONSUME;
+			return InteractionResult.CONSUME;
 		}
 	}
 
@@ -97,7 +98,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, @org.jetbrains.annotations.Nullable Orientation orientation, boolean movedByPiston) {
 		boolean flag = level.hasNeighborSignal(pos);
 		if (flag != state.getValue(POWERED)) {
 			if (flag) {

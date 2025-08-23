@@ -4,48 +4,50 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.mrbysco.slabmachines.entity.TNTSlabEntity;
 import com.mrbysco.slabmachines.init.SlabRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.client.renderer.entity.state.TntRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity> {
+public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity, TntRenderState> {
+	private final BlockRenderDispatcher blockRenderer;
+
 	public TNTPrimeSlabRenderer(Context context) {
 		super(context);
 		this.shadowRadius = 0.5F;
+		this.blockRenderer = context.getBlockRenderDispatcher();
 	}
 
 	@Override
-	public void render(TNTSlabEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLightIn) {
+	public void render(TntRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
 		poseStack.pushPose();
 		poseStack.translate(0.0D, 0.5D, 0.0D);
-		int var7 = entityIn.getFuse();
-		if ((float) var7 - partialTicks + 1.0F < 10.0F) {
-			float var8 = 1.0F - ((float) var7 - partialTicks + 1.0F) / 10.0F;
-			var8 = Mth.clamp(var8, 0.0F, 1.0F);
-			var8 *= var8;
-			var8 *= var8;
-			float var9 = 1.0F + var8 * 0.3F;
-			poseStack.scale(var9, var9, var9);
+		float remainingInTicks = renderState.fuseRemainingInTicks;
+		if (remainingInTicks < 10.0F) {
+			float f1 = 1.0F - remainingInTicks / 10.0F;
+			f1 = Mth.clamp(f1, 0.0F, 1.0F);
+			f1 *= f1;
+			f1 *= f1;
+			float f2 = 1.0F + f1 * 0.3F;
+			poseStack.scale(f2, f2, f2);
 		}
 
 		poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
 		poseStack.translate(-0.5D, -0.5D, 0.5D);
 		poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-		renderTntFlash(SlabRegistry.TNT_SLAB.get().defaultBlockState(), poseStack, bufferSource, packedLightIn, var7 / 5 % 2 == 0);
+		renderTntFlash(SlabRegistry.TNT_SLAB.get().defaultBlockState(), poseStack, bufferSource, packedLight, remainingInTicks / 5 % 2 == 0);
 		poseStack.popPose();
-		super.render(entityIn, entityYaw, partialTicks, poseStack, bufferSource, packedLightIn);
+		super.render(renderState, poseStack, bufferSource, packedLight);
 	}
 
-	public static void renderTntFlash(BlockState state, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, boolean doFullBright) {
+	private void renderTntFlash(BlockState state, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, boolean doFullBright) {
 		int i;
 		if (doFullBright) {
 			i = OverlayTexture.pack(OverlayTexture.u(1.0F), 10);
@@ -53,14 +55,18 @@ public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity> {
 			i = OverlayTexture.NO_OVERLAY;
 		}
 
-		Minecraft.getInstance().getBlockRenderer().renderSingleBlock(state, poseStack, bufferSource, combinedLight, i);
+		blockRenderer.renderSingleBlock(state, poseStack, bufferSource, combinedLight, i);
 	}
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-	 */
 	@Override
-	public ResourceLocation getTextureLocation(TNTSlabEntity entity) {
-		return TextureAtlas.LOCATION_BLOCKS;
+	public TntRenderState createRenderState() {
+		return new TntRenderState();
+	}
+
+	@Override
+	public void extractRenderState(TNTSlabEntity slabEntity, TntRenderState renderState, float partialTick) {
+		super.extractRenderState(slabEntity, renderState, partialTick);
+		renderState.fuseRemainingInTicks = (float) slabEntity.getFuse() - partialTick + 1.0F;
+		renderState.blockState = slabEntity.getBlockState();
 	}
 }

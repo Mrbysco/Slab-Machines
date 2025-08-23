@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:cartography_table"
-    }
+    "minecraft:cartography_table"
   ],
   "result": {
     "count": 2,

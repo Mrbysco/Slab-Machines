@@ -1,7 +1,7 @@
 package com.mrbysco.slabmachines.client;
 
-import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import com.mrbysco.slabmachines.init.SlabRegistry;
+import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
 import net.minecraft.client.gui.screens.inventory.CraftingScreen;
 import net.minecraft.network.chat.Component;

@@ -3,10 +3,11 @@ package com.mrbysco.slabmachines.blocks;
 import com.mrbysco.slabmachines.blocks.base.CustomSlabBlock;
 import com.mrbysco.slabmachines.entity.TNTSlabEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,10 +26,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class TNTSlabBlock extends CustomSlabBlock {
 	public static final BooleanProperty UNSTABLE = BlockStateProperties.UNSTABLE;
@@ -68,8 +69,9 @@ public class TNTSlabBlock extends CustomSlabBlock {
 		return etho;
 	}
 
+
 	@Override
-	public void wasExploded(Level level, BlockPos pos, Explosion explosionIn) {
+	public void wasExploded(ServerLevel level, BlockPos pos, Explosion explosionIn) {
 		if (!level.isClientSide) {
 			TNTSlabEntity tntentity = new TNTSlabEntity(level, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, explosionIn.getIndirectSourceEntity(), isEthoSlab(level, pos));
 			tntentity.setFuse((short) (level.random.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
@@ -91,7 +93,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 	}
 
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		ItemStack itemstack = player.getItemInHand(handIn);
 		Item item = itemstack.getItem();
 		if (item != Items.FLINT_AND_STEEL && item != Items.FIRE_CHARGE) {
@@ -107,7 +109,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 				}
 			}
 
-			return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 	}
 
@@ -130,7 +132,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, @Nullable Orientation orientation, boolean movedByPiston) {
 		if (level.hasNeighborSignal(pos)) {
 			catchFire(state, level, pos, null, null);
 			level.removeBlock(pos, false);

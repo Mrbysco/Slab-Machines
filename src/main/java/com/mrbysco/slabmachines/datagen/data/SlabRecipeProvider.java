@@ -7,8 +7,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
@@ -19,20 +17,20 @@ import java.util.concurrent.CompletableFuture;
 
 public class SlabRecipeProvider extends RecipeProvider {
 
-	public SlabRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-		super(packOutput, lookupProvider);
+	public SlabRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+		super(provider, recipeOutput);
 	}
 
 	@Override
-	protected void buildRecipes(RecipeOutput output) {
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CHEST)
+	protected void buildRecipes() {
+		shaped(RecipeCategory.MISC, Blocks.CHEST)
 				.pattern("S")
 				.pattern("S")
 				.define('S', SlabRegistry.CHEST_SLAB.get())
 				.unlockedBy("has_slab_chest", has(SlabRegistry.CHEST_SLAB.get()))
-				.save(output, modLoc("chest_from_slab"));
+				.save(output, modLoc("chest_from_slab").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.CHEST_SLAB.get())
+		shaped(RecipeCategory.MISC, SlabRegistry.CHEST_SLAB.get())
 				.pattern("SSS")
 				.pattern("S S")
 				.pattern("SSS")
@@ -40,82 +38,82 @@ public class SlabRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
 				.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.CHEST_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.CHEST_SLAB.get(), 2)
 				.requires(Items.CHEST)
 				.unlockedBy("has_chest", has(Items.CHEST))
-				.save(output, modLoc("slab_from_chest"));
+				.save(output, modLoc("slab_from_chest").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.FURNACE)
+		shaped(RecipeCategory.MISC, Blocks.FURNACE)
 				.pattern("S")
 				.pattern("S")
 				.define('S', SlabRegistry.FURNACE_SLAB.get())
 				.unlockedBy("has_slab_furnace", has(SlabRegistry.FURNACE_SLAB.get()))
-				.save(output, modLoc("furnace_from_slab"));
+				.save(output, modLoc("furnace_from_slab").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.FURNACE_SLAB.get())
+		shaped(RecipeCategory.MISC, SlabRegistry.FURNACE_SLAB.get())
 				.pattern("SSS")
 				.pattern("S S")
 				.pattern("SSS")
 				.define('S', SlabReference.COBBLESTONE_SLABS)
 				.unlockedBy("has_cobblestone_slab", has(SlabReference.COBBLESTONE_SLABS))
-				.save(output, modLoc("slab_from_furnace"));
+				.save(output, modLoc("slab_from_furnace").toString());
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.FURNACE_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.FURNACE_SLAB.get(), 2)
 				.requires(Items.FURNACE)
 				.unlockedBy("has_furnace", has(Items.FURNACE))
 				.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.NOTE_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.NOTE_SLAB.get(), 2)
 				.requires(Items.NOTE_BLOCK)
 				.unlockedBy("has_note_block", has(Items.NOTE_BLOCK))
 				.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.NOTE_BLOCK)
+		shaped(RecipeCategory.MISC, Blocks.NOTE_BLOCK)
 				.pattern("S")
 				.pattern("S")
 				.define('S', SlabRegistry.NOTE_SLAB.get())
 				.unlockedBy("has_note_slab", has(SlabRegistry.NOTE_SLAB.get()))
-				.save(output, modLoc("note_block_from_slab"));
+				.save(output, modLoc("note_block_from_slab").toString());
 
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.TNT_SLAB.get(), 6)
+		shaped(RecipeCategory.MISC, SlabRegistry.TNT_SLAB.get(), 6)
 				.pattern("SSS")
 				.define('S', Items.TNT)
 				.unlockedBy("has_tnt", has(Items.TNT))
 				.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.TRAPPED_CHEST)
+		shaped(RecipeCategory.MISC, Blocks.TRAPPED_CHEST)
 				.pattern("S")
 				.pattern("S")
 				.define('S', SlabRegistry.TRAPPED_CHEST_SLAB.get())
 				.unlockedBy("has_trapped_slab_chest", has(SlabRegistry.TRAPPED_CHEST_SLAB.get()))
-				.save(output, modLoc("trapped_chest_from_slab"));
+				.save(output, modLoc("trapped_chest_from_slab").toString());
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.TRAPPED_CHEST_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.TRAPPED_CHEST_SLAB.get(), 2)
 				.requires(Items.TRAPPED_CHEST)
 				.unlockedBy("has_trapped_chest", has(Items.TRAPPED_CHEST))
 				.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+		shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
 				.pattern("S")
 				.pattern("S")
 				.define('S', SlabRegistry.CRAFTING_TABLE_SLAB.get())
 				.unlockedBy("has_slab_crafting_table", has(SlabRegistry.CRAFTING_TABLE_SLAB.get()))
-				.save(output, modLoc("crafting_table_from_slab"));
+				.save(output, modLoc("crafting_table_from_slab").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.CRAFTING_TABLE_SLAB.get())
+		shaped(RecipeCategory.MISC, SlabRegistry.CRAFTING_TABLE_SLAB.get())
 				.pattern("SS")
 				.pattern("SS")
 				.define('S', ItemTags.WOODEN_SLABS)
 				.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
 				.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.CRAFTING_TABLE_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.CRAFTING_TABLE_SLAB.get(), 2)
 				.requires(Items.CRAFTING_TABLE)
 				.unlockedBy("has_crafting_table", has(Items.CRAFTING_TABLE))
-				.save(output, modLoc("slab_from_crafting_table"));
+				.save(output, modLoc("slab_from_crafting_table").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.SMOKER_SLAB.get())
+		shaped(RecipeCategory.MISC, SlabRegistry.SMOKER_SLAB.get())
 				.pattern(" S ")
 				.pattern("SFS")
 				.pattern(" S ")
@@ -124,12 +122,12 @@ public class SlabRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_cobblestone_slab", has(SlabReference.COBBLESTONE_SLABS))
 				.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.SMOKER_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.SMOKER_SLAB.get(), 2)
 				.requires(Items.SMOKER)
 				.unlockedBy("has_smoker", has(Items.SMOKER))
-				.save(output, modLoc("slab_from_smoker"));
+				.save(output, modLoc("slab_from_smoker").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.BLAST_FURNACE_SLAB.get())
+		shaped(RecipeCategory.MISC, SlabRegistry.BLAST_FURNACE_SLAB.get())
 				.pattern("NNN")
 				.pattern("NFN")
 				.pattern("SSS")
@@ -139,12 +137,12 @@ public class SlabRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_cobblestone_slab", has(SlabReference.COBBLESTONE_SLABS))
 				.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.BLAST_FURNACE_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.BLAST_FURNACE_SLAB.get(), 2)
 				.requires(Items.BLAST_FURNACE)
 				.unlockedBy("has_blast_furnace", has(Items.BLAST_FURNACE))
-				.save(output, modLoc("slab_from_blast_furnace"));
+				.save(output, modLoc("slab_from_blast_furnace").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.CARTOGRAPHY_TABLE_SLAB.get())
+		shaped(RecipeCategory.MISC, SlabRegistry.CARTOGRAPHY_TABLE_SLAB.get())
 				.pattern("p")
 				.pattern("s")
 				.pattern("s")
@@ -154,12 +152,12 @@ public class SlabRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_paper", has(Items.PAPER))
 				.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.CARTOGRAPHY_TABLE_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.CARTOGRAPHY_TABLE_SLAB.get(), 2)
 				.requires(Items.CARTOGRAPHY_TABLE)
 				.unlockedBy("has_cartography_table", has(Items.CARTOGRAPHY_TABLE))
-				.save(output, modLoc("slab_from_cartography_table"));
+				.save(output, modLoc("slab_from_cartography_table").toString());
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SlabRegistry.LOOM_SLAB.get())
+		shaped(RecipeCategory.MISC, SlabRegistry.LOOM_SLAB.get())
 				.pattern("s")
 				.pattern("w")
 				.define('s', Tags.Items.STRINGS)
@@ -168,13 +166,29 @@ public class SlabRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
 				.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SlabRegistry.LOOM_SLAB.get(), 2)
+		shapeless(RecipeCategory.MISC, SlabRegistry.LOOM_SLAB.get(), 2)
 				.requires(Items.LOOM)
 				.unlockedBy("has_loom", has(Items.LOOM))
-				.save(output, modLoc("slab_from_loom"));
+				.save(output, modLoc("slab_from_loom").toString());
 	}
 
 	private ResourceLocation modLoc(String path) {
 		return ResourceLocation.fromNamespaceAndPath(SlabReference.MOD_ID, path);
+	}
+
+	public static class Runner extends RecipeProvider.Runner {
+		public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
+			super(output, completableFuture);
+		}
+
+		@Override
+		protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+			return new SlabRecipeProvider(provider, recipeOutput);
+		}
+
+		@Override
+		public String getName() {
+			return "Slab Machines Recipes";
+		}
 	}
 }

@@ -4,7 +4,6 @@
     "down": "minecraft:block/loom_bottom",
     "east": "slabmachines:block/loom_slab_side",
     "north": "slabmachines:block/loom_slab_front",
-    "particle": "slabmachines:block/loom_slab_front",
     "south": "slabmachines:block/loom_slab_side",
     "up": "minecraft:block/loom_top",
     "west": "slabmachines:block/loom_slab_side"

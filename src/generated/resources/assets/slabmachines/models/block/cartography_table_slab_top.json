@@ -4,7 +4,6 @@
     "down": "minecraft:block/dark_oak_planks",
     "east": "slabmachines:block/cartography_table_slab_3",
     "north": "slabmachines:block/cartography_table_slab_3",
-    "particle": "slabmachines:block/cartography_table_slab_3",
     "south": "slabmachines:block/cartography_table_slab_1",
     "up": "minecraft:block/cartography_table_top",
     "west": "slabmachines:block/cartography_table_slab_2"

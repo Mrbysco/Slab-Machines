@@ -42,6 +42,7 @@ import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.GameData;
@@ -53,7 +54,7 @@ public class SlabRegistry {
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(SlabReference.MOD_ID);
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(SlabReference.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlabReference.MOD_ID);
-	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, SlabReference.MOD_ID);
+	public static final DeferredRegister.Entities ENTITY_TYPES = DeferredRegister.createEntities(SlabReference.MOD_ID);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, SlabReference.MOD_ID);
 	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Registries.MENU, SlabReference.MOD_ID);
 
@@ -94,12 +95,17 @@ public class SlabRegistry {
 				output.acceptAll(stacks);
 			}).build());
 
-	public static final Supplier<BlockEntityType<FurnaceSlabBlockEntity>> FURNACE_SLAB_BE = BLOCK_ENTITY_TYPES.register("furnace_slab", () -> BlockEntityType.Builder.of(FurnaceSlabBlockEntity::new, FURNACE_SLAB.get()).build(null));
-	public static final Supplier<BlockEntityType<BlastFurnaceSlabBlockEntity>> BLAST_FURNACE_SLAB_BE = BLOCK_ENTITY_TYPES.register("blast_furnace_slab", () -> BlockEntityType.Builder.of(BlastFurnaceSlabBlockEntity::new, BLAST_FURNACE_SLAB.get()).build(null));
-	public static final Supplier<BlockEntityType<SmokerSlabBlockEntity>> SMOKER_SLAB_BE = BLOCK_ENTITY_TYPES.register("smoker_slab", () -> BlockEntityType.Builder.of(SmokerSlabBlockEntity::new, SMOKER_SLAB.get()).build(null));
-	public static final Supplier<BlockEntityType<ChestSlabBlockEntity>> CHEST_SLAB_BE = BLOCK_ENTITY_TYPES.register("chest_slab", () -> BlockEntityType.Builder.of(ChestSlabBlockEntity::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()).build(null));
+	public static final Supplier<BlockEntityType<FurnaceSlabBlockEntity>> FURNACE_SLAB_BE = BLOCK_ENTITY_TYPES.register("furnace_slab", () -> new BlockEntityType<>(FurnaceSlabBlockEntity::new, FURNACE_SLAB.get()));
+	public static final Supplier<BlockEntityType<BlastFurnaceSlabBlockEntity>> BLAST_FURNACE_SLAB_BE = BLOCK_ENTITY_TYPES.register("blast_furnace_slab", () -> new BlockEntityType<>(BlastFurnaceSlabBlockEntity::new, BLAST_FURNACE_SLAB.get()));
+	public static final Supplier<BlockEntityType<SmokerSlabBlockEntity>> SMOKER_SLAB_BE = BLOCK_ENTITY_TYPES.register("smoker_slab", () -> new BlockEntityType<>(SmokerSlabBlockEntity::new, SMOKER_SLAB.get()));
+	public static final Supplier<BlockEntityType<ChestSlabBlockEntity>> CHEST_SLAB_BE = BLOCK_ENTITY_TYPES.register("chest_slab", () -> new BlockEntityType<>(ChestSlabBlockEntity::new, CHEST_SLAB.get(), TRAPPED_CHEST_SLAB.get()));
 
-	public static final Supplier<EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITY_TYPES.register("tnt_slab", () -> EntityType.Builder.<TNTSlabEntity>of(TNTSlabEntity::new, MobCategory.MISC).sized(1.0F, 0.5F).clientTrackingRange(10).updateInterval(10).build("tnt_slab"));
+	public static final DeferredHolder<EntityType<?>, EntityType<TNTSlabEntity>> TNT_SLAB_ENTITY = ENTITY_TYPES.registerEntityType("tnt_slab",
+			TNTSlabEntity::new,
+			MobCategory.MISC,
+			builder -> builder
+					.sized(1.0F, 0.5F).clientTrackingRange(10).updateInterval(10)
+	);
 
 	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
 		var sidedContainers = List.of(
@@ -123,7 +129,7 @@ public class SlabRegistry {
 	@SuppressWarnings("UnstableApiUsage")
 	@SafeVarargs
 	private static void registerAllStatesToPointOfInterest(ResourceKey<PoiType> poi, Supplier<? extends Block>... blocks) {
-		Holder<PoiType> poiHolder = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(poi);
+		Holder<PoiType> poiHolder = BuiltInRegistries.POINT_OF_INTEREST_TYPE.getOrThrow(poi);
 		for (var block : blocks) {
 			block.get().getStateDefinition().getPossibleStates().forEach(
 					state -> GameData.getBlockStatePointOfInterestTypeMap().put(state, poiHolder)

@@ -1,8 +1,8 @@
 package com.mrbysco.slabmachines.compat.jei;
 
 import com.mrbysco.slabmachines.SlabReference;
-import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import com.mrbysco.slabmachines.init.SlabRegistry;
+import com.mrbysco.slabmachines.menu.SlabBenchMenu;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -23,10 +23,10 @@ public class JEIPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.CRAFTING_TABLE_SLAB.get()), RecipeTypes.CRAFTING);
-		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.FURNACE_SLAB.get()), RecipeTypes.SMELTING);
-		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.BLAST_FURNACE_SLAB.get()), RecipeTypes.BLASTING);
-		registration.addRecipeCatalyst(new ItemStack(SlabRegistry.SMOKER_SLAB.get()), RecipeTypes.SMOKING);
+		registration.addCraftingStation(RecipeTypes.CRAFTING, new ItemStack(SlabRegistry.CRAFTING_TABLE_SLAB.get()));
+		registration.addCraftingStation(RecipeTypes.SMELTING, new ItemStack(SlabRegistry.FURNACE_SLAB.get()));
+		registration.addCraftingStation(RecipeTypes.BLASTING, new ItemStack(SlabRegistry.BLAST_FURNACE_SLAB.get()));
+		registration.addCraftingStation(RecipeTypes.SMOKING, new ItemStack(SlabRegistry.SMOKER_SLAB.get()));
 	}
 
 	@Override

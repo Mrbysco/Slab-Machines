@@ -18,8 +18,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.Vec3;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractFurnaceSlabBlock extends FacingMultiSlabBlock implements EntityBlock {
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -59,7 +58,15 @@ public abstract class AbstractFurnaceSlabBlock extends FacingMultiSlabBlock impl
 	}
 
 	@Nullable
-	protected static <T extends BlockEntity> BlockEntityTicker<T> createFurnaceTicker(Level level, BlockEntityType<T> blockEntityType, BlockEntityType<? extends AbstractFurnaceBlockEntity> blockEntityType1) {
-		return level.isClientSide ? null : createTickerHelper(blockEntityType, blockEntityType1, AbstractFurnaceBlockEntity::serverTick);
+	protected static <T extends BlockEntity> BlockEntityTicker<T> createFurnaceTicker(
+			Level level, BlockEntityType<T> serverType, BlockEntityType<? extends AbstractFurnaceBlockEntity> clientType
+	) {
+		return level instanceof ServerLevel serverlevel
+				? createTickerHelper(
+				serverType,
+				clientType,
+				(level1, pos, state, blockEntity) -> AbstractFurnaceBlockEntity.serverTick(serverlevel, pos, state, blockEntity)
+		)
+				: null;
 	}
 }

@@ -11,4 +11,7 @@ public class SlabReference {
 
 	public static final TagKey<Item> COBBLESTONE_SLABS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "cobblestone/slabs"));
 
+	public static ResourceLocation modLoc(String path) {
+		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+	}
 }

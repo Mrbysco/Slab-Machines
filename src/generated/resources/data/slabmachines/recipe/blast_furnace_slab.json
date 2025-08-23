@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "F": {
-      "item": "slabmachines:furnace_slab"
-    },
-    "N": {
-      "tag": "c:nuggets/iron"
-    },
-    "S": {
-      "item": "minecraft:smooth_stone_slab"
-    }
+    "F": "slabmachines:furnace_slab",
+    "N": "#c:nuggets/iron",
+    "S": "minecraft:smooth_stone_slab"
   },
   "pattern": [
     "NNN",
