@@ -1,9 +1,11 @@
 {
   "block.slabmachines.blast_furnace_slab": "Blast Furnace Slab",
+  "block.slabmachines.cartography_table_slab": "Cartography Slab",
   "block.slabmachines.chest_slab": "Chest Slab",
   "block.slabmachines.crafting_station_slab": "Crafting Station Slab",
   "block.slabmachines.crafting_table_slab": "Crafting Slab",
   "block.slabmachines.furnace_slab": "Furnace Slab",
+  "block.slabmachines.loom_slab": "Loom Slab",
   "block.slabmachines.note_slab": "Note Slab",
   "block.slabmachines.part_builder_slab": "Part Builder Slab",
   "block.slabmachines.part_chest_slab": "Part Chest Slab",
@@ -18,8 +20,10 @@
   "itemGroup.slabmachines.tab": "Slab Machines",
   "slabmachines.config.title": "Slab Machines Config",
   "slabmachines:container.blast_furnace": "Blast Furnace Slab",
+  "slabmachines:container.cartography": "Cartography Slab",
   "slabmachines:container.chest": "Chest Slab",
   "slabmachines:container.crafting": "Crafting Slab",
   "slabmachines:container.furnace": "Furnace Slab",
+  "slabmachines:container.loom": "Loom Slab",
   "slabmachines:container.smoker": "Smoker Slab"
 }

@@ -1,8 +1,10 @@
-// 1.21.1	2024-10-03T20:10:44.2692445	Loot Tables
+// 1.21.1	2025-08-23T16:39:17.4014187	Loot Tables
 6b3b6d0690441cae381545dec87e383b0bcb91af data/slabmachines/loot_table/blocks/blast_furnace_slab.json
+713de985464c0259438b0effaddcd75c73eced03 data/slabmachines/loot_table/blocks/cartography_table_slab.json
 945e888e110c68b4b1e05cc8c07a4bed4d7be530 data/slabmachines/loot_table/blocks/chest_slab.json
 703b1823c4c62ac52ab22658ca30a67c2eafaf3b data/slabmachines/loot_table/blocks/crafting_table_slab.json
 b5310deb7059f0047bfca141698ddecf78714f17 data/slabmachines/loot_table/blocks/furnace_slab.json
+5d39fe6444b0420bf82001b0cf8df7a806c0a7b5 data/slabmachines/loot_table/blocks/loom_slab.json
 f46b384420fcf7d5b400d5278a6454b205826f2d data/slabmachines/loot_table/blocks/note_slab.json
 e4c7c54df1cbdfdb90bf1fcc3d42288b1ba3acdd data/slabmachines/loot_table/blocks/smoker_slab.json
 9b72f1d40a4d2bfe55cfdc50069f0fc70fd532ae data/slabmachines/loot_table/blocks/tnt_slab.json

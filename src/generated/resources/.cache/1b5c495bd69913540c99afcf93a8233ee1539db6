@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-03T20:10:44.2722463	Tags for minecraft:block mod id slabmachines
+// 1.21.1	2025-08-23T16:39:17.4034203	Tags for minecraft:block mod id slabmachines
 94eca1bea3950baeddcb96ea5fb5f2887ff6272d data/minecraft/tags/block/guarded_by_piglins.json
-71b92792af579b698375d023f7e1cb59556a780b data/minecraft/tags/block/mineable/axe.json
+f68855150c632c413ced3d81fd29e06f3cd8401a data/minecraft/tags/block/mineable/axe.json
 273e9e68322352bb589f7daa28af38e2e00d8a87 data/minecraft/tags/block/mineable/pickaxe.json

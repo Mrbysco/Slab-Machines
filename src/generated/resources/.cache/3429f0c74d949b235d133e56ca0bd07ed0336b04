@@ -1,8 +1,10 @@
-// 1.21.1	2024-10-03T20:10:44.2727457	Block Models: slabmachines
+// 1.21.1	2025-08-23T16:50:01.5112168	Block Models: slabmachines
 db069d302eeb7448e04fc8bd3e98bc1299bab050 assets/slabmachines/models/block/blast_furnace_slab.json
 f96bc709ec72446b03837383e9f3a47751de8960 assets/slabmachines/models/block/blast_furnace_slab_on.json
 a80cff7fb9280fb79eb59e406115b51b4a2d00cf assets/slabmachines/models/block/blast_furnace_slab_top.json
 9fa0b34a0623e45630ab06997384b82c158f30a4 assets/slabmachines/models/block/blast_furnace_slab_top_on.json
+52588415eaf7f10f2f0fe0f4737671ee46823a59 assets/slabmachines/models/block/cartography_table_slab.json
+8bfae15fc0212a2dbfb035467027bff5651aa100 assets/slabmachines/models/block/cartography_table_slab_top.json
 ca744dc6da630d93cf754200e8f7e11b79a225d1 assets/slabmachines/models/block/chest_slab.json
 9d5397724b018bdc3f1851a5f08c0a0b9f609e2b assets/slabmachines/models/block/chest_slab_top.json
 5225041290255e54daabb0be91f04ed90206f2a2 assets/slabmachines/models/block/crafting_table_slab.json
@@ -11,6 +13,8 @@ ca744dc6da630d93cf754200e8f7e11b79a225d1 assets/slabmachines/models/block/chest_
 4e7664ce90fe18ff94c25e7da2e522d832ce86bf assets/slabmachines/models/block/furnace_slab_on.json
 172855663492e1c6c751816af59864cc600f48fa assets/slabmachines/models/block/furnace_slab_top.json
 055e4192d97e990ab929ff2f92397e4afdf30da7 assets/slabmachines/models/block/furnace_slab_top_on.json
+2c568a65e94f31e400bd2b8175b8aa7db6643c87 assets/slabmachines/models/block/loom_slab.json
+5d80259d2cdb62ae6c51e4eb49b1551239d693b4 assets/slabmachines/models/block/loom_slab_top.json
 b0b977e746663cebb92f5c9b0529ffce97390847 assets/slabmachines/models/block/note_slab.json
 81721b9d49d8934c3835709da41f6e02965c55b7 assets/slabmachines/models/block/note_slab_top.json
 cf7d489dd278a220cef7362cde88b68274407fab assets/slabmachines/models/block/smoker_slab.json

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "s": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "p",
+    "s",
+    "s"
+  ],
+  "result": {
+    "count": 1,
+    "id": "slabmachines:cartography_table_slab"
+  }
+}
