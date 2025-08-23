@@ -118,6 +118,8 @@ public class SlabRegistry {
 	public static void registerPointOfInterests() {
 		registerAllStatesToPointOfInterest(PoiTypes.ARMORER, BLAST_FURNACE_SLAB);
 		registerAllStatesToPointOfInterest(PoiTypes.BUTCHER, SMOKER_SLAB);
+		registerAllStatesToPointOfInterest(PoiTypes.CARTOGRAPHER, CARTOGRAPHY_TABLE_SLAB);
+		registerAllStatesToPointOfInterest(PoiTypes.SHEPHERD, SMOKER_SLAB);
 	}
 
 	@SuppressWarnings("UnstableApiUsage")
