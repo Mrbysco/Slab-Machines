@@ -81,7 +81,7 @@ public class TNTSlabEntity extends PrimedTnt {
 	@Override
 	protected void readAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
-		this.setEtho(compound.getBoolean("Etho"));
+		this.setEtho(compound.getBooleanOr("Etho", false));
 	}
 
 

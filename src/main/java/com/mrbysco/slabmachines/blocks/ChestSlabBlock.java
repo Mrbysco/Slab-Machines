@@ -7,8 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
@@ -51,18 +49,6 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 
 	protected Stat<ResourceLocation> getOpenStat() {
 		return Stats.CUSTOM.get(Stats.OPEN_CHEST);
-	}
-
-	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			if (level.getBlockEntity(pos) instanceof Container container) {
-				Containers.dropContents(level, pos, container);
-				level.updateNeighbourForOutputSignal(pos, this);
-			}
-
-			super.onRemove(state, level, pos, newState, isMoving);
-		}
 	}
 
 	@Override

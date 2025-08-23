@@ -11,8 +11,6 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.blockstates.Variant;
-import net.minecraft.client.data.models.blockstates.VariantProperties;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
@@ -85,18 +83,18 @@ public class SlabModelProvider extends ModelProvider {
 				bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
 		blockModels.blockStateOutput.accept(
-				MultiVariantGenerator.multiVariant(registryObject.get())
+				MultiVariantGenerator.dispatch(registryObject.get())
 						.with(
-								PropertyDispatch.property(CustomSlabBlock.TYPE)
-										.select(CustomSlabType.TOP, Variant.variant().with(VariantProperties.MODEL, models[0]))
-										.select(CustomSlabType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, models[1]))
+								PropertyDispatch.initial(CustomSlabBlock.TYPE)
+										.select(CustomSlabType.TOP, BlockModelGenerators.plainVariant(models[0]))
+										.select(CustomSlabType.BOTTOM, BlockModelGenerators.plainVariant(models[1]))
 						)
 		);
 	}
 
 	private void generateFacingSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends FacingMultiSlabBlock> registryObject,
-	                          ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                          ResourceLocation sideTexture, ResourceLocation frontTexture) {
+	                                ResourceLocation bottomTexture, ResourceLocation topTexture,
+	                                ResourceLocation sideTexture, ResourceLocation frontTexture) {
 		generateFacingSlab(
 				blockModels,
 				registryObject,
@@ -117,18 +115,18 @@ public class SlabModelProvider extends ModelProvider {
 				bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
 		blockModels.blockStateOutput.accept(
-				MultiVariantGenerator.multiVariant(registryObject.get())
+				MultiVariantGenerator.dispatch(registryObject.get())
 						.with(
-								PropertyDispatch.property(CustomSlabBlock.TYPE)
-										.select(CustomSlabType.TOP, Variant.variant().with(VariantProperties.MODEL, models[0]))
-										.select(CustomSlabType.BOTTOM, Variant.variant().with(VariantProperties.MODEL, models[1]))
-						).with(BlockModelGenerators.createHorizontalFacingDispatch())
+								PropertyDispatch.initial(CustomSlabBlock.TYPE)
+										.select(CustomSlabType.TOP, BlockModelGenerators.plainVariant(models[0]))
+										.select(CustomSlabType.BOTTOM, BlockModelGenerators.plainVariant(models[1]))
+						).with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
 		);
 	}
 
 	private void generateFurnaceSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends AbstractFurnaceSlabBlock> registryObject,
-	                          ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                          ResourceLocation sideTexture, ResourceLocation frontTexture) {
+	                                 ResourceLocation bottomTexture, ResourceLocation topTexture,
+	                                 ResourceLocation sideTexture, ResourceLocation frontTexture) {
 		generateFurnaceSlab(
 				blockModels,
 				registryObject,
@@ -151,14 +149,14 @@ public class SlabModelProvider extends ModelProvider {
 				bottomTexture, topTexture, northTexture.withSuffix("_active"), eastTexture, southTexture, westTexture);
 
 		blockModels.blockStateOutput.accept(
-				MultiVariantGenerator.multiVariant(registryObject.get())
+				MultiVariantGenerator.dispatch(registryObject.get())
 						.with(
-								PropertyDispatch.properties(CustomSlabBlock.TYPE, AbstractFurnaceSlabBlock.LIT)
-										.select(CustomSlabType.TOP, false, Variant.variant().with(VariantProperties.MODEL, models[0]))
-										.select(CustomSlabType.BOTTOM, false, Variant.variant().with(VariantProperties.MODEL, models[1]))
-										.select(CustomSlabType.TOP, true, Variant.variant().with(VariantProperties.MODEL, onModels[0]))
-										.select(CustomSlabType.BOTTOM, true, Variant.variant().with(VariantProperties.MODEL, onModels[1]))
-						).with(BlockModelGenerators.createHorizontalFacingDispatch())
+								PropertyDispatch.initial(CustomSlabBlock.TYPE, AbstractFurnaceSlabBlock.LIT)
+										.select(CustomSlabType.TOP, false, BlockModelGenerators.plainVariant(models[0]))
+										.select(CustomSlabType.BOTTOM, false, BlockModelGenerators.plainVariant(models[1]))
+										.select(CustomSlabType.TOP, true, BlockModelGenerators.plainVariant(onModels[0]))
+										.select(CustomSlabType.BOTTOM, true, BlockModelGenerators.plainVariant(onModels[1]))
+						).with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
 		);
 	}
 

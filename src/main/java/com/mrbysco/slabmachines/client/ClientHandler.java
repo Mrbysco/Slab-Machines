@@ -21,8 +21,8 @@ public class ClientHandler {
 
 	private static class Factory implements ScreenConstructor {
 		@Override
-		public CraftingScreen create(AbstractContainerMenu container, Inventory pInv, Component name) {
-			return new CraftingScreen((SlabBenchMenu) container, pInv, name);
+		public CraftingScreen create(AbstractContainerMenu menu, Inventory inventory, Component title) {
+			return new CraftingScreen((SlabBenchMenu) menu, inventory, title);
 		}
 	}
 }
