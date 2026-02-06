@@ -39,13 +39,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.GameData;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
+import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -60,19 +60,19 @@ public class SlabRegistry {
 
 	public static final Supplier<MenuType<SlabBenchMenu>> SLAB_WORKBENCH_CONTAINER = MENU_TYPES.register("slab_workbench", () -> IMenuTypeExtension.create((windowId, inv, data) -> new SlabBenchMenu(windowId, inv)));
 
-	public static final DeferredBlock<CraftingTableSlabBlock> CRAFTING_TABLE_SLAB = BLOCKS.registerBlock("crafting_table_slab", CraftingTableSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
-	public static final DeferredBlock<CartographyTableSlabBlock> CARTOGRAPHY_TABLE_SLAB = BLOCKS.registerBlock("cartography_table_slab", CartographyTableSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CARTOGRAPHY_TABLE));
-	public static final DeferredBlock<LoomSlabBlock> LOOM_SLAB = BLOCKS.registerBlock("loom_slab", LoomSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LOOM));
-	public static final DeferredBlock<FurnaceSlabBlock> FURNACE_SLAB = BLOCKS.registerBlock("furnace_slab", FurnaceSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
+	public static final DeferredBlock<CraftingTableSlabBlock> CRAFTING_TABLE_SLAB = BLOCKS.registerBlock("crafting_table_slab", CraftingTableSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
+	public static final DeferredBlock<CartographyTableSlabBlock> CARTOGRAPHY_TABLE_SLAB = BLOCKS.registerBlock("cartography_table_slab", CartographyTableSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CARTOGRAPHY_TABLE));
+	public static final DeferredBlock<LoomSlabBlock> LOOM_SLAB = BLOCKS.registerBlock("loom_slab", LoomSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.LOOM));
+	public static final DeferredBlock<FurnaceSlabBlock> FURNACE_SLAB = BLOCKS.registerBlock("furnace_slab", FurnaceSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
 			state.getValue(BlockStateProperties.LIT) ? 7 : 0));
-	public static final DeferredBlock<BlastFurnaceSlabBlock> BLAST_FURNACE_SLAB = BLOCKS.registerBlock("blast_furnace_slab", BlastFurnaceSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
+	public static final DeferredBlock<BlastFurnaceSlabBlock> BLAST_FURNACE_SLAB = BLOCKS.registerBlock("blast_furnace_slab", BlastFurnaceSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
 			state.getValue(BlockStateProperties.LIT) ? 7 : 0));
-	public static final DeferredBlock<SmokerSlabBlock> SMOKER_SLAB = BLOCKS.registerBlock("smoker_slab", SmokerSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
+	public static final DeferredBlock<SmokerSlabBlock> SMOKER_SLAB = BLOCKS.registerBlock("smoker_slab", SmokerSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE).lightLevel((state) ->
 			state.getValue(BlockStateProperties.LIT) ? 7 : 0));
-	public static final DeferredBlock<ChestSlabBlock> CHEST_SLAB = BLOCKS.registerBlock("chest_slab", ChestSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
-	public static final DeferredBlock<TrappedChestSlabBlock> TRAPPED_CHEST_SLAB = BLOCKS.registerBlock("trapped_chest_slab", TrappedChestSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.TRAPPED_CHEST));
-	public static final DeferredBlock<NoteBlockSlab> NOTE_SLAB = BLOCKS.registerBlock("note_slab", NoteBlockSlab::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NOTE_BLOCK));
-	public static final DeferredBlock<TNTSlabBlock> TNT_SLAB = BLOCKS.registerBlock("tnt_slab", TNTSlabBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.TNT));
+	public static final DeferredBlock<ChestSlabBlock> CHEST_SLAB = BLOCKS.registerBlock("chest_slab", ChestSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST));
+	public static final DeferredBlock<TrappedChestSlabBlock> TRAPPED_CHEST_SLAB = BLOCKS.registerBlock("trapped_chest_slab", TrappedChestSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TRAPPED_CHEST));
+	public static final DeferredBlock<NoteBlockSlab> NOTE_SLAB = BLOCKS.registerBlock("note_slab", NoteBlockSlab::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.NOTE_BLOCK));
+	public static final DeferredBlock<TNTSlabBlock> TNT_SLAB = BLOCKS.registerBlock("tnt_slab", TNTSlabBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.TNT));
 
 	public static final DeferredItem<BlockItem> CRAFTING_TABLE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(CRAFTING_TABLE_SLAB);
 	public static final DeferredItem<BlockItem> CARTOGRAPHY_TABLE_SLAB_ITEM = ITEMS.registerSimpleBlockItem(CARTOGRAPHY_TABLE_SLAB);
@@ -114,11 +114,9 @@ public class SlabRegistry {
 				SMOKER_SLAB_BE.get()
 		);
 		for (var type : sidedContainers) {
-			event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, type, (sidedContainer, side) ->
-					side == null ? new InvWrapper(sidedContainer) : new SidedInvWrapper(sidedContainer, side));
+			event.registerBlockEntity(Capabilities.Item.BLOCK, type, WorldlyContainerWrapper::new);
 		}
-		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, CHEST_SLAB_BE.get(), (chestSlabBlock, side) ->
-				new InvWrapper(chestSlabBlock));
+		event.registerBlockEntity(Capabilities.Item.BLOCK, CHEST_SLAB_BE.get(), (container, side) -> VanillaContainerWrapper.of(container));
 	}
 
 	public static void registerPointOfInterests() {

@@ -8,16 +8,16 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
-	private static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(SlabReference.MOD_ID, "jei_plugin");
+	private static final Identifier UID = Identifier.fromNamespaceAndPath(SlabReference.MOD_ID, "jei_plugin");
 
 	@Override
-	public ResourceLocation getPluginUid() {
+	public Identifier getPluginUid() {
 		return UID;
 	}
 

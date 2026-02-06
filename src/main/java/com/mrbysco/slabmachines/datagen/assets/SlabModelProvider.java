@@ -16,7 +16,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -61,8 +61,8 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private void generateSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends CustomSlabBlock> registryObject,
-	                          ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                          ResourceLocation sideTexture, ResourceLocation frontTexture) {
+	                          Identifier bottomTexture, Identifier topTexture,
+	                          Identifier sideTexture, Identifier frontTexture) {
 		generateSlab(
 				blockModels,
 				registryObject,
@@ -76,10 +76,10 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private void generateSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends CustomSlabBlock> registryObject,
-	                          ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                          ResourceLocation northTexture, ResourceLocation eastTexture,
-	                          ResourceLocation southTexture, ResourceLocation westTexture) {
-		ResourceLocation[] models = generateSlabModels(blockModels, registryObject.get(),
+	                          Identifier bottomTexture, Identifier topTexture,
+	                          Identifier northTexture, Identifier eastTexture,
+	                          Identifier southTexture, Identifier westTexture) {
+		Identifier[] models = generateSlabModels(blockModels, registryObject.get(),
 				bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
 		blockModels.blockStateOutput.accept(
@@ -93,8 +93,8 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private void generateFacingSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends FacingMultiSlabBlock> registryObject,
-	                                ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                                ResourceLocation sideTexture, ResourceLocation frontTexture) {
+	                                Identifier bottomTexture, Identifier topTexture,
+	                                Identifier sideTexture, Identifier frontTexture) {
 		generateFacingSlab(
 				blockModels,
 				registryObject,
@@ -108,10 +108,10 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private void generateFacingSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends FacingMultiSlabBlock> registryObject,
-	                                ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                                ResourceLocation northTexture, ResourceLocation eastTexture,
-	                                ResourceLocation southTexture, ResourceLocation westTexture) {
-		ResourceLocation[] models = generateSlabModels(blockModels, registryObject.get(),
+	                                Identifier bottomTexture, Identifier topTexture,
+	                                Identifier northTexture, Identifier eastTexture,
+	                                Identifier southTexture, Identifier westTexture) {
+		Identifier[] models = generateSlabModels(blockModels, registryObject.get(),
 				bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
 		blockModels.blockStateOutput.accept(
@@ -125,8 +125,8 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private void generateFurnaceSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends AbstractFurnaceSlabBlock> registryObject,
-	                                 ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                                 ResourceLocation sideTexture, ResourceLocation frontTexture) {
+	                                 Identifier bottomTexture, Identifier topTexture,
+	                                 Identifier sideTexture, Identifier frontTexture) {
 		generateFurnaceSlab(
 				blockModels,
 				registryObject,
@@ -140,12 +140,12 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private void generateFurnaceSlab(BlockModelGenerators blockModels, DeferredHolder<Block, ? extends AbstractFurnaceSlabBlock> registryObject,
-	                                 ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                                 ResourceLocation northTexture, ResourceLocation eastTexture,
-	                                 ResourceLocation southTexture, ResourceLocation westTexture) {
-		ResourceLocation[] models = generateSlabModels(blockModels, registryObject.get(),
+	                                 Identifier bottomTexture, Identifier topTexture,
+	                                 Identifier northTexture, Identifier eastTexture,
+	                                 Identifier southTexture, Identifier westTexture) {
+		Identifier[] models = generateSlabModels(blockModels, registryObject.get(),
 				bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
-		ResourceLocation[] onModels = generateSlabModelsOn(blockModels, registryObject.get(),
+		Identifier[] onModels = generateSlabModelsOn(blockModels, registryObject.get(),
 				bottomTexture, topTexture, northTexture.withSuffix("_active"), eastTexture, southTexture, westTexture);
 
 		blockModels.blockStateOutput.accept(
@@ -160,33 +160,33 @@ public class SlabModelProvider extends ModelProvider {
 		);
 	}
 
-	private ResourceLocation[] generateSlabModelsOn(BlockModelGenerators blockModels, CustomSlabBlock slabBlock,
-	                                                ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                                                ResourceLocation northTexture, ResourceLocation eastTexture,
-	                                                ResourceLocation southTexture, ResourceLocation westTexture) {
+	private Identifier[] generateSlabModelsOn(BlockModelGenerators blockModels, CustomSlabBlock slabBlock,
+	                                                Identifier bottomTexture, Identifier topTexture,
+	                                                Identifier northTexture, Identifier eastTexture,
+	                                                Identifier southTexture, Identifier westTexture) {
 		TextureMapping slabMapping = this.createSlabMapping(bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
-		ResourceLocation[] models = new ResourceLocation[2];
+		Identifier[] models = new Identifier[2];
 		models[0] = SLAB_TOP.createWithSuffix(slabBlock, "_top_on", slabMapping, blockModels.modelOutput);
 		models[1] = SLAB_BOTTOM.createWithSuffix(slabBlock, "_on", slabMapping, blockModels.modelOutput);
 		return models;
 	}
 
-	private ResourceLocation[] generateSlabModels(BlockModelGenerators blockModels, CustomSlabBlock slabBlock,
-	                                              ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                                              ResourceLocation northTexture, ResourceLocation eastTexture,
-	                                              ResourceLocation southTexture, ResourceLocation westTexture) {
+	private Identifier[] generateSlabModels(BlockModelGenerators blockModels, CustomSlabBlock slabBlock,
+	                                              Identifier bottomTexture, Identifier topTexture,
+	                                              Identifier northTexture, Identifier eastTexture,
+	                                              Identifier southTexture, Identifier westTexture) {
 		TextureMapping slabMapping = this.createSlabMapping(bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
-		ResourceLocation[] models = new ResourceLocation[2];
+		Identifier[] models = new Identifier[2];
 		models[0] = SLAB_TOP.createWithSuffix(slabBlock, "_top", slabMapping, blockModels.modelOutput);
 		models[1] = SLAB_BOTTOM.create(slabBlock, slabMapping, blockModels.modelOutput);
 		return models;
 	}
 
-	private TextureMapping createSlabMapping(ResourceLocation bottomTexture, ResourceLocation topTexture,
-	                                         ResourceLocation northTexture, ResourceLocation eastTexture,
-	                                         ResourceLocation southTexture, ResourceLocation westTexture) {
+	private TextureMapping createSlabMapping(Identifier bottomTexture, Identifier topTexture,
+	                                         Identifier northTexture, Identifier eastTexture,
+	                                         Identifier southTexture, Identifier westTexture) {
 		return new TextureMapping()
 				.put(TextureSlot.UP, topTexture)
 				.put(TextureSlot.DOWN, bottomTexture)
@@ -196,11 +196,11 @@ public class SlabModelProvider extends ModelProvider {
 				.put(TextureSlot.WEST, westTexture);
 	}
 
-	private ResourceLocation modTexture(String path) {
+	private Identifier modTexture(String path) {
 		return SlabReference.modLoc(path).withPrefix("block/");
 	}
 
-	private ResourceLocation mcLoc(String path) {
-		return ResourceLocation.withDefaultNamespace(path);
+	private Identifier mcLoc(String path) {
+		return Identifier.withDefaultNamespace(path);
 	}
 }

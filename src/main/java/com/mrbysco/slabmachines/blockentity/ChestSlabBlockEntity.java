@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.ContainerUser;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.level.BlockGetter;
@@ -24,19 +25,23 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ChestSlabBlockEntity extends ChestBlockEntity {
 
 	private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
-		protected void onOpen(Level level, BlockPos pos, BlockState state) {
+		@Override
+		public void onOpen(Level level, BlockPos pos, BlockState state) {
 			ChestSlabBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_OPEN);
 		}
 
-		protected void onClose(Level level, BlockPos pos, BlockState state) {
+		@Override
+		public void onClose(Level level, BlockPos pos, BlockState state) {
 			ChestSlabBlockEntity.playSound(level, pos, state, SoundEvents.CHEST_CLOSE);
 		}
 
-		protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int p_155364_, int p_155365_) {
+		@Override
+		public void openerCountChanged(Level level, BlockPos pos, BlockState state, int p_155364_, int p_155365_) {
 			ChestSlabBlockEntity.this.signalOpenCount(level, pos, state, p_155364_, p_155365_);
 		}
 
-		protected boolean isOwnContainer(Player player) {
+		@Override
+		public boolean isOwnContainer(Player player) {
 			if (!(player.containerMenu instanceof ChestMenu)) {
 				return false;
 			} else {
@@ -53,6 +58,7 @@ public class ChestSlabBlockEntity extends ChestBlockEntity {
 	/**
 	 * Returns the number of slots in the inventory.
 	 */
+	@Override
 	public int getContainerSize() {
 		return 27;
 	}
@@ -60,6 +66,7 @@ public class ChestSlabBlockEntity extends ChestBlockEntity {
 	/**
 	 * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
 	 */
+	@Override
 	public int getMaxStackSize() {
 		return SlabConfig.COMMON.slabChestSlotLimit.get();
 	}
@@ -98,18 +105,24 @@ public class ChestSlabBlockEntity extends ChestBlockEntity {
 		return 0;
 	}
 
-	public void startOpen(Player player) {
-		if (!this.remove && !player.isSpectator()) {
-			this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+	@Override
+	public void startOpen(ContainerUser containerUser) {
+		if (!this.remove && !containerUser.getLivingEntity().isSpectator()) {
+			this.openersCounter
+					.incrementOpeners(
+							containerUser.getLivingEntity(), this.getLevel(), this.getBlockPos(), this.getBlockState(), containerUser.getContainerInteractionRange()
+					);
 		}
 	}
 
-	public void stopOpen(Player player) {
-		if (!this.remove && !player.isSpectator()) {
-			this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+	@Override
+	public void stopOpen(ContainerUser containerUser) {
+		if (!this.remove && !containerUser.getLivingEntity().isSpectator()) {
+			this.openersCounter.decrementOpeners(containerUser.getLivingEntity(), this.getLevel(), this.getBlockPos(), this.getBlockState());
 		}
 	}
 
+	@Override
 	public void recheckOpen() {
 		if (!this.remove) {
 			this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());

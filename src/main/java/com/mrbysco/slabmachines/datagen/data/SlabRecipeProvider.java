@@ -7,7 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -172,8 +172,8 @@ public class SlabRecipeProvider extends RecipeProvider {
 				.save(output, modLoc("slab_from_loom").toString());
 	}
 
-	private ResourceLocation modLoc(String path) {
-		return ResourceLocation.fromNamespaceAndPath(SlabReference.MOD_ID, path);
+	private Identifier modLoc(String path) {
+		return Identifier.fromNamespaceAndPath(SlabReference.MOD_ID, path);
 	}
 
 	public static class Runner extends RecipeProvider.Runner {

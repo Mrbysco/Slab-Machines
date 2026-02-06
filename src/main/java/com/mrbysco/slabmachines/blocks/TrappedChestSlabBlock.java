@@ -3,7 +3,7 @@ package com.mrbysco.slabmachines.blocks;
 import com.mrbysco.slabmachines.blockentity.ChestSlabBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
@@ -17,7 +17,7 @@ public class TrappedChestSlabBlock extends ChestSlabBlock {
 	}
 
 	@Override
-	protected Stat<ResourceLocation> getOpenStat() {
+	protected Stat<Identifier> getOpenStat() {
 		return Stats.CUSTOM.get(Stats.TRIGGER_TRAPPED_CHEST);
 	}
 

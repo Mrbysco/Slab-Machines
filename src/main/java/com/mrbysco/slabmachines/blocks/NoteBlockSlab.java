@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -76,7 +76,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (itemstack.is(ItemTags.NOTE_BLOCK_TOP_INSTRUMENTS) && result.getDirection() == Direction.UP) {
 			return InteractionResult.PASS;
-		} else if (level.isClientSide) {
+		} else if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
 		} else {
 			int _new = CommonHooks.onNoteChange(level, pos, state, state.getValue(NOTE), state.cycle(NOTE).getValue(NOTE));
@@ -91,7 +91,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 
 	@Override
 	public void attack(BlockState state, Level level, BlockPos pos, Player player) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			this.playNote(player, state, level, pos);
 			player.awardStat(Stats.PLAY_NOTEBLOCK);
 		}
@@ -133,7 +133,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 
 		Holder<SoundEvent> holder;
 		if (noteblockinstrument.hasCustomSound()) {
-			ResourceLocation resourcelocation = this.getCustomSoundId(level, pos);
+			Identifier resourcelocation = this.getCustomSoundId(level, pos);
 			if (resourcelocation == null) {
 				return false;
 			}
@@ -148,7 +148,7 @@ public class NoteBlockSlab extends CustomSlabBlock {
 	}
 
 	@Nullable
-	private ResourceLocation getCustomSoundId(Level level, BlockPos pos) {
+	private Identifier getCustomSoundId(Level level, BlockPos pos) {
 		BlockEntity blockentity = level.getBlockEntity(pos.above());
 		if (blockentity instanceof SkullBlockEntity skullblockentity) {
 			return skullblockentity.getNoteBlockSound();

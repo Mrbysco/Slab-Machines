@@ -2,6 +2,7 @@ package com.mrbysco.slabmachines.blocks;
 
 import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
@@ -32,7 +33,7 @@ public abstract class AbstractFurnaceSlabBlock extends FacingMultiSlabBlock impl
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
 	}
 

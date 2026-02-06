@@ -3,19 +3,15 @@ package com.mrbysco.slabmachines.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.mrbysco.slabmachines.entity.TNTSlabEntity;
-import com.mrbysco.slabmachines.init.SlabRegistry;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.client.renderer.entity.TntMinecartRenderer;
 import net.minecraft.client.renderer.entity.state.TntRenderState;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity, TntRenderState> {
 	private final BlockRenderDispatcher blockRenderer;
 
@@ -26,12 +22,13 @@ public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity, TntRende
 	}
 
 	@Override
-	public void render(TntRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+	public void submit(TntRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector,
+	                   CameraRenderState cameraRenderState) {
 		poseStack.pushPose();
-		poseStack.translate(0.0D, 0.5D, 0.0D);
-		float remainingInTicks = renderState.fuseRemainingInTicks;
-		if (remainingInTicks < 10.0F) {
-			float f1 = 1.0F - remainingInTicks / 10.0F;
+		poseStack.translate(0.0F, 0.5F, 0.0F);
+		float f = renderState.fuseRemainingInTicks;
+		if (renderState.fuseRemainingInTicks < 10.0F) {
+			float f1 = 1.0F - renderState.fuseRemainingInTicks / 10.0F;
 			f1 = Mth.clamp(f1, 0.0F, 1.0F);
 			f1 *= f1;
 			f1 *= f1;
@@ -40,22 +37,17 @@ public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity, TntRende
 		}
 
 		poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-		poseStack.translate(-0.5D, -0.5D, 0.5D);
+		poseStack.translate(-0.5F, -0.5F, 0.5F);
 		poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
-		renderTntFlash(SlabRegistry.TNT_SLAB.get().defaultBlockState(), poseStack, bufferSource, packedLight, remainingInTicks / 5 % 2 == 0);
-		poseStack.popPose();
-		super.render(renderState, poseStack, bufferSource, packedLight);
-	}
-
-	private void renderTntFlash(BlockState state, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, boolean doFullBright) {
-		int i;
-		if (doFullBright) {
-			i = OverlayTexture.pack(OverlayTexture.u(1.0F), 10);
-		} else {
-			i = OverlayTexture.NO_OVERLAY;
+		if (renderState.blockState != null) {
+			TntMinecartRenderer.submitWhiteSolidBlock(
+					renderState.blockState, poseStack, nodeCollector, renderState.lightCoords, (int) f / 5 % 2 == 0, renderState.outlineColor
+			);
 		}
 
-		blockRenderer.renderSingleBlock(state, poseStack, bufferSource, combinedLight, i);
+		poseStack.popPose();
+
+		super.submit(renderState, poseStack, nodeCollector, cameraRenderState);
 	}
 
 	@Override

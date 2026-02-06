@@ -72,7 +72,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 
 	@Override
 	public void wasExploded(ServerLevel level, BlockPos pos, Explosion explosionIn) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			TNTSlabEntity tntentity = new TNTSlabEntity(level, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, explosionIn.getIndirectSourceEntity(), isEthoSlab(level, pos));
 			tntentity.setFuse((short) (level.random.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
 			level.addFreshEntity(tntentity);
@@ -80,7 +80,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 	}
 
 	public void explode(Level level, BlockPos pos, LivingEntity igniter) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			TNTSlabEntity tntentity = new TNTSlabEntity(level, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, igniter, isEthoSlab(level, pos));
 			level.addFreshEntity(tntentity);
 			level.playSound((Player) null, tntentity.getX(), tntentity.getY(), tntentity.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -103,7 +103,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 			level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
 			if (!player.isCreative()) {
 				if (item == Items.FLINT_AND_STEEL) {
-					itemstack.hurtAndBreak(1, player, Player.getSlotForHand(handIn));
+					itemstack.hurtAndBreak(1, player, handIn.asEquipmentSlot());
 				} else {
 					itemstack.shrink(1);
 				}
@@ -115,7 +115,7 @@ public class TNTSlabBlock extends CustomSlabBlock {
 
 	@Override
 	public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			Entity entity = projectile.getOwner();
 			if (projectile.isOnFire()) {
 				BlockPos blockpos = hit.getBlockPos();

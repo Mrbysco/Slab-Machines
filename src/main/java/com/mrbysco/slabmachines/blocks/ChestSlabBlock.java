@@ -3,7 +3,8 @@ package com.mrbysco.slabmachines.blocks;
 import com.mrbysco.slabmachines.blockentity.ChestSlabBlockEntity;
 import com.mrbysco.slabmachines.blocks.base.FacingMultiSlabBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
@@ -27,7 +28,7 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result) {
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
 		} else {
 			MenuProvider menuProvider = this.getMenuProvider(state, level, pos);
@@ -47,7 +48,7 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 		return blockEntity instanceof MenuProvider ? (MenuProvider) blockEntity : null;
 	}
 
-	protected Stat<ResourceLocation> getOpenStat() {
+	protected Stat<Identifier> getOpenStat() {
 		return Stats.CUSTOM.get(Stats.OPEN_CHEST);
 	}
 
@@ -57,7 +58,7 @@ public class ChestSlabBlock extends FacingMultiSlabBlock implements EntityBlock 
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
 		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
 	}
 
