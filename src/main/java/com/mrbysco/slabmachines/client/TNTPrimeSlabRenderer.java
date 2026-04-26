@@ -4,21 +4,23 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.mrbysco.slabmachines.entity.TNTSlabEntity;
 import net.minecraft.client.renderer.SubmitNodeCollector;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.block.BlockModelResolver;
+import net.minecraft.client.renderer.block.model.BlockDisplayContext;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.TntMinecartRenderer;
 import net.minecraft.client.renderer.entity.state.TntRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.util.Mth;
 
 public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity, TntRenderState> {
-	private final BlockRenderDispatcher blockRenderer;
+	public static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
+	private final BlockModelResolver blockModelResolver;
 
 	public TNTPrimeSlabRenderer(Context context) {
 		super(context);
 		this.shadowRadius = 0.5F;
-		this.blockRenderer = context.getBlockRenderDispatcher();
+		this.blockModelResolver = context.getBlockModelResolver();
 	}
 
 	@Override
@@ -59,6 +61,6 @@ public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity, TntRende
 	public void extractRenderState(TNTSlabEntity slabEntity, TntRenderState renderState, float partialTick) {
 		super.extractRenderState(slabEntity, renderState, partialTick);
 		renderState.fuseRemainingInTicks = (float) slabEntity.getFuse() - partialTick + 1.0F;
-		renderState.blockState = slabEntity.getBlockState();
+		this.blockModelResolver.update(renderState.blockState, slabEntity.getBlockState(), BLOCK_DISPLAY_CONTEXT);
 	}
 }

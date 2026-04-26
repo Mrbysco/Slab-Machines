@@ -15,6 +15,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
@@ -161,9 +162,9 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private Identifier[] generateSlabModelsOn(BlockModelGenerators blockModels, CustomSlabBlock slabBlock,
-	                                                Identifier bottomTexture, Identifier topTexture,
-	                                                Identifier northTexture, Identifier eastTexture,
-	                                                Identifier southTexture, Identifier westTexture) {
+	                                          Identifier bottomTexture, Identifier topTexture,
+	                                          Identifier northTexture, Identifier eastTexture,
+	                                          Identifier southTexture, Identifier westTexture) {
 		TextureMapping slabMapping = this.createSlabMapping(bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
 		Identifier[] models = new Identifier[2];
@@ -173,9 +174,9 @@ public class SlabModelProvider extends ModelProvider {
 	}
 
 	private Identifier[] generateSlabModels(BlockModelGenerators blockModels, CustomSlabBlock slabBlock,
-	                                              Identifier bottomTexture, Identifier topTexture,
-	                                              Identifier northTexture, Identifier eastTexture,
-	                                              Identifier southTexture, Identifier westTexture) {
+	                                        Identifier bottomTexture, Identifier topTexture,
+	                                        Identifier northTexture, Identifier eastTexture,
+	                                        Identifier southTexture, Identifier westTexture) {
 		TextureMapping slabMapping = this.createSlabMapping(bottomTexture, topTexture, northTexture, eastTexture, southTexture, westTexture);
 
 		Identifier[] models = new Identifier[2];
@@ -188,12 +189,12 @@ public class SlabModelProvider extends ModelProvider {
 	                                         Identifier northTexture, Identifier eastTexture,
 	                                         Identifier southTexture, Identifier westTexture) {
 		return new TextureMapping()
-				.put(TextureSlot.UP, topTexture)
-				.put(TextureSlot.DOWN, bottomTexture)
-				.put(TextureSlot.NORTH, northTexture)
-				.put(TextureSlot.EAST, eastTexture)
-				.put(TextureSlot.SOUTH, southTexture)
-				.put(TextureSlot.WEST, westTexture);
+				.put(TextureSlot.UP, new Material(topTexture))
+				.put(TextureSlot.DOWN, new Material(bottomTexture))
+				.put(TextureSlot.NORTH, new Material(northTexture))
+				.put(TextureSlot.EAST, new Material(eastTexture))
+				.put(TextureSlot.SOUTH, new Material(southTexture))
+				.put(TextureSlot.WEST, new Material(westTexture));
 	}
 
 	private Identifier modTexture(String path) {

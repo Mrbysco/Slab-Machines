@@ -90,7 +90,7 @@ public class ChestSlabBlockEntity extends ChestBlockEntity {
 		double d1 = (double) pos.getY() + 0.5D;
 		double d2 = (double) pos.getZ() + 0.5D;
 
-		level.playSound((Player) null, d0, d1, d2, soundEvent, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
+		level.playSound((Player) null, d0, d1, d2, soundEvent, SoundSource.BLOCKS, 0.5F, level.getRandom().nextFloat() * 0.1F + 0.9F);
 	}
 
 	public static int getOpenCount(BlockGetter blockGetter, BlockPos pos) {

@@ -143,7 +143,8 @@ public class NoteBlockSlab extends CustomSlabBlock {
 			holder = noteblockinstrument.getSoundEvent();
 		}
 
-		level.playSeededSound((Player) null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, holder, SoundSource.RECORDS, 3.0F, f, level.random.nextLong());
+		level.playSeededSound((Player) null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, holder,
+				SoundSource.RECORDS, 3.0F, f, level.getRandom().nextLong());
 		return true;
 	}
 

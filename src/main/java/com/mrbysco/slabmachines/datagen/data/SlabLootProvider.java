@@ -4,16 +4,13 @@ import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.WritableRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -56,10 +53,5 @@ public class SlabLootProvider extends LootTableProvider {
 		protected Iterable<Block> getKnownBlocks() {
 			return (Iterable<Block>) SlabRegistry.BLOCKS.getEntries().stream().map(holder -> (Block) holder.get())::iterator;
 		}
-	}
-
-	@Override
-	protected void validate(WritableRegistry<LootTable> writableregistry, ValidationContext validationcontext, ProblemReporter.Collector problemreporter$collector) {
-		super.validate(writableregistry, validationcontext, problemreporter$collector);
 	}
 }

@@ -2,7 +2,6 @@ package com.mrbysco.slabmachines.entity;
 
 import com.mrbysco.slabmachines.config.SlabConfig;
 import com.mrbysco.slabmachines.init.SlabRegistry;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -31,7 +30,7 @@ public class TNTSlabEntity extends PrimedTnt {
 	public TNTSlabEntity(Level level, double x, double y, double z, @Nullable LivingEntity igniter, boolean etho) {
 		this(SlabRegistry.TNT_SLAB_ENTITY.get(), level);
 		this.setPos(x, y, z);
-		double d0 = level.random.nextDouble() * (double) ((float) Math.PI * 2F);
+		double d0 = level.getRandom().nextDouble() * (double) ((float) Math.PI * 2F);
 		this.setDeltaMovement(-Math.sin(d0) * 0.02D, 0.2D, -Math.cos(d0) * 0.02D);
 		this.setFuse(80);
 		this.xo = x;
@@ -54,7 +53,7 @@ public class TNTSlabEntity extends PrimedTnt {
 
 		if (!this.level().isClientSide()) {
 			if (this.isEtho()) {
-				double radius = (double) (6F * (0.7F + this.level().random.nextFloat() * 0.6F));
+				double radius = (double) (6F * (0.7F + this.level().getRandom().nextFloat() * 0.6F));
 
 				AABB hitbox = new AABB(this.getX() - 0.5f, this.getY() - 0.5f, this.getZ() - 0.5f, this.getX() + 0.5f, this.getY() + 0.5f, this.getZ() + 0.5f)
 						.expandTowards(-radius, -radius, -radius).expandTowards(radius, radius, radius);

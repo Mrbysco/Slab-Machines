@@ -97,6 +97,6 @@ public class CustomSlabBlock extends Block implements SimpleWaterloggedBlock {
 	protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(
 			BlockEntityType<A> serverType, BlockEntityType<E> clientType, BlockEntityTicker<? super E> ticker
 	) {
-		return clientType == serverType ? (BlockEntityTicker<A>)ticker : null;
+		return clientType == serverType ? (BlockEntityTicker<A>) ticker : null;
 	}
 }
