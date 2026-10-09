@@ -3,25 +3,32 @@ package com.mrbysco.slabmachines.datagen.data;
 import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
+import net.minecraft.core.registries.SingleRegistryBootstrap;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.List;
 import java.util.Set;
 
-public class SlabLootProvider extends LootTableProvider {
+public class SlabLootProvider {
 
-	public SlabLootProvider(Set<ResourceKey<LootTable>> requiredTables, List<SubProviderEntry> subProviders) {
-		super(requiredTables, subProviders);
+	public static SingleRegistryBootstrap<LootTable> create() {
+		return new LootTableProvider(
+				BuiltInLootTables.all(),
+				List.of(
+						new LootTableProvider.SubProviderEntry(SlabBlockLoot::new, LootContextParamSets.BLOCK)
+				)
+		);
 	}
 
 	public static class SlabBlockLoot extends BlockLootSubProvider {
@@ -47,7 +54,7 @@ public class SlabLootProvider extends LootTableProvider {
 
 		@Override
 		protected Iterable<Block> getKnownBlocks() {
-			return (Iterable<Block>) SlabRegistry.BLOCKS.getEntries().stream().map(holder -> (Block) holder.get())::iterator;
+			return SlabRegistry.BLOCKS.getEntries().stream().map(holder -> (Block) holder.get())::iterator;
 		}
 	}
 }
