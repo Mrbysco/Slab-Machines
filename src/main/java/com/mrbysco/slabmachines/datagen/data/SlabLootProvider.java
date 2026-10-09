@@ -27,7 +27,7 @@ public class SlabLootProvider extends LootTableProvider {
 	public static class SlabBlockLoot extends BlockLootSubProvider {
 
 		public SlabBlockLoot(LootTableSubProvider.Context context) {
-			super(Set.of(), FeatureFlags.REGISTRY.allFlags(),context);
+			super(Set.of(), FeatureFlags.REGISTRY.allFlags(), context);
 		}
 
 		@Override
@@ -42,7 +42,7 @@ public class SlabLootProvider extends LootTableProvider {
 			this.add(SlabRegistry.TRAPPED_CHEST_SLAB.get(), this::createNameableBlockEntityTable);
 			this.dropSelf(SlabRegistry.NOTE_SLAB.get());
 			this.add(SlabRegistry.TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(SlabRegistry.TNT_SLAB.get(), LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
-					.add(LootItem.lootTableItem(SlabRegistry.TNT_SLAB.get()).when(MatchBlock.blockMatches(this.blocks,SlabRegistry.TNT_SLAB.get(), StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
+					.add(LootItem.lootTableItem(SlabRegistry.TNT_SLAB.get()).when(MatchBlock.blockMatches(this.blocks, SlabRegistry.TNT_SLAB.get(), StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
 		}
 
 		@Override

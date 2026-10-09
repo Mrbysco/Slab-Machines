@@ -7,7 +7,6 @@ import com.mrbysco.slabmachines.datagen.data.SlabBlockTagProvider;
 import com.mrbysco.slabmachines.datagen.data.SlabItemTagProvider;
 import com.mrbysco.slabmachines.datagen.data.SlabLootProvider;
 import com.mrbysco.slabmachines.datagen.data.SlabRecipeProvider;
-import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.recipes.RecipeProvider;
