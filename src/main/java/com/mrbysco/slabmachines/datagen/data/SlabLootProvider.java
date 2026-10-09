@@ -3,34 +3,31 @@ package com.mrbysco.slabmachines.datagen.data;
 import com.mrbysco.slabmachines.blocks.TNTSlabBlock;
 import com.mrbysco.slabmachines.init.SlabRegistry;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 
 public class SlabLootProvider extends LootTableProvider {
-	public SlabLootProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-		super(packOutput, Set.of(), List.of(
-				new SubProviderEntry(SlabBlockLoot::new, LootContextParamSets.BLOCK)
-		), lookupProvider);
+
+	public SlabLootProvider(Set<ResourceKey<LootTable>> requiredTables, List<SubProviderEntry> subProviders) {
+		super(requiredTables, subProviders);
 	}
 
-	private static class SlabBlockLoot extends BlockLootSubProvider {
+	public static class SlabBlockLoot extends BlockLootSubProvider {
 
-		protected SlabBlockLoot(HolderLookup.Provider provider) {
-			super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
+		public SlabBlockLoot(LootTableSubProvider.Context context) {
+			super(Set.of(), FeatureFlags.REGISTRY.allFlags(),context);
 		}
 
 		@Override
@@ -44,9 +41,8 @@ public class SlabLootProvider extends LootTableProvider {
 			this.add(SlabRegistry.CHEST_SLAB.get(), this::createNameableBlockEntityTable);
 			this.add(SlabRegistry.TRAPPED_CHEST_SLAB.get(), this::createNameableBlockEntityTable);
 			this.dropSelf(SlabRegistry.NOTE_SLAB.get());
-			this.add(SlabRegistry.TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(SlabRegistry.TNT_SLAB.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-					.add(LootItem.lootTableItem(SlabRegistry.TNT_SLAB.get()).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(SlabRegistry.TNT_SLAB.get())
-							.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
+			this.add(SlabRegistry.TNT_SLAB.get(), LootTable.lootTable().withPool(applyExplosionCondition(SlabRegistry.TNT_SLAB.get(), LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
+					.add(LootItem.lootTableItem(SlabRegistry.TNT_SLAB.get()).when(MatchBlock.blockMatches(this.blocks,SlabRegistry.TNT_SLAB.get(), StatePropertiesPredicate.Builder.properties().hasProperty(TNTSlabBlock.UNSTABLE, false)))))));
 		}
 
 		@Override

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slabmachines:blast_furnace_slab"
+        "recipes": "slabmachines:blast_furnace_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

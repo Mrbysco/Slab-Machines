@@ -2,27 +2,23 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "slabmachines:tnt_slab",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "unstable": "false"
-              }
+          "condition": {
+            "type": "minecraft:match_block",
+            "blocks": "slabmachines:tnt_slab",
+            "state": {
+              "unstable": "false"
             }
-          ],
+          },
           "name": "slabmachines:tnt_slab"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "slabmachines:blocks/tnt_slab"

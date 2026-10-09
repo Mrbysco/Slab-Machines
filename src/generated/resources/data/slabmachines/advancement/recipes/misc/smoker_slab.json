@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slabmachines:smoker_slab"
+        "recipes": "slabmachines:smoker_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

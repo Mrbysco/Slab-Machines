@@ -16,8 +16,8 @@ public class SlabBlockTagProvider extends BlockTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
-		this.tag(BlockTags.MINEABLE_WITH_AXE).add(SlabRegistry.CRAFTING_TABLE_SLAB.getKey(), SlabRegistry.CARTOGRAPHY_TABLE_SLAB.getKey(), SlabRegistry.LOOM_SLAB.getKey(), SlabRegistry.CHEST_SLAB.getKey(), SlabRegistry.TRAPPED_CHEST_SLAB.getKey(), SlabRegistry.NOTE_SLAB.getKey());
-		this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(SlabRegistry.FURNACE_SLAB.getKey(), SlabRegistry.BLAST_FURNACE_SLAB.getKey(), SlabRegistry.SMOKER_SLAB.getKey());
-		this.tag(BlockTags.GUARDED_BY_PIGLINS).add(SlabRegistry.CHEST_SLAB.getKey(), SlabRegistry.TRAPPED_CHEST_SLAB.getKey());
+		this.tag(BlockTags.MINEABLE_WITH_AXE).add(SlabRegistry.CRAFTING_TABLE_SLAB.key(), SlabRegistry.CARTOGRAPHY_TABLE_SLAB.key(), SlabRegistry.LOOM_SLAB.key(), SlabRegistry.CHEST_SLAB.key(), SlabRegistry.TRAPPED_CHEST_SLAB.key(), SlabRegistry.NOTE_SLAB.key());
+		this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(SlabRegistry.FURNACE_SLAB.key(), SlabRegistry.BLAST_FURNACE_SLAB.key(), SlabRegistry.SMOKER_SLAB.key());
+		this.tag(BlockTags.GUARDED_BY_PIGLINS).add(SlabRegistry.CHEST_SLAB.key(), SlabRegistry.TRAPPED_CHEST_SLAB.key());
 	}
 }
