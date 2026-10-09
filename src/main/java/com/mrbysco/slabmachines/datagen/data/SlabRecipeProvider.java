@@ -16,7 +16,7 @@ import net.neoforged.neoforge.common.Tags;
 
 public class SlabRecipeProvider extends RecipeProvider {
 
-	protected SlabRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+	public SlabRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
 		super(recipeOutput, advancementOutput);
 	}
 
