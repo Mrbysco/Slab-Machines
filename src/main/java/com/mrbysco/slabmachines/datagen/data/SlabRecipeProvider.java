@@ -2,23 +2,26 @@ package com.mrbysco.slabmachines.datagen.data;
 
 import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.init.SlabRegistry;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.core.registries.MultiRegistryBootstrap;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
-import java.util.concurrent.CompletableFuture;
-
 public class SlabRecipeProvider extends RecipeProvider {
 
-	public SlabRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
-		super(provider, recipeOutput);
+	public SlabRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+		super(recipeOutput, advancementOutput);
+	}
+
+	public static MultiRegistryBootstrap create() {
+		return RecipeProvider.asBootstrap(SlabRecipeProvider::new);
 	}
 
 	@Override
@@ -174,21 +177,5 @@ public class SlabRecipeProvider extends RecipeProvider {
 
 	private Identifier modLoc(String path) {
 		return Identifier.fromNamespaceAndPath(SlabReference.MOD_ID, path);
-	}
-
-	public static class Runner extends RecipeProvider.Runner {
-		public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
-			super(output, completableFuture);
-		}
-
-		@Override
-		protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
-			return new SlabRecipeProvider(provider, recipeOutput);
-		}
-
-		@Override
-		public String getName() {
-			return "Slab Machines Recipes";
-		}
 	}
 }

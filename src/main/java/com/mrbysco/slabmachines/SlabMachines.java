@@ -23,7 +23,7 @@ public class SlabMachines {
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public SlabMachines(IEventBus eventBus, Dist dist, ModContainer container) {
-		container.registerConfig(ModConfig.Type.COMMON, SlabConfig.commonSpec);
+		container.registerConfig(ModConfig.Type.LOCAL, SlabConfig.commonSpec);
 		eventBus.register(SlabConfig.class);
 
 		eventBus.addListener(this::commonSetupEvent);

@@ -1,36 +1,35 @@
 package com.mrbysco.slabmachines.datagen;
 
+import com.mrbysco.slabmachines.SlabReference;
 import com.mrbysco.slabmachines.datagen.assets.SlabLanguageProvider;
 import com.mrbysco.slabmachines.datagen.assets.SlabModelProvider;
 import com.mrbysco.slabmachines.datagen.data.SlabBlockTagProvider;
 import com.mrbysco.slabmachines.datagen.data.SlabItemTagProvider;
 import com.mrbysco.slabmachines.datagen.data.SlabLootProvider;
 import com.mrbysco.slabmachines.datagen.data.SlabRecipeProvider;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-
-import java.util.concurrent.CompletableFuture;
+import net.neoforged.neoforge.data.event.GatherDataRegistryEntriesEvent;
 
 @EventBusSubscriber
 public class SlabDatagen {
 
 	@SubscribeEvent
+	static void onGatherRegistries(GatherDataRegistryEntriesEvent event) {
+		event.gatherFor(SlabReference.MOD_ID)
+				.add(RecipeProvider.asBootstrap(SlabRecipeProvider::new))
+				.add(Registries.LOOT_TABLE, SlabLootProvider.create());
+	}
+
+	@SubscribeEvent
 	public static void gatherData(GatherDataEvent.Client event) {
-		DataGenerator generator = event.getGenerator();
-		PackOutput packOutput = generator.getPackOutput();
-		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+		event.createProvider(SlabBlockTagProvider::new);
+		event.createProvider(SlabItemTagProvider::new);
 
-		generator.addProvider(true, new SlabRecipeProvider.Runner(packOutput, lookupProvider));
-		generator.addProvider(true, new SlabLootProvider(packOutput, lookupProvider));
-		generator.addProvider(true, new SlabBlockTagProvider(packOutput, lookupProvider));
-		generator.addProvider(true, new SlabItemTagProvider(packOutput, lookupProvider));
-
-		generator.addProvider(true, new SlabLanguageProvider(packOutput));
-		generator.addProvider(true, new SlabModelProvider(packOutput));
-
+		event.createProvider(SlabLanguageProvider::new);
+		event.createProvider(SlabModelProvider::new);
 	}
 }

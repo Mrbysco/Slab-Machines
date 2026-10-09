@@ -38,9 +38,9 @@ public class TNTPrimeSlabRenderer extends EntityRenderer<TNTSlabEntity, TntRende
 			poseStack.scale(f2, f2, f2);
 		}
 
-		poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+		poseStack.rotateDegrees(Axis.YP, -90.0F);
 		poseStack.translate(-0.5F, -0.5F, 0.5F);
-		poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+		poseStack.rotateDegrees(Axis.YP, 90.0F);
 		if (renderState.blockState != null) {
 			TntMinecartRenderer.submitWhiteSolidBlock(
 					renderState.blockState, poseStack, nodeCollector, renderState.lightCoords, (int) f / 5 % 2 == 0, renderState.outlineColor

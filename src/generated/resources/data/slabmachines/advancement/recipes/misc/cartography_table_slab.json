@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slabmachines:cartography_table_slab"
+        "recipes": "slabmachines:cartography_table_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

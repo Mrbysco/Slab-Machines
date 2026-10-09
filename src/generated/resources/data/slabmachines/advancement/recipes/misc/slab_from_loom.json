@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slabmachines:slab_from_loom"
+        "recipes": "slabmachines:slab_from_loom"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

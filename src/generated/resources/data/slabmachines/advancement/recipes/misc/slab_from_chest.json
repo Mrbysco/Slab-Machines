@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "slabmachines:slab_from_chest"
+        "recipes": "slabmachines:slab_from_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
